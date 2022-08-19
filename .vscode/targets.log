@@ -1,0 +1,1035 @@
+make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+# GNU Make 3.81
+# Copyright (C) 2006  Free Software Foundation, Inc.
+# This is free software; see the source for copying conditions.
+# There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE.
+
+# This program built for i386-apple-darwin11.3.0
+ 
+find: /etc/cups/certs: Permission denied
+
+make: root-config: Command not found
+
+
+# Make data base, printed on Thu Aug 18 23:46:40 2022
+
+# Variables
+
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# automatic
+?F = $(notdir $?)
+ 
+# makefile (from `Makefile', line 43)
+INCD = $(INCDIR)/GRootWriter.h 
+# makefile (from `Makefile', line 24)
+INCDIR := include
+# automatic
+?D = $(patsubst %/,%,$(dir $?))
+# automatic
+@D = $(patsubst %/,%,$(dir $@))
+# automatic
+@F = $(notdir $@)
+# makefile
+CURDIR := /Users/parshadkp/Library/CloudStorage/OneDrive-GeorgiaInstituteofTechnology/Georgia Tech/NASA Balloon/GrOptics-Otte
+# makefile
+SHELL = /bin/sh
+# environment
+VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
+# environment
+_ = /usr/bin/make
+# makefile (from `Makefile.depend', line 1)
+MAKEFILE_LIST :=  Makefile Makefile.common Makefile.depend
+# makefile (from `Makefile', line 26)
+ObjSuf := o
+# makefile (from `Makefile', line 19)
+CXXFLAGS = $(INCLUDEFLAGS)
+# environment
+__CFBundleIdentifier = com.microsoft.VSCode
+# environment
+INFOPATH = /opt/homebrew/share/info:
+# makefile (from `Makefile', line 40)
+INCS := include/GArrayTel.h include/GDCGeometry.h include/GDCRayTracer.h include/GDCTelescope.h include/GDCTelescopeFactory.h include/GDefinition.h include/GGeometryBase.h include/GOrderedGrid.h include/GPilot.h include/GRayTracerBase.h include/GReadDCStdBase.h include/GReadDCStdGrISU.h include/GReadPhotonBase.h include/GReadPhotonGrISU.h include/GReadSCStd.h include/GReadSegSCStd.h include/GRootDCNavigator.h include/GRootWriter.h include/GSCTelescope.h include/GSCTelescopeFactory.h include/GSegSCTelescope.h include/GSegSCTelescopeFactory.h include/GSegmentedMirror.h include/GSegmentedObscuration.h include/GSimulateOptics.h include/GTelescope.h include/GTelescopeFactory.h include/GUtilityFuncts.h 
+# makefile (from `Makefile.common', line 49)
+ROBAST_VER := ROBAST-telescope_factory
+# makefile (from `Makefile.common', line 51)
+ROBAST_BASE_URL := https://codeload.github.com/ROBAST/ROBAST/tar.gz
+# environment
+VSCODE_CWD = /
+# makefile (from `Makefile', line 111)
+INCFILE := 
+# environment
+PATH = /Users/parshadkp/opt/anaconda3/bin:/Users/parshadkp/opt/anaconda3/condabin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin
+# makefile (from `Makefile.common', line 50)
+ROBAST_TGZ := ROBAST-2.4.1.tar.gz
+# environment
+LaunchInstanceID = 5741A359-0ADC-46A3-AB4E-93E85CB089BD
+# environment
+ELECTRON_RUN_AS_NODE = 1
+# makefile (from `Makefile.common', line 23)
+MAKEARCH := 
+# makefile (from `Makefile.common', line 56)
+LDFLAGS = -L$(ROBAST_VER)
+# default
+.FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
+# makefile (from `Makefile', line 29)
+DICTS = $(SRCDIR)/GrOpticsDict.cpp 
+# environment
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.olkssMKJqA/Listeners
+# makefile (from `Makefile', line 23)
+SRCDIR := src
+# automatic
+%F = $(notdir $%)
+# environment
+DISPLAY = /private/tmp/com.apple.launchd.quiGqG3wpc/org.macosforge.xquartz:0
+# environment
+CONDA_EXE = /Users/parshadkp/opt/anaconda3/bin/conda
+# makefile (from `Makefile', line 64)
+TESTOBJECTS = $(OBJDIR)/GUtilityFuncts.o $(OBJDIR)/GDefinition.o 
+# makefile (from `Makefile.common', line 22)
+RC := root-config
+# makefile (from `Makefile', line 37)
+OBJS := obj/GArrayTel.o obj/GDCGeometry.o obj/GDCRayTracer.o obj/GDCTelescope.o obj/GDCTelescopeFactory.o obj/GDefinition.o obj/GGeometryBase.o obj/GOrderedGrid.o obj/GPilot.o obj/GRayTracerBase.o obj/GReadDCStdBase.o obj/GReadDCStdGrISU.o obj/GReadPhotonBase.o obj/GReadPhotonGrISU.o obj/GReadSCStd.o obj/GReadSegSCStd.o obj/GRootDCNavigator.o obj/GRootWriter.o obj/GSCTelescope.o obj/GSCTelescopeFactory.o obj/GSegSCTelescope.o obj/GSegSCTelescopeFactory.o obj/GSegmentedMirror.o obj/GSegmentedObscuration.o obj/GSimulateOptics.o obj/GTelescope.o obj/GTelescopeFactory.o obj/GUtilityFuncts.o obj/GrOpticsDict.o
+# environment
+PWD = /Users/parshadkp/Library/CloudStorage/OneDrive-GeorgiaInstituteofTechnology/Georgia Tech/NASA Balloon/GrOptics-Otte
+# environment
+HOMEBREW_CELLAR = /opt/homebrew/Cellar
+# environment
+ORIGINAL_XDG_CURRENT_DESKTOP = undefined
+# makefile (from `Makefile', line 113)
+COPY_FILE = $(EDIT_DIR)/copyFile
+# environment
+MANPATH = /opt/homebrew/share/man::
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+# environment
+HOME = /Users/parshadkp
+# default
+MAKEFILEPATH = $(shell /usr/bin/xcode-select -print-path 2>/dev/null || echo /Developer)/Makefiles
+# environment
+VSCODE_CODE_CACHE_PATH = /Users/parshadkp/Library/Application Support/Code/CachedData/3b889b090b5ad5793f524b5d1d39fda662b96a2a
+# environment
+LOGNAME = parshadkp
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+# environment
+CONDA_PROMPT_MODIFIER = (base) 
+# makefile (from `Makefile.common', line 53)
+ROOTMAP := ROBAST-telescope_factory/libROBAST.rootmap
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
+# environment
+CONDA_DEFAULT_ENV = base
+# environment
+XPC_FLAGS = 0x0
+# default
+MAKE = $(MAKE_COMMAND)
+# default
+MAKECMDGOALS := all
+# makefile (from `Makefile', line 34)
+SRCS := src/GArrayTel.cpp src/GDCGeometry.cpp src/GDCRayTracer.cpp src/GDCTelescope.cpp src/GDCTelescopeFactory.cpp src/GDefinition.cpp src/GGeometryBase.cpp src/GOrderedGrid.cpp src/GPilot.cpp src/GRayTracerBase.cpp src/GReadDCStdBase.cpp src/GReadDCStdGrISU.cpp src/GReadPhotonBase.cpp src/GReadPhotonGrISU.cpp src/GReadSCStd.cpp src/GReadSegSCStd.cpp src/GRootDCNavigator.cpp src/GRootWriter.cpp src/GSCTelescope.cpp src/GSCTelescopeFactory.cpp src/GSegSCTelescope.cpp src/GSegSCTelescopeFactory.cpp src/GSegmentedMirror.cpp src/GSegmentedObscuration.cpp src/GSimulateOptics.cpp src/GTelescope.cpp src/GTelescopeFactory.cpp src/GUtilityFuncts.cpp src/GrOpticsDict.cpp 
+# environment
+SHLVL = 1
+# default
+MAKE_VERSION := 3.81
+# environment
+USER = parshadkp
+# makefile
+.DEFAULT_GOAL := all
+# makefile (from `Makefile.common', line 52)
+ROBAST_URL := https://codeload.github.com/ROBAST/ROBAST/tar.gz/v2.4.1
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
+# makefile (from `Makefile.common', line 47)
+ROBAST_VER_NUM := 2.4.1
+# makefile (from `Makefile', line 17)
+INCLUDEFLAGS = -I$(ROBAST_VER)/include -I. -I./include
+# environment
+CONDA_SHLVL = 1
+# default
+MAKE_COMMAND := /Library/Developer/CommandLineTools/usr/bin/make
+# makefile (from `Makefile', line 30)
+DICTI = $(INCDIR)/GrOpticsDict.h 
+# default
+.VARIABLES := 
+# environment
+TMPDIR = /var/folders/b2/9bxz6lpj2bx0k2xp41bzfwwr0000gn/T/
+# makefile (from `Makefile', line 112)
+CXXFILE := ROBASTEditedFile/AOpticalComponent.cxx
+# automatic
+*F = $(notdir $*)
+# makefile (from `Makefile', line 28)
+DICTO = $(OBJDIR)/GrOpticsDict.o 
+# environment
+VSCODE_IPC_HOOK = /Users/parshadkp/Library/Application Support/Code/1.69.2-main.sock
+# makefile (from `Makefile', line 116)
+ROBDIR = $(wildcard $(ROBAST_VER))
+# environment
+MallocNanoZone = 0
+# makefile (from `Makefile.common', line 40)
+ROOTCLING := 
+# makefile
+MAKEFLAGS = Rrqp
+# environment
+MFLAGS = -Rrqp
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
+# environment
+XPC_SERVICE_NAME = application.com.microsoft.VSCode.10484193.10484199
+# environment
+HOMEBREW_PREFIX = /opt/homebrew
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# automatic
++F = $(notdir $+)
+# environment
+HOMEBREW_REPOSITORY = /opt/homebrew
+# environment
+__CF_USER_TEXT_ENCODING = 0x1F5:0x0:0x0
+# environment
+COMMAND_MODE = unix2003
+ 
+# default
+MAKEFILES := 
+# automatic
+<F = $(notdir $<)
+# makefile (from `Makefile', line 22)
+OBJDIR := obj
+# makefile (from `Makefile.common', line 59)
+ARCH1 := Darwin
+# environment
+LC_ALL = C
+# environment
+CONDA_PYTHON_EXE = /Users/parshadkp/opt/anaconda3/bin/python
+# makefile (from `Makefile.common', line 57)
+LIBS = -lMinuit -lTreePlayer -lGenVector   -lGeomBuilder  -lGeomPainter  -lGeom -lGed -lROBAST
+# environment
+SECURITYSESSIONID = 186ac
+# automatic
+^F = $(notdir $^)
+# default
+SUFFIXES := 
+# makefile (from `Makefile', line 110)
+EDIT_DIR := ROBASTEditedFile
+# environment
+_CE_M = 
+# environment
+MAKELEVEL := 0
+# makefile (from `Makefile', line 33)
+FILTEROUT = $(SRCDIR)/GArray_Tel_noGraphs_4.0deg.cpp $(SRCDIR)/GrOpticsDict.cpp  
+# environment
+CONDA_PREFIX = /Users/parshadkp/opt/anaconda3
+# makefile (from `Makefile', line 192)
+DEPEND = echo > Makefile.depend0 && makedepend -s "#DEPEND LIST DONT DELETE" -- $(INCLUDEFLAGS) -Y --  $(SRCDIR)/*.cpp  $(INCDIR)/*.h -f Makefile.depend0 > /dev/null 2>&1 && sed "s/^[a-zA-Z0-9]*\//obj\//" Makefile.depend0 > Makefile.depend && rm -f Makefile.depend0
+# environment
+VSCODE_PID = 3062
+# environment
+_CE_CONDA = 
+# makefile (from `Makefile', line 25)
+SrcSuf := cpp
+# environment
+LANG = C
+# variable set hash-table stats:
+# Load=107/1024=10%, Rehash=0, Collisions=20/215=9%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# ROBASTEditedFile (device 16777233, inode 11737525): 3 files, no impossibilities.
+# include (device 16777233, inode 11737552): 33 files, no impossibilities.
+# . (device 16777233, inode 11737272): 24 files, no impossibilities.
+# / (device 16777233, inode 2): 21 files, no impossibilities.
+# src (device 16777233, inode 11737638): 37 files, no impossibilities.
+
+# 118 files, no impossibilities in 5 directories.
+
+# Implicit Rules
+
+obj/%.o: src/%.cpp
+#  commands to execute (from `Makefile', line 83):
+	@echo "        Compiling $< ... "
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+	@echo "Done"
+	
+
+# 1 implicit rules, 0 (0.0%) terminal.
+
+# Files
+
+obj/GTelescopeFactory.o: include/GDefinition.h include/GTelescope.h include/GTelescopeFactory.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+ROBAST-telescope_factory/include/AOpticsManager.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+include/GSegmentedObscuration.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+obj/GReadSCStd.o: include/GDefinition.h include/GPilot.h include/GUtilityFuncts.h include/GTelescope.h include/GSCTelescope.h ROBAST-telescope_factory/include/AOpticsManager.h ROBAST-telescope_factory/include/ARayArray.h ROBAST-telescope_factory/include/ARay.h ROBAST-telescope_factory/include/AFocalSurface.h ROBAST-telescope_factory/include/AOpticalComponent.h ROBAST-telescope_factory/include/ABorderSurfaceCondition.h ROBAST-telescope_factory/include/ALens.h ROBAST-telescope_factory/include/ARefractiveIndex.h ROBAST-telescope_factory/include/AMirror.h ROBAST-telescope_factory/include/AObscuration.h include/GTelescopeFactory.h include/GSCTelescopeFactory.h include/GReadSCStd.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+obj/GReadSegSCStd.o: include/GDefinition.h include/GPilot.h include/GUtilityFuncts.h include/GTelescope.h include/GSegSCTelescope.h ROBAST-telescope_factory/include/AOpticsManager.h ROBAST-telescope_factory/include/ARayArray.h ROBAST-telescope_factory/include/ARay.h ROBAST-telescope_factory/include/AFocalSurface.h ROBAST-telescope_factory/include/AOpticalComponent.h ROBAST-telescope_factory/include/ABorderSurfaceCondition.h ROBAST-telescope_factory/include/ALens.h ROBAST-telescope_factory/include/ARefractiveIndex.h ROBAST-telescope_factory/include/AMirror.h ROBAST-telescope_factory/include/AObscuration.h include/GTelescopeFactory.h include/GSegSCTelescopeFactory.h include/GReadSegSCStd.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+obj/grReaderFactory.o: include/GDefinition.h include/GUtilityFuncts.h include/GPilot.h include/GSegmentedMirror.h include/GTelescope.h include/GDCTelescope.h include/GSCTelescope.h ROBAST-telescope_factory/include/AOpticsManager.h ROBAST-telescope_factory/include/ARayArray.h ROBAST-telescope_factory/include/ARay.h ROBAST-telescope_factory/include/AFocalSurface.h ROBAST-telescope_factory/include/AOpticalComponent.h ROBAST-telescope_factory/include/ABorderSurfaceCondition.h ROBAST-telescope_factory/include/ALens.h ROBAST-telescope_factory/include/ARefractiveIndex.h ROBAST-telescope_factory/include/AMirror.h ROBAST-telescope_factory/include/AObscuration.h include/GSegSCTelescope.h include/GTelescopeFactory.h include/GDCTelescopeFactory.h include/GSCTelescopeFactory.h include/GSegSCTelescopeFactory.h include/GReadDCStdBase.h include/GReadDCStdGrISU.h include/GReadSCStd.h include/GReadSegSCStd.h include/GReadPhotonBase.h include/GReadPhotonGrISU.h include/GArrayTel.h include/GSimulateOptics.h include/GRootWriter.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+include/GTelescope.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+obj/GDCGeometry.o: include/GDefinition.h include/GGeometryBase.h include/GDCGeometry.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+all: robast grOptics
+#  Phony target (prerequisite of .PHONY).
+#  Command-line target.
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/6=0%
+
+.PHONY: all printDebug robast var includeflags cxxflags ldflags libs cleanGrOptics cleanRobast removeRobast testDict robast
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+cleanGrOptics:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 179):
+	rm -rf grOptics *.pcm $(SRCDIR)/*Dict* $(INCDIR)/*Dict* $(OBJDIR)/*.o \
+	Makefile.depend grReaderFactory $(COPY_FILE) *.pcm
+	
+
+# Not a target:
+ROBAST-telescope_factory/include/AGlassCatalog.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+testDict:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+
+# Not a target:
+include/GGeometryBase.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+obj/GSCTelescopeFactory.o: include/GDefinition.h include/GPilot.h include/GUtilityFuncts.h ROBAST-telescope_factory/include/AOpticsManager.h ROBAST-telescope_factory/include/ARayArray.h ROBAST-telescope_factory/include/ARay.h ROBAST-telescope_factory/include/AFocalSurface.h ROBAST-telescope_factory/include/AOpticalComponent.h ROBAST-telescope_factory/include/ABorderSurfaceCondition.h ROBAST-telescope_factory/include/ALens.h ROBAST-telescope_factory/include/ARefractiveIndex.h ROBAST-telescope_factory/include/AMirror.h ROBAST-telescope_factory/include/AObscuration.h include/GTelescope.h include/GSCTelescope.h include/GTelescopeFactory.h include/GSCTelescopeFactory.h include/GReadSCStd.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+obj/testUtilities.o: include/GDefinition.h include/GUtilityFuncts.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+ 
+obj/GSegSCTelescopeFactory.o: include/GDefinition.h include/GPilot.h include/GUtilityFuncts.h ROBAST-telescope_factory/include/AOpticsManager.h ROBAST-telescope_factory/include/ARayArray.h ROBAST-telescope_factory/include/ARay.h ROBAST-telescope_factory/include/AFocalSurface.h ROBAST-telescope_factory/include/AOpticalComponent.h ROBAST-telescope_factory/include/ABorderSurfaceCondition.h ROBAST-telescope_factory/include/ALens.h ROBAST-telescope_factory/include/ARefractiveIndex.h ROBAST-telescope_factory/include/AMirror.h ROBAST-telescope_factory/include/AObscuration.h include/GTelescope.h include/GSegSCTelescope.h include/GSCTelescope.h include/GTelescopeFactory.h include/GSCTelescopeFactory.h include/GSegSCTelescopeFactory.h include/GReadSegSCStd.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+include/GRootWriter.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+ROBAST-telescope_factory/include/ACauchyFormula.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+ldflags:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 158):
+	@echo "ldflags:  $(LDFLAGS)"
+	
+
+# Not a target:
+include/GSCTelescope.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+include/GRayTracerBase.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+obj/GPilot.o: include/GDefinition.h include/GPilot.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+srcs:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 167):
+	@echo $(SRCS)
+	
+
+# Not a target:
+include/GSegSCTelescope.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+obj/grOptics.o: include/GDefinition.h include/GUtilityFuncts.h include/GPilot.h include/GTelescope.h include/GDCTelescope.h include/GSCTelescope.h ROBAST-telescope_factory/include/AOpticsManager.h ROBAST-telescope_factory/include/ARayArray.h ROBAST-telescope_factory/include/ARay.h ROBAST-telescope_factory/include/AFocalSurface.h ROBAST-telescope_factory/include/AOpticalComponent.h ROBAST-telescope_factory/include/ABorderSurfaceCondition.h ROBAST-telescope_factory/include/ALens.h ROBAST-telescope_factory/include/ARefractiveIndex.h ROBAST-telescope_factory/include/AMirror.h ROBAST-telescope_factory/include/AObscuration.h include/GSegSCTelescope.h include/GTelescopeFactory.h include/GDCTelescopeFactory.h include/GSCTelescopeFactory.h include/GSegSCTelescopeFactory.h include/GReadDCStdBase.h include/GReadDCStdGrISU.h include/GReadSCStd.h include/GReadSegSCStd.h include/GReadPhotonBase.h include/GReadPhotonGrISU.h include/GArrayTel.h include/GSimulateOptics.h include/GRootWriter.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+ROBAST-telescope_factory/include/ASchottFormula.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+ROBAST-telescope_factory/include/ARayArray.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+include/GTelescopeFactory.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+.SUFFIXES:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+obj/GRootDCNavigator.o: include/GDefinition.h include/GUtilityFuncts.h include/GGeometryBase.h include/GDCGeometry.h include/GTelescope.h include/GDCTelescope.h include/GRootDCNavigator.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+printDebug:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 55):
+	@echo SRCS $(SRCS)
+	@echo OBJS $(OBJS)
+	@echo OutPutOpt $(OutPutOpt)
+	@echo ROOTCLING_FOUND $(ROOTCLING_FOUND)
+	@echo PWD $(PWD)
+	@echo SRCDIR $(SRCDIR)
+	@echo INCDIR $(INCDIR)
+	@echo OBJDIR $(OBJDIR)
+	
+
+# Not a target:
+include/GReadSCStd.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-18 23:45:50
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+ROBAST-telescope_factory/include/AMirror.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+libs:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 161):
+	@echo "libs:  $(LIBS)"
+	
+
+robast: ROBASTEditedFile/copyFile
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/6=0%
+#  commands to execute (from `Makefile', line 136):
+	@echo    robast ready and waiting
+	
+
+cleanRobast:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 183):
+	cd $(ROBAST_VER); make clean;
+	rm -f  $(COPY_FILE)
+	
+
+# Not a target:
+include/GReadSegSCStd.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+obj/GSegmentedMirror.o: ROBAST-telescope_factory/include/ABorderSurfaceCondition.h ROBAST-telescope_factory/include/AGeoAsphericDisk.h ROBAST-telescope_factory/include/AGlassCatalog.h ROBAST-telescope_factory/include/ACauchyFormula.h ROBAST-telescope_factory/include/ARefractiveIndex.h ROBAST-telescope_factory/include/ASchottFormula.h ROBAST-telescope_factory/include/ASellmeierFormula.h ROBAST-telescope_factory/include/ALens.h ROBAST-telescope_factory/include/AOpticalComponent.h ROBAST-telescope_factory/include/AMirror.h ROBAST-telescope_factory/include/AObscuration.h ROBAST-telescope_factory/include/AOpticsManager.h ROBAST-telescope_factory/include/ARayArray.h ROBAST-telescope_factory/include/ARay.h ROBAST-telescope_factory/include/AFocalSurface.h ROBAST-telescope_factory/include/ARayShooter.h include/GSegmentedMirror.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+include/GDCGeometry.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+ROBAST-telescope_factory/include/ASellmeierFormula.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+objs:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 164):
+	@echo $(OBJS)
+	
+
+dicts:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 174):
+	@echo $(DICTS)
+	
+
+# Not a target:
+ROBAST-telescope_factory/include/ARefractiveIndex.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+include/GSCTelescopeFactory.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+ 
+#  File has not been updated.
+
+obj/GArray_Tel_noGraphs_4.0deg.o: include/GDefinition.h include/GUtilityFuncts.h include/GTelescope.h include/GDCTelescope.h include/GSCTelescope.h ROBAST-telescope_factory/include/AOpticsManager.h ROBAST-telescope_factory/include/ARayArray.h ROBAST-telescope_factory/include/ARay.h ROBAST-telescope_factory/include/AFocalSurface.h ROBAST-telescope_factory/include/AOpticalComponent.h ROBAST-telescope_factory/include/ABorderSurfaceCondition.h ROBAST-telescope_factory/include/ALens.h ROBAST-telescope_factory/include/ARefractiveIndex.h ROBAST-telescope_factory/include/AMirror.h ROBAST-telescope_factory/include/AObscuration.h include/GTelescopeFactory.h include/GDCTelescopeFactory.h include/GReadDCStdBase.h include/GReadDCStdGrISU.h include/GReadPhotonBase.h include/GReadPhotonGrISU.h include/GArrayTel.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+obj/GDCTelescope.o: include/GUtilityFuncts.h include/GDefinition.h include/GRootDCNavigator.h include/GTelescope.h include/GDCTelescope.h include/GGeometryBase.h include/GDCGeometry.h include/GRayTracerBase.h include/GDCRayTracer.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+ROBAST-telescope_factory/include/ARay.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+include/GSegSCTelescopeFactory.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+Makefile.depend:
+#  Implicit rule search has not been done.
+#  Last modified 2022-08-18 23:46:40
+#  File has been updated.
+#  Successfully updated.
+#  commands to execute (from `Makefile', line 203):
+	$(DEPEND)
+	
+
+# Not a target:
+ROBAST-telescope_factory/include/AOpticalComponent.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+include/GPilot.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+dicti:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 176):
+	@echo $(DICTI)
+	
+
+obj/GArrayTel.o: include/GDefinition.h include/GUtilityFuncts.h include/GTelescope.h include/GDCTelescope.h include/GSCTelescope.h ROBAST-telescope_factory/include/AOpticsManager.h ROBAST-telescope_factory/include/ARayArray.h ROBAST-telescope_factory/include/ARay.h ROBAST-telescope_factory/include/AFocalSurface.h ROBAST-telescope_factory/include/AOpticalComponent.h ROBAST-telescope_factory/include/ABorderSurfaceCondition.h ROBAST-telescope_factory/include/ALens.h ROBAST-telescope_factory/include/ARefractiveIndex.h ROBAST-telescope_factory/include/AMirror.h ROBAST-telescope_factory/include/AObscuration.h include/GTelescopeFactory.h include/GDCTelescopeFactory.h include/GReadDCStdBase.h include/GReadDCStdGrISU.h include/GReadPhotonBase.h include/GReadPhotonGrISU.h include/GArrayTel.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+cxxflags:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 155):
+	@echo "cxxflags:  $(CXXFLAGS)"
+	
+
+incd:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 172):
+	@echo $(INCD)
+	
+
+# Not a target:
+include/GRootDCNavigator.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+obj/GUtilityFuncts.o: include/GDefinition.h include/GUtilityFuncts.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+depend:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 200):
+	$(DEPEND)
+	
+
+# Not a target:
+include/GSegmentedMirror.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+obj/GReadDCStdBase.o: include/GDefinition.h include/GUtilityFuncts.h include/GPilot.h include/GTelescope.h include/GDCTelescope.h include/GTelescopeFactory.h include/GDCTelescopeFactory.h include/GReadDCStdBase.h include/GReadDCStdGrISU.h include/GRayTracerBase.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+obj/GOrderedGrid.o: include/GUtilityFuncts.h include/GDefinition.h include/GOrderedGrid.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+obj/GDCTelescopeFactory.o: include/GDefinition.h include/GPilot.h include/GUtilityFuncts.h include/GTelescope.h include/GDCTelescope.h include/GTelescopeFactory.h include/GDCTelescopeFactory.h include/GGeometryBase.h include/GDCGeometry.h include/GRayTracerBase.h include/GDCRayTracer.h include/GReadDCStdBase.h include/GReadDCStdGrISU.h include/GOrderedGrid.h include/GRootDCNavigator.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+obj/GDefinition.o: include/GDefinition.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+obj/GReadDCStdGrISU.o: include/GDefinition.h include/GPilot.h include/GUtilityFuncts.h include/GGeometryBase.h include/GDCGeometry.h include/GTelescope.h include/GDCTelescope.h include/GTelescopeFactory.h include/GDCTelescopeFactory.h include/GOrderedGrid.h include/GReadDCStdBase.h include/GReadDCStdGrISU.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+include/GDCTelescope.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+Makefile.common:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-18 23:45:50
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+obj/GSimulateOptics.o: include/GDefinition.h include/GUtilityFuncts.h include/GTelescope.h include/GDCTelescope.h include/GSCTelescope.h ROBAST-telescope_factory/include/AOpticsManager.h ROBAST-telescope_factory/include/ARayArray.h ROBAST-telescope_factory/include/ARay.h ROBAST-telescope_factory/include/AFocalSurface.h ROBAST-telescope_factory/include/AOpticalComponent.h ROBAST-telescope_factory/include/ABorderSurfaceCondition.h ROBAST-telescope_factory/include/ALens.h ROBAST-telescope_factory/include/ARefractiveIndex.h ROBAST-telescope_factory/include/AMirror.h ROBAST-telescope_factory/include/AObscuration.h include/GTelescopeFactory.h include/GDCTelescopeFactory.h include/GReadDCStdBase.h include/GReadDCStdGrISU.h include/GReadPhotonBase.h include/GReadPhotonGrISU.h include/GArrayTel.h include/GSimulateOptics.h include/GRootWriter.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+obj/GDCRayTracer.o: include/GDefinition.h include/GUtilityFuncts.h include/GRayTracerBase.h include/GTelescope.h include/GDCTelescope.h include/GOrderedGrid.h include/GRootDCNavigator.h include/GGeometryBase.h include/GDCRayTracer.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+clean: cleanGrOptics
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+ROBAST-telescope_factory/include/AFocalSurface.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+obj/GReadPhotonBase.o: include/GDefinition.h include/GReadPhotonBase.h
+ 
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+var:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 148):
+	@echo "ld   $(LD)"
+	@echo "archsoflags $(ARCHSOFLAGS)"
+	
+
+# Not a target:
+ROBAST-telescope_factory/include/ALens.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+include/GArrayTel.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+incs:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 169):
+	@echo $(INCS)
+	
+
+# Not a target:
+ROBAST-telescope_factory/include/ABorderSurfaceCondition.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+src/GrOpticsDict.cpp: include/GRootWriter.h include/LinkDef.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 99):
+	@echo "Generating GrOpticsDict dictionary $< ... "
+	rootcint -v -f $@ -c  $^
+	@echo "rootcint SHELL mv src/GRootWriterDict.h include/."
+	cp src/GrOpticsDict.h  include/.
+	@echo "Done"
+	
+
+includeflags:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 152):
+	@echo "includeflags: $(INCLUDEFLAGS)"
+	
+
+# Not a target:
+ROBAST-telescope_factory/include/AObscuration.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+grReaderFactory: obj/grReaderFactory.o obj/GArrayTel.o obj/GDCGeometry.o obj/GDCRayTracer.o obj/GDCTelescope.o obj/GDCTelescopeFactory.o obj/GDefinition.o obj/GGeometryBase.o obj/GOrderedGrid.o obj/GPilot.o obj/GRayTracerBase.o obj/GReadDCStdBase.o obj/GReadDCStdGrISU.o obj/GReadPhotonBase.o obj/GReadPhotonGrISU.o obj/GReadSCStd.o obj/GReadSegSCStd.o obj/GRootDCNavigator.o obj/GRootWriter.o obj/GSCTelescope.o obj/GSCTelescopeFactory.o obj/GSegSCTelescope.o obj/GSegSCTelescopeFactory.o obj/GSegmentedMirror.o obj/GSegmentedObscuration.o obj/GSimulateOptics.o obj/GTelescope.o obj/GTelescopeFactory.o obj/GUtilityFuncts.o obj/GrOpticsDict.o
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 77):
+	@echo "building grTestSegReaderFactory"
+	$(LD) $(LDFLAGS) $(LIBS) $^ $(OutPutOpt) $@
+	
+
+obj/GSegmentedObscuration.o: ROBAST-telescope_factory/include/ABorderSurfaceCondition.h ROBAST-telescope_factory/include/AGeoAsphericDisk.h ROBAST-telescope_factory/include/AGlassCatalog.h ROBAST-telescope_factory/include/ACauchyFormula.h ROBAST-telescope_factory/include/ARefractiveIndex.h ROBAST-telescope_factory/include/ASchottFormula.h ROBAST-telescope_factory/include/ASellmeierFormula.h ROBAST-telescope_factory/include/ALens.h ROBAST-telescope_factory/include/AOpticalComponent.h ROBAST-telescope_factory/include/AMirror.h ROBAST-telescope_factory/include/AObscuration.h ROBAST-telescope_factory/include/AOpticsManager.h ROBAST-telescope_factory/include/ARayArray.h ROBAST-telescope_factory/include/ARay.h ROBAST-telescope_factory/include/AFocalSurface.h ROBAST-telescope_factory/include/ARayShooter.h include/GSegmentedObscuration.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+obj/GrOpticsDict.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+include/GReadPhotonGrISU.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+include/GReadDCStdBase.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+obj/GTelescope.o: ROBAST-telescope_factory/include/AOpticsManager.h ROBAST-telescope_factory/include/ARayArray.h ROBAST-telescope_factory/include/ARay.h ROBAST-telescope_factory/include/AFocalSurface.h ROBAST-telescope_factory/include/AOpticalComponent.h ROBAST-telescope_factory/include/ABorderSurfaceCondition.h ROBAST-telescope_factory/include/ALens.h ROBAST-telescope_factory/include/ARefractiveIndex.h ROBAST-telescope_factory/include/AMirror.h ROBAST-telescope_factory/include/AObscuration.h include/GDefinition.h include/GTelescope.h include/GGeometryBase.h include/GDCGeometry.h include/GRayTracerBase.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+include/GOrderedGrid.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+include/GDCTelescopeFactory.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+include/GDefinition.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+ROBAST-telescope_factory/include/ARayShooter.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+ROBAST-telescope_factory/include/AGeoAsphericDisk.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+removeRobast:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 187):
+	rm -rf $(ROBAST_VER) $(ROBAST_TGZ)
+	rm -f  $(COPY_FILE)
+	
+
+estDict: src/GrOpticsDict.cpp
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 51):
+	@echo in testDict
+	
+
+# Not a target:
+ROBASTEditedFile/AOpticalComponent.cxx:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-18 23:45:50
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+include/GReadDCStdGrISU.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+include/GSimulateOptics.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+include/LinkDef.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+obj/GGeometryBase.o: include/GDefinition.h include/GGeometryBase.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+include/GUtilityFuncts.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+include/GDCRayTracer.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+ROBASTEditedFile/copyFile: ROBASTEditedFile/AOpticalComponent.cxx
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: `'
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := ROBASTEditedFile/copyFile
+# automatic
+# % := 
+# automatic
+# * := 
+# automatic
+# + := ROBASTEditedFile/AOpticalComponent.cxx
+# automatic
+# | := 
+# automatic
+# < := ROBASTEditedFile/AOpticalComponent.cxx
+# automatic
+# ^ := ROBASTEditedFile/AOpticalComponent.cxx
+# automatic
+# ? := ROBASTEditedFile/AOpticalComponent.cxx
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=3/16=19%
+#  commands to execute (from `Makefile', line 140):
+	@echo     ready to copy robast edit files
+	$(foreach f,$(filter %.cxx, $?), cp $(f) $(ROBAST_VER)/src/.;) 
+ 
+	$(foreach f,$(filter %.h, $?), cp $(f) $(ROBAST_VER)/include/.;) 
+	touch $(COPY_FILE)
+	cd $(ROBAST_VER); make;
+	
+
+obj/GRootWriter.o: include/GDefinition.h include/GRootWriter.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+grOptics: obj/grOptics.o obj/GArrayTel.o obj/GDCGeometry.o obj/GDCRayTracer.o obj/GDCTelescope.o obj/GDCTelescopeFactory.o obj/GDefinition.o obj/GGeometryBase.o obj/GOrderedGrid.o obj/GPilot.o obj/GRayTracerBase.o obj/GReadDCStdBase.o obj/GReadDCStdGrISU.o obj/GReadPhotonBase.o obj/GReadPhotonGrISU.o obj/GReadSCStd.o obj/GReadSegSCStd.o obj/GRootDCNavigator.o obj/GRootWriter.o obj/GSCTelescope.o obj/GSCTelescopeFactory.o obj/GSegSCTelescope.o obj/GSegSCTelescopeFactory.o obj/GSegmentedMirror.o obj/GSegmentedObscuration.o obj/GSimulateOptics.o obj/GTelescope.o obj/GTelescopeFactory.o obj/GUtilityFuncts.o obj/GrOpticsDict.o
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 73):
+	@echo "building grOptics"
+	$(LD) $(LDFLAGS) $(LIBS) $^ $(OutPutOpt) $@
+	
+
+# Not a target:
+include/GReadPhotonBase.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+obj/GSCTelescope.o: ROBAST-telescope_factory/include/AOpticsManager.h ROBAST-telescope_factory/include/ARayArray.h ROBAST-telescope_factory/include/ARay.h ROBAST-telescope_factory/include/AFocalSurface.h ROBAST-telescope_factory/include/AOpticalComponent.h ROBAST-telescope_factory/include/ABorderSurfaceCondition.h ROBAST-telescope_factory/include/ALens.h ROBAST-telescope_factory/include/ARefractiveIndex.h ROBAST-telescope_factory/include/AMirror.h ROBAST-telescope_factory/include/AObscuration.h ROBAST-telescope_factory/include/AGeoAsphericDisk.h ROBAST-telescope_factory/include/AGlassCatalog.h ROBAST-telescope_factory/include/ACauchyFormula.h ROBAST-telescope_factory/include/ASchottFormula.h ROBAST-telescope_factory/include/ASellmeierFormula.h include/GUtilityFuncts.h include/GDefinition.h include/GTelescope.h include/GSCTelescope.h ROBAST-telescope_factory/include/AOpticsManager.h ROBAST-telescope_factory/include/ARayArray.h ROBAST-telescope_factory/include/ARay.h ROBAST-telescope_factory/include/AFocalSurface.h ROBAST-telescope_factory/include/AOpticalComponent.h ROBAST-telescope_factory/include/ABorderSurfaceCondition.h ROBAST-telescope_factory/include/ALens.h ROBAST-telescope_factory/include/ARefractiveIndex.h ROBAST-telescope_factory/include/AMirror.h ROBAST-telescope_factory/include/AObscuration.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+obj/GRayTracerBase.o: include/GDefinition.h include/GRayTracerBase.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+obj/GSegSCTelescope.o: ROBAST-telescope_factory/include/AGeoAsphericDisk.h ROBAST-telescope_factory/include/AGlassCatalog.h ROBAST-telescope_factory/include/ACauchyFormula.h ROBAST-telescope_factory/include/ARefractiveIndex.h ROBAST-telescope_factory/include/ASchottFormula.h ROBAST-telescope_factory/include/ASellmeierFormula.h ROBAST-telescope_factory/include/ABorderSurfaceCondition.h ROBAST-telescope_factory/include/ALens.h ROBAST-telescope_factory/include/AOpticalComponent.h ROBAST-telescope_factory/include/AMirror.h ROBAST-telescope_factory/include/AObscuration.h ROBAST-telescope_factory/include/AOpticsManager.h ROBAST-telescope_factory/include/ARayArray.h ROBAST-telescope_factory/include/ARay.h ROBAST-telescope_factory/include/AFocalSurface.h ROBAST-telescope_factory/include/ARayShooter.h include/GUtilityFuncts.h include/GDefinition.h include/GSegmentedMirror.h include/GSegmentedObscuration.h include/GTelescope.h include/GSegSCTelescope.h ROBAST-telescope_factory/include/AOpticsManager.h ROBAST-telescope_factory/include/ARayArray.h ROBAST-telescope_factory/include/ARay.h ROBAST-telescope_factory/include/AFocalSurface.h ROBAST-telescope_factory/include/AOpticalComponent.h ROBAST-telescope_factory/include/ABorderSurfaceCondition.h ROBAST-telescope_factory/include/ALens.h ROBAST-telescope_factory/include/ARefractiveIndex.h ROBAST-telescope_factory/include/AMirror.h ROBAST-telescope_factory/include/AObscuration.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+testUtilities: obj/testUtilities.o obj/GUtilityFuncts.o obj/GDefinition.o
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 67):
+	@echo "building testUtilities"
+	$(LD) $(LDFLAGS) -pg $(LIBS) $^ $(OutPutOpt) $@
+	@echo SRCDIR $(SRCDIR)
+	@echo INCDIR $(INCDIR)
+	
+
+obj/GReadPhotonGrISU.o: include/GUtilityFuncts.h include/GDefinition.h include/GReadPhotonBase.h include/GReadPhotonGrISU.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# files hash-table stats:
+# Load=111/1024=11%, Rehash=0, Collisions=56/912=6%
+# VPATH Search Paths
+
+# No `vpath' search paths.
+
+# No general (`VPATH' variable) search path.
+
+# # of strings in strcache: 3
+# # of strcache buffers: 1
+# strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
+# strcache free: total = 4055 / max = 4055 / min = 4055 / avg = 4055
+
+# Finished Make data base on Thu Aug 18 23:46:40 2022
+
+ 
