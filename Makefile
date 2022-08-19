@@ -71,7 +71,7 @@ testUtilities: $(OBJDIR)/testUtilities.o  $(TESTOBJECTS)
 
 grOptics: $(OBJDIR)/grOptics.o $(OBJS)
 	@echo "building grOptics"
-	$(LD) $(LDFLAGS) $(LIBS) $^ $(OutPutOpt) $@
+	g++ $(shell root-config --cflags) $(LDFLAGS) $^ -lGeom $(shell gsl-config --libs) $(shell root-config --libs) $(shell root-config --glibs) $(LIBS) -lGeom $(OutPutOpt) $@
 
 grReaderFactory: $(OBJDIR)/grReaderFactory.o $(OBJS)
 	@echo "building grTestSegReaderFactory"
