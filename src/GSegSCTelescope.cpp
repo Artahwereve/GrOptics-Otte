@@ -307,7 +307,7 @@ void GSegSCTelescope::addPrimaryF() {
         *oLog << "        margin    " << margin << endl;
         *oLog << "        phimin/max " << phimin << "  " << phimax << endl;
       }
-    PentagonSegmentedMirror mirror(rmin + margin, rmax, phimin, phimax);
+    TetragonSegmentedMirror mirror(rmin + margin, rmax, phimin, phimax);
     Double_t posErrorX = (*(vSegP1.at(i))).posErrorX;
     Double_t posErrorY = (*(vSegP1.at(i))).posErrorY;
     Double_t posErrorZ = (*(vSegP1.at(i))).posErrorZ;
@@ -347,7 +347,7 @@ void GSegSCTelescope::addPrimaryF() {
         *oLog << "        margin    " << margin << endl;
         *oLog << "        phimin/max " << phimin << "  " << phimax << endl;
       }
-    PentagonSegmentedMirror mirror(rmin + margin, rmax, phimin, phimax);
+    TetragonSegmentedMirror mirror(rmin + margin, rmax, phimin, phimax);
     Double_t posErrorX = (*(vSegP2.at(i))).posErrorX;
     Double_t posErrorY = (*(vSegP2.at(i))).posErrorY;
     Double_t posErrorZ = (*(vSegP2.at(i))).posErrorZ;
