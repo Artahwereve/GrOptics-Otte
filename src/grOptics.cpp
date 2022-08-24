@@ -48,16 +48,19 @@ using namespace std;
 #include "GDCTelescope.h"
 #include "GSCTelescope.h"
 #include "GSegSCTelescope.h"
+#include "GACTelescope.h"
 
 #include "GTelescopeFactory.h"
 #include "GDCTelescopeFactory.h"
 #include "GSCTelescopeFactory.h"
 #include "GSegSCTelescopeFactory.h"
+#include "GACTelescopeFactory.h"
 
 #include "GReadDCStdBase.h"
 #include "GReadDCStdGrISU.h"
 #include "GReadSCStd.h"
 #include "GReadSegSCStd.h"
+#include "GReadACStd.h"
 
 #include "GReadPhotonBase.h"
 #include "GReadPhotonGrISU.h"
@@ -354,9 +357,11 @@ int main(int argc, char *argv[]) {
   GTelescopeFactory *DCFac = 0;
   GTelescopeFactory *SCFac = 0;
   GTelescopeFactory *SegSCFac = 0;
+  GTelescopeFactory *ACFac = 0;
   GReadDCStdBase *readerDC = 0;
   GReadSCStd *readerSC = 0;
   GReadSegSCStd *readerSegSC = 0;
+  GReadACStd *readerAC = 0;
 
   // set up readers for telescope details
   for (unsigned i = 0;i< vTelFac.size(); ++i) {
@@ -378,6 +383,11 @@ int main(int argc, char *argv[]) {
       //*oLog << " in SEGSC" << endl;
       readerSegSC = new GReadSegSCStd(vTelFac.at(i)->configFile);
       SegSCFac = new GSegSCTelescopeFactory(*readerSegSC,vTelFac.at(i)->editFile);
+    }
+    else if ( vTelFac.at(i)->telType == AC) {
+      //*oLog << " in SEGSC" << endl;
+      readerAC = new GReadACStd(vTelFac.at(i)->configFile);
+      ACFac = new GACTelescopeFactory(*readerAC,vTelFac.at(i)->editFile);
     }
   }
 
@@ -468,6 +478,32 @@ int main(int argc, char *argv[]) {
 	tel->drawTelescope(pilot.telDrawOption);
 	app->Run(); 
 	return 0;
+      }
+      mArrayTel[telId] = new GArrayTel(telLocGrd,xoffsettel,
+                                       yoffsettel,telType,
+                                       telId,telStd,printMode,
+                                       bFixedPtFlag,azFixPt,znFixPt,
+                                       tel);
+
+      if (pilot.photonHistoryFile != "") {
+        mArrayTel[telId]->setPhotonHistory(pilot.photonHistoryFile,
+                                           pilot.photonHistoryTree);
+      }
+      
+    }
+    else if (telType==AC) {
+
+      GTelescope *tel = ACFac->makeTelescope(telId,telStd);
+
+      tel->setPrintMode(*oLog,printMode);
+      if (bDrawRayFlag) {
+        tel->setRayPlotMode(eRayType);
+      }
+      if ( (pilot.telToDraw == telId) && (bDrawTelFlag) ) {
+    *oLog << "READY TO DRAW TELESCOPE AND QUIT" << endl;
+    tel->drawTelescope(pilot.telDrawOption);
+    app->Run();
+    return 0;
       }
       mArrayTel[telId] = new GArrayTel(telLocGrd,xoffsettel,
                                        yoffsettel,telType,
@@ -618,6 +654,7 @@ int main(int argc, char *argv[]) {
   SafeDelete(DCFac);
   SafeDelete(SCFac);
   SafeDelete(SegSCFac);
+  SafeDelete(ACFac);
   
   // this deletes the telescopes
   for (mArrayTelIter = mArrayTel.begin();

@@ -135,7 +135,9 @@ string getTelType(const enum TelType &rdType) {
   else if (rdType==SEGSC) {
     rdtypeStr = "SEGSC";
   }
-
+  else if (rdType==AC) {
+  rdtypeStr = "AC";
+}
   return rdtypeStr;
 
 };
@@ -158,6 +160,9 @@ enum TelType getTelTypeEnum(const string &telTypeStr) {
   }
   else if (teststr=="SEGSC") {
     tenum = SEGSC;
+  }
+  else if (teststr=="AC") {
+    tenum = AC;
   }
   else {
     *oLog << " in getTelTypeEnum " << endl;
