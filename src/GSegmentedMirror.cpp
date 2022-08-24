@@ -193,7 +193,9 @@ AMirror* TetragonSegmentedMirror::BuildMirror(const char* name,
   Double_t p0y = ay + fMargin;
   Double_t p1x = ax + (-ay + by - fMargin*(1./TMath::Sin(dphi*d2r) + 1.))/TMath::Tan((90. - dphi)*d2r);
   Double_t p1y = by - fMargin;
-  TGeoTrd1* trd1 = new TGeoTrd1(Form("%s_trd1", name), p0x, p1x, (zmax - zmin)/2., (p1y - p0y)/2.);
+  // TGeoTrd1* trd1 = new TGeoTrd1(Form("%s_trd1", name), p0x, p1x, (zmax - zmin)/2., (p1y - p0y)/2.);
+  TGeoTrd1* trd1 = new TGeoTrd1(Form("%s_trd1", name), 0.424305*m, 0.424305*m, (zmax - zmin)/2., (p1y - p0y)/2.);
+
 
   TGeoRotation* rot1 = new TGeoRotation(Form("%s_rot1", name), 0., -90., 0.);
   rot1->RegisterYourself();
