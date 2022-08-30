@@ -12,13 +12,12 @@ find: /etc/cups/certs: Permission denied
 make: root-config: Command not found
 
 
-# Make data base, printed on Fri Aug 19 21:35:46 2022
+# Make data base, printed on Mon Aug 29 11:37:17 2022
 
 # Variables
 
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
- 
 # automatic
 ?F = $(notdir $?)
 # makefile (from `Makefile', line 43)
@@ -30,6 +29,7 @@ INCDIR := include
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
 # automatic
+ 
 @F = $(notdir $@)
 # makefile
 CURDIR := /Users/parshadkp/Library/CloudStorage/OneDrive-GeorgiaInstituteofTechnology/Georgia Tech/NASA Balloon/GrOptics-Otte
@@ -64,7 +64,7 @@ PATH = /Users/parshadkp/opt/anaconda3/bin:/Users/parshadkp/opt/anaconda3/condabi
 # makefile (from `Makefile.common', line 50)
 ROBAST_TGZ := ROBAST-2.4.4.tar.gz
 # environment
-LaunchInstanceID = 1402ED4D-C270-4ECF-8CE3-7E6545920BFE
+LaunchInstanceID = 4E3B3684-15AF-438A-8C93-5C9FAEC7D2DF
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # makefile (from `Makefile.common', line 23)
@@ -74,13 +74,13 @@ MAKEARCH :=
 # makefile (from `Makefile', line 29)
 DICTS = $(SRCDIR)/GrOpticsDict.cpp 
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.ou9nSpJ7WO/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.oYgxDL1jkz/Listeners
 # makefile (from `Makefile', line 23)
 SRCDIR := src
 # automatic
 %F = $(notdir $%)
 # environment
-DISPLAY = /private/tmp/com.apple.launchd.4WB1ftOV1U/org.macosforge.xquartz:0
+DISPLAY = /private/tmp/com.apple.launchd.9w4aqo10vT/org.macosforge.xquartz:0
 # environment
 CONDA_EXE = /Users/parshadkp/opt/anaconda3/bin/conda
 # makefile (from `Makefile', line 64)
@@ -170,6 +170,7 @@ MallocNanoZone = 0
 # makefile (from `Makefile.common', line 40)
 ROOTCLING := 
 # makefile
+ 
 MAKEFLAGS = Rrqp
 # environment
 MFLAGS = -Rrqp
@@ -182,7 +183,6 @@ HOMEBREW_PREFIX = /opt/homebrew
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
- 
 +F = $(notdir $+)
 # environment
 HOMEBREW_REPOSITORY = /opt/homebrew
@@ -205,7 +205,7 @@ CONDA_PYTHON_EXE = /Users/parshadkp/opt/anaconda3/bin/python
 # makefile (from `Makefile.common', line 57)
 LIBS = -lMinuit -lTreePlayer -lGenVector   -lGeomBuilder  -lGeomPainter  -lGeom -lGed ${ROBAST_VER}/libROBAST.so
 # environment
-SECURITYSESSIONID = 186ac
+SECURITYSESSIONID = 186b3
 # automatic
 ^F = $(notdir $^)
 # default
@@ -223,7 +223,7 @@ CONDA_PREFIX = /Users/parshadkp/opt/anaconda3
 # makefile (from `Makefile', line 192)
 DEPEND = echo > Makefile.depend0 && makedepend -s "#DEPEND LIST DONT DELETE" -- $(INCLUDEFLAGS) -Y --  $(SRCDIR)/*.cpp  $(INCDIR)/*.h -f Makefile.depend0 > /dev/null 2>&1 && sed "s/^[a-zA-Z0-9]*\//obj\//" Makefile.depend0 > Makefile.depend && rm -f Makefile.depend0
 # environment
-VSCODE_PID = 3026
+VSCODE_PID = 585
 # environment
 _CE_CONDA = 
 # makefile (from `Makefile', line 25)
@@ -239,12 +239,12 @@ LANG = C
 
 # Directories
 
-# ROBASTEditedFile (device 16777232, inode 11741716): 4 files, no impossibilities.
-# include (device 16777232, inode 11741705): 33 files, no impossibilities.
-# . (device 16777232, inode 11737272): 25 files, no impossibilities.
-# / (device 16777232, inode 2): 21 files, no impossibilities.
+# ROBASTEditedFile (device 16777234, inode 11741716): 4 files, no impossibilities.
+# include (device 16777234, inode 11741705): 33 files, no impossibilities.
+# . (device 16777234, inode 11737272): 25 files, no impossibilities.
+# / (device 16777234, inode 2): 21 files, no impossibilities.
 # /storage/hive/project/phy-otte/shared/analysistools/ROBAST: could not be stat'd.
-# src (device 16777232, inode 11741718): 39 files, no impossibilities.
+# src (device 16777234, inode 11741718): 39 files, no impossibilities.
 
 # 122 files, no impossibilities in 6 directories.
 
@@ -359,7 +359,6 @@ include/GRootWriter.h:
 ldflags:
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
- 
 #  File does not exist.
 #  File has not been updated.
 #  commands to execute (from `Makefile', line 158):
@@ -381,6 +380,7 @@ include/GRayTracerBase.h:
 obj/GPilot.o: include/GDefinition.h include/GPilot.h
 #  Implicit rule search has not been done.
 #  Modification time never checked.
+ 
 #  File has not been updated.
 
 srcs:
@@ -564,7 +564,7 @@ include/GSegSCTelescopeFactory.h:
 
 Makefile.depend:
 #  Implicit rule search has not been done.
-#  Last modified 2022-08-19 21:35:45
+#  Last modified 2022-08-29 11:37:17
 #  File has been updated.
 #  Successfully updated.
 #  commands to execute (from `Makefile', line 203):
@@ -622,7 +622,6 @@ depend:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
- 
 #  commands to execute (from `Makefile', line 200):
 	$(DEPEND)
 	
@@ -638,6 +637,7 @@ obj/GReadDCStdBase.o: include/GDefinition.h include/GUtilityFuncts.h include/GPi
 #  Modification time never checked.
 #  File has not been updated.
 
+ 
 obj/GOrderedGrid.o: include/GUtilityFuncts.h include/GDefinition.h include/GOrderedGrid.h
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -843,7 +843,6 @@ include/GReadSCStd.h:
 
 obj/GGeometryBase.o: include/GDefinition.h include/GGeometryBase.h
 #  Implicit rule search has not been done.
- 
 #  Modification time never checked.
 #  File has not been updated.
 
@@ -864,6 +863,7 @@ ROBASTEditedFile/copyFile: ROBASTEditedFile/AOpticalComponent.cxx
 #  Modification time never checked.
 #  File has not been updated.
 #  commands to execute (from `Makefile', line 140):
+ 
 	@echo     ready to copy robast edit files
 	$(foreach f,$(filter %.cxx, $?), cp $(f) $(ROBAST_VER)/src/.;) 
 	$(foreach f,$(filter %.h, $?), cp $(f) $(ROBAST_VER)/include/.;) 
@@ -935,6 +935,6 @@ obj/GReadPhotonGrISU.o: include/GUtilityFuncts.h include/GDefinition.h include/G
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4055 / max = 4055 / min = 4055 / avg = 4055
 
-# Finished Make data base on Fri Aug 19 21:35:46 2022
+# Finished Make data base on Mon Aug 29 11:37:17 2022
 
  

@@ -287,88 +287,96 @@ void GSegSCTelescope::addPrimaryF() {
   if (debug) {
     *oLog << "  --  GSegSCTelescope::addPrimaryF" << endl;
    }
-  Int_t count = 0;
-
+  Int_t count = 1;
+  Double_t rmin = (*(vSegP1.at(1))).rmin;
+  Double_t rmax = (*(vSegP1.at(1))).rmax;
+  Double_t margin = ( (*(vSegP1.at(1))).margin )*mm;
+  rmin = rmin*m - margin/TMath::Cos(11.25/2.*TMath::DegToRad());
+  rmax = rmax*m;
+  Double_t phimin = ( (*(vSegP1.at(1))).delPhi)*1;
+  Double_t phimax = ( (*(vSegP1.at(1))).delPhi)*(1+1);
+  TetragonSegmentedMirror mirror(rmin + margin, rmax, phimin, phimax);
+  addPrimaryMirror(Form("primary%d", count), &mirror);
   // segment not created if reflect = 0
   // P1 mirrors
-  for (Int_t i = 0; i < iNumP1Mirrors; i++) {
-    if ( ( (*(vSegP1.at(i))).reflect) > 0) {
-      Double_t rmin = (*(vSegP1.at(i))).rmin;
-      Double_t rmax = (*(vSegP1.at(i))).rmax;
-      Double_t margin = ( (*(vSegP1.at(i))).margin )*mm;
-      rmin = rmin*m - margin/TMath::Cos(11.25/2.*TMath::DegToRad());
-      rmax = rmax*m;
+  // for (Int_t i = 0; i < iNumP1Mirrors; i++) {
+  //   if ( ( (*(vSegP1.at(i))).reflect) > 0) {
+  //     Double_t rmin = (*(vSegP1.at(i))).rmin;
+  //     Double_t rmax = (*(vSegP1.at(i))).rmax;
+  //     Double_t margin = ( (*(vSegP1.at(i))).margin )*mm;
+  //     rmin = rmin*m - margin/TMath::Cos(11.25/2.*TMath::DegToRad());
+  //     rmax = rmax*m;
       
-      Double_t phimin = ( (*(vSegP1.at(i))).delPhi)*i;
-      Double_t phimax = ( (*(vSegP1.at(i))).delPhi)*(i+1);
-      if (debug) {
-        *oLog << "    P1 pentagon segmented mirror number " << i << endl;
-        *oLog << "        rmin/rmax " << rmin << " " << rmax << endl;
-        *oLog << "        margin    " << margin << endl;
-        *oLog << "        phimin/max " << phimin << "  " << phimax << endl;
-      }
-    TetragonSegmentedMirror mirror(rmin + margin, rmax, phimin, phimax);
-    Double_t posErrorX = (*(vSegP1.at(i))).posErrorX;
-    Double_t posErrorY = (*(vSegP1.at(i))).posErrorY;
-    Double_t posErrorZ = (*(vSegP1.at(i))).posErrorZ;
-    mirror.SetPositionErrors(posErrorX*mm, posErrorY*mm, posErrorZ*mm);
+  //     Double_t phimin = ( (*(vSegP1.at(i))).delPhi)*i;
+  //     Double_t phimax = ( (*(vSegP1.at(i))).delPhi)*(i+1);
+  //     if (debug) {
+  //       *oLog << "    P1 pentagon segmented mirror number " << i << endl;
+  //       *oLog << "        rmin/rmax " << rmin << " " << rmax << endl;
+  //       *oLog << "        margin    " << margin << endl;
+  //       *oLog << "        phimin/max " << phimin << "  " << phimax << endl;
+  //     }
+  //   TetragonSegmentedMirror mirror(rmin + margin, rmax, phimin, phimax);
+  //   Double_t posErrorX = (*(vSegP1.at(i))).posErrorX;
+  //   Double_t posErrorY = (*(vSegP1.at(i))).posErrorY;
+  //   Double_t posErrorZ = (*(vSegP1.at(i))).posErrorZ;
+  //   mirror.SetPositionErrors(posErrorX*mm, posErrorY*mm, posErrorZ*mm);
  
-    Double_t rotErrorPhi = (*(vSegP1.at(i))).rotErrorPhi;
-    Double_t rotErrorTheta = (*(vSegP1.at(i))).rotErrorTheta;
-    Double_t rotErrorPsi = (*(vSegP1.at(i))).rotErrorPsi;
-    mirror.SetRotationErrors(rotErrorPhi, rotErrorTheta,
-                             rotErrorPsi);
+  //   Double_t rotErrorPhi = (*(vSegP1.at(i))).rotErrorPhi;
+  //   Double_t rotErrorTheta = (*(vSegP1.at(i))).rotErrorTheta;
+  //   Double_t rotErrorPsi = (*(vSegP1.at(i))).rotErrorPsi;
+  //   mirror.SetRotationErrors(rotErrorPhi, rotErrorTheta,
+  //                            rotErrorPsi);
  
-    Double_t roughness = (*(vSegP1.at(i))).roughness; 
-    mirror.SetRougness(roughness);
+  //   Double_t roughness = (*(vSegP1.at(i))).roughness; 
+  //   mirror.SetRougness(roughness);
 
-    mirror.SetMargin(margin);
-    iReflect = (*(vSegP1.at(i))).reflect;
-   // add mirror segment
-    addPrimaryMirror(Form("primary%d", count), &mirror);
-    count++;
-    } 
-  }
+  //   mirror.SetMargin(margin);
+  //   iReflect = (*(vSegP1.at(i))).reflect;
+  //  // add mirror segment
+  //   addPrimaryMirror(Form("primary%d", count), &mirror);
+  //   count++;
+  //   } 
+  // }
 
-  // P2 mirrors
-  for (Int_t i = 0; i < iNumP2Mirrors; i++) {
-    if ( ( (*(vSegP2.at(i))).reflect) > 0) {
-      Double_t rmin = (*(vSegP2.at(i))).rmin;
-      Double_t rmax = (*(vSegP2.at(i))).rmax;
-      Double_t margin = ( (*(vSegP2.at(i))).margin )*mm;
-      rmin = rmin*m - margin/TMath::Cos(11.25/2.*TMath::DegToRad());
-      rmax = rmax*m;
+  // // P2 mirrors
+  // for (Int_t i = 0; i < iNumP2Mirrors; i++) {
+  //   if ( ( (*(vSegP2.at(i))).reflect) > 0) {
+  //     Double_t rmin = (*(vSegP2.at(i))).rmin;
+  //     Double_t rmax = (*(vSegP2.at(i))).rmax;
+  //     Double_t margin = ( (*(vSegP2.at(i))).margin )*mm;
+  //     rmin = rmin*m - margin/TMath::Cos(11.25/2.*TMath::DegToRad());
+  //     rmax = rmax*m;
       
-      Double_t phimin = ( (*(vSegP2.at(i))).delPhi)*i;
-      Double_t phimax = ( (*(vSegP2.at(i))).delPhi)*(i+1);
-      if (0) {
-        *oLog << "    P1 pentagon segmented P2 mirror number " << i << endl;
-        *oLog << "        rmin/rmax " << rmin << " " << rmax << endl;
-        *oLog << "        margin    " << margin << endl;
-        *oLog << "        phimin/max " << phimin << "  " << phimax << endl;
-      }
-    TetragonSegmentedMirror mirror(rmin + margin, rmax, phimin, phimax);
-    Double_t posErrorX = (*(vSegP2.at(i))).posErrorX;
-    Double_t posErrorY = (*(vSegP2.at(i))).posErrorY;
-    Double_t posErrorZ = (*(vSegP2.at(i))).posErrorZ;
-    mirror.SetPositionErrors(posErrorX*mm, posErrorY*mm, posErrorZ*mm);
+  //     Double_t phimin = ( (*(vSegP2.at(i))).delPhi)*i;
+  //     Double_t phimax = ( (*(vSegP2.at(i))).delPhi)*(i+1);
+  //     if (0) {
+  //       *oLog << "    P1 pentagon segmented P2 mirror number " << i << endl;
+  //       *oLog << "        rmin/rmax " << rmin << " " << rmax << endl;
+  //       *oLog << "        margin    " << margin << endl;
+  //       *oLog << "        phimin/max " << phimin << "  " << phimax << endl;
+  //     }
+  //   TetragonSegmentedMirror mirror(rmin + margin, rmax, phimin, phimax);
+  //   Double_t posErrorX = (*(vSegP2.at(i))).posErrorX;
+  //   Double_t posErrorY = (*(vSegP2.at(i))).posErrorY;
+  //   Double_t posErrorZ = (*(vSegP2.at(i))).posErrorZ;
+  //   mirror.SetPositionErrors(posErrorX*mm, posErrorY*mm, posErrorZ*mm);
  
-    Double_t rotErrorPhi = (*(vSegP2.at(i))).rotErrorPhi;
-    Double_t rotErrorTheta = (*(vSegP2.at(i))).rotErrorTheta;
-    Double_t rotErrorPsi = (*(vSegP2.at(i))).rotErrorPsi;
-    mirror.SetRotationErrors(rotErrorPhi, rotErrorTheta,
-                             rotErrorPsi);
+  //   Double_t rotErrorPhi = (*(vSegP2.at(i))).rotErrorPhi;
+  //   Double_t rotErrorTheta = (*(vSegP2.at(i))).rotErrorTheta;
+  //   Double_t rotErrorPsi = (*(vSegP2.at(i))).rotErrorPsi;
+  //   mirror.SetRotationErrors(rotErrorPhi, rotErrorTheta,
+  //                            rotErrorPsi);
  
-    Double_t roughness = (*(vSegP2.at(i))).roughness; 
-    mirror.SetRougness(roughness);
+  //   Double_t roughness = (*(vSegP2.at(i))).roughness; 
+  //   mirror.SetRougness(roughness);
 
-    mirror.SetMargin(margin);
-    iReflect = (*(vSegP2.at(i))).reflect;
-    // add mirror segment
-    addPrimaryMirror(Form("primary%d", count), &mirror);
-    count++;
-    } 
-  }
+  //   mirror.SetMargin(margin);
+  //   iReflect = (*(vSegP2.at(i))).reflect;
+  //   // add mirror segment
+  //   addPrimaryMirror(Form("primary%d", count), &mirror);
+  //   count++;
+  //   } 
+  // }
 };
 /*******************************************************************/
 void GSegSCTelescope::addPrimaryMirror(const char*name,
