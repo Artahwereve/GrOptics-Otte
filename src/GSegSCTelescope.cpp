@@ -288,14 +288,19 @@ void GSegSCTelescope::addPrimaryF() {
     *oLog << "  --  GSegSCTelescope::addPrimaryF" << endl;
    }
   Int_t count = 1;
-  Double_t rmin = (*(vSegP1.at(1))).rmin;
-  Double_t rmax = (*(vSegP1.at(1))).rmax;
-  Double_t margin = ( (*(vSegP1.at(1))).margin )*mm;
-  rmin = rmin*m - margin/TMath::Cos(11.25/2.*TMath::DegToRad());
-  rmax = rmax*m;
-  Double_t phimin = ( (*(vSegP1.at(1))).delPhi)*1;
-  Double_t phimax = ( (*(vSegP1.at(1))).delPhi)*(1+1);
+  Double_t rmin = 0*m;
+  Double_t rmax = 0.84861*m;
+  Double_t margin = 10*mm;
+  Double_t phimin = 0;
+  Double_t phimax = 22.5;
   TetragonSegmentedMirror mirror(rmin + margin, rmax, phimin, phimax);
+  mirror.SetMargin(margin);
+  mirror.SetPositionErrors(0*mm, 0*mm, 0*mm);
+ 
+  mirror.SetRotationErrors(0, 0, 0);
+ 
+  Double_t roughness = (*(vSegP2.at(1))).roughness; 
+  mirror.SetRougness(roughness);
   addPrimaryMirror(Form("primary%d", count), &mirror);
   // segment not created if reflect = 0
   // P1 mirrors
