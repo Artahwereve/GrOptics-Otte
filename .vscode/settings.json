@@ -1,3 +1,6 @@
 {
-    "makefile.extensionOutputFolder": "./.vscode"
+    "makefile.extensionOutputFolder": "./.vscode",
+    "files.associations": {
+        "BalloonTest2.C": "cpp"
+    }
 }

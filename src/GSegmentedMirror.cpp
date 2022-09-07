@@ -193,15 +193,18 @@ AMirror* TetragonSegmentedMirror::BuildMirror(const char* name,
   Double_t p0y = ay + fMargin;
   Double_t p1x = ax + (-ay + by - fMargin*(1./TMath::Sin(dphi*d2r) + 1.))/TMath::Tan((90. - dphi)*d2r);
   Double_t p1y = by - fMargin;
-  // TGeoTrd1* trd1 = new TGeoTrd1(Form("%s_trd1", name), p0x, p1x, (zmax - zmin)/2., (p1y - p0y)/2.);
-  TGeoTrd1* trd1 = new TGeoTrd1(Form("%s_trd1", name), (0.424305*2)*m, (0.424305*2)*m, (0.424305*2)*m, (p1y - p0y)/2.);
+  // TGeoTrd1* trd1 = new TGeoTrd1(Form("%s_trd1", name), p0x, p1x, (zmax - zmin)/2., (p1y - p0y)/2.); (0.4971)*m, (0.6696)*m
+  TGeoTrd1* trd1 = new TGeoTrd1(Form("%s_trd1", name), (0.4971)*m, (0.4971)*m, (0.6696)*m, (p1y - p0y)/2.);
 
 
   // TGeoRotation* rot1 = new TGeoRotation(Form("%s_rot1", name), 0., -90., 0.);
   TGeoRotation* rot1 = new TGeoRotation(Form("%s_rot1", name), -11.25, 0, 0.);
   rot1->RegisterYourself();
 
-  TGeoCombiTrans* combi1 = new TGeoCombiTrans(Form("%s_combi1", name), 0, (p0y + p1y)/2. - cr, (zmax + zmin)/2. - cz, rot1);
+  // TGeoCombiTrans* combi1 = new TGeoCombiTrans(Form("%s_combi1", name), 0, (p0y + p1y)/2. - cr, (zmax + zmin)/2. - cz, rot1);
+  // X and Y are switeched for translation
+  TGeoCombiTrans* combi1 = new TGeoCombiTrans(Form("%s_combi1", name), -0.4*m, 0.35*m, 0, rot1);
+
   combi1->RegisterYourself();
 
   // TGeoTranslation* tr2 = new TGeoTranslation(Form("%s_tr2", name), 0, -cr, -cz);
