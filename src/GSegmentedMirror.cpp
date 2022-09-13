@@ -34,6 +34,7 @@
 #include "GSegmentedMirror.h"
 
 #include <iostream>
+#include <string>
 
 // define useful units
 static const Double_t cm = AOpticsManager::cm();
@@ -203,9 +204,17 @@ AMirror* TetragonSegmentedMirror::BuildMirror(const char* name,
 
   // TGeoCombiTrans* combi1 = new TGeoCombiTrans(Form("%s_combi1", name), 0, (p0y + p1y)/2. - cr, (zmax + zmin)/2. - cz, rot1);
   // X and Y are switeched for translation
-  TGeoCombiTrans* combi1 = new TGeoCombiTrans(Form("%s_combi1", name), -0.4*m, 0.35*m, 0, rot1);
-
-  combi1->RegisterYourself();
+  TGeoCombiTrans* combi1;
+  const char* a = "primary1";
+  const char* b = "primary2";
+  if(strcmp(name,a)==0){
+    combi1 = new TGeoCombiTrans(Form("%s_combi1", name), -0.4*m, 0.35*m, 0, rot1);
+    combi1->RegisterYourself();
+  }
+  if(strcmp(name,b)==0){
+    combi1 = new TGeoCombiTrans(Form("%s_combi1", name), 1*m, 0*m, 0, rot1);
+    combi1->RegisterYourself();
+  }
 
   // TGeoTranslation* tr2 = new TGeoTranslation(Form("%s_tr2", name), 0, -cr, -cz);
   TGeoTranslation* tr2 = new TGeoTranslation(Form("%s_tr2", name), 0, 0, 0);

@@ -301,9 +301,16 @@ void GSegSCTelescope::addPrimaryF() {
  
   Double_t roughness = (*(vSegP2.at(1))).roughness; 
   mirror.SetRougness(roughness);
-  TGeoTranslation* tr3 = new TGeoTranslation(1*m, 0*m, 0*m);
-  tr3->RegisterYourself();
   addPrimaryMirror(Form("primary%d", count), &mirror);
+
+  TetragonSegmentedMirror mirror2(rmin + margin, rmax, phimin, phimax);
+  mirror2.SetMargin(margin);
+  mirror2.SetPositionErrors(0*mm, 0*mm, 0*mm);
+ 
+  mirror2.SetRotationErrors(0, 0, 0);
+ 
+  mirror2.SetRougness(roughness);
+  addPrimaryMirror(Form("primary%d", 2), &mirror2);
   // segment not created if reflect = 0
   // P1 mirrors
   // for (Int_t i = 0; i < iNumP1Mirrors; i++) {
