@@ -207,12 +207,22 @@ AMirror* TetragonSegmentedMirror::BuildMirror(const char* name,
   TGeoCombiTrans* combi1;
   const char* a = "primary1";
   const char* b = "primary2";
+  const char* c = "primary3";
+  const char* d = "primary4";
   if(strcmp(name,a)==0){
     combi1 = new TGeoCombiTrans(Form("%s_combi1", name), -0.4*m, 0.35*m, 0, rot1);
     combi1->RegisterYourself();
   }
   if(strcmp(name,b)==0){
-    combi1 = new TGeoCombiTrans(Form("%s_combi1", name), 1*m, 0*m, 0, rot1);
+    combi1 = new TGeoCombiTrans(Form("%s_combi1", name), 0.65*m, 0.12*m, 0, rot1);
+    combi1->RegisterYourself();
+  }
+  if(strcmp(name,c)==0){
+    combi1 = new TGeoCombiTrans(Form("%s_combi1", name), -2*m, 0*m, 0, rot1);
+    combi1->RegisterYourself();
+  }
+  if(strcmp(name,d)==0){
+    combi1 = new TGeoCombiTrans(Form("%s_combi1", name), 0*m, -2*m, 0, rot1);
     combi1->RegisterYourself();
   }
 

@@ -293,12 +293,11 @@ void GSegSCTelescope::addPrimaryF() {
   Double_t margin = 10*mm;
   Double_t phimin = 0;
   Double_t phimax = 22.5;
+  
   TetragonSegmentedMirror mirror(rmin + margin, rmax, phimin, phimax);
   mirror.SetMargin(margin);
   mirror.SetPositionErrors(0*mm, 0*mm, 0*mm);
- 
   mirror.SetRotationErrors(0, 0, 0);
- 
   Double_t roughness = (*(vSegP2.at(1))).roughness; 
   mirror.SetRougness(roughness);
   addPrimaryMirror(Form("primary%d", count), &mirror);
@@ -306,11 +305,24 @@ void GSegSCTelescope::addPrimaryF() {
   TetragonSegmentedMirror mirror2(rmin + margin, rmax, phimin, phimax);
   mirror2.SetMargin(margin);
   mirror2.SetPositionErrors(0*mm, 0*mm, 0*mm);
- 
   mirror2.SetRotationErrors(0, 0, 0);
- 
   mirror2.SetRougness(roughness);
   addPrimaryMirror(Form("primary%d", 2), &mirror2);
+
+  TetragonSegmentedMirror mirror3(rmin + margin, rmax, phimin, phimax);
+  mirror3.SetMargin(margin);
+  mirror3.SetPositionErrors(0*mm, 0*mm, 0*mm);
+  mirror3.SetRotationErrors(0, 0, 0);
+  mirror3.SetRougness(roughness);
+  addPrimaryMirror(Form("primary%d", 3), &mirror3);
+
+  TetragonSegmentedMirror mirror4(rmin + margin, rmax, phimin, phimax);
+  mirror4.SetMargin(margin);
+  mirror4.SetPositionErrors(0*mm, 0*mm, 0*mm);
+  mirror4.SetRotationErrors(0, 0, 0);
+  mirror4.SetRougness(roughness);
+  addPrimaryMirror(Form("primary%d", 4), &mirror4);
+  
   // segment not created if reflect = 0
   // P1 mirrors
   // for (Int_t i = 0; i < iNumP1Mirrors; i++) {
