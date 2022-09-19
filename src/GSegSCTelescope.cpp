@@ -322,7 +322,7 @@ void GSegSCTelescope::addPrimaryF() {
   mirror4.SetRotationErrors(0, 0, 0);
   mirror4.SetRougness(roughness);
   addPrimaryMirror(Form("primary%d", 4), &mirror4);
-  
+
   // segment not created if reflect = 0
   // P1 mirrors
   // for (Int_t i = 0; i < iNumP1Mirrors; i++) {
@@ -726,6 +726,7 @@ void GSegSCTelescope::addIdealFocalPlane()  {
 
   AObscuration* idealCameraObs = new AObscuration("idealCameraObs", idealCameraV);
   idealCameraObs->SetLineColor(iMAPMTObscurationColor);
+  //fManager->GetTopVolume()->AddNode(idealCamera, 1, new TGeoTranslation(0, 0, 0));
   fManager->GetTopVolume()->AddNode(idealCamera, 1, new TGeoTranslation(0, 0, -fFocalPlaneOffsetCorrection));
   //fManager->GetTopVolume()->AddNode(idealCamera, 1, new TGeoTranslation(0, 0, -2.2*mm));
   

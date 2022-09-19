@@ -205,24 +205,24 @@ AMirror* TetragonSegmentedMirror::BuildMirror(const char* name,
   // TGeoCombiTrans* combi1 = new TGeoCombiTrans(Form("%s_combi1", name), 0, (p0y + p1y)/2. - cr, (zmax + zmin)/2. - cz, rot1);
   // X and Y are switeched for translation
   TGeoCombiTrans* combi1;
-  const char* a = "primary1";
-  const char* b = "primary2";
-  const char* c = "primary3";
-  const char* d = "primary4";
+  const char* a = "primary1"; //top right
+  const char* b = "primary2"; //bottom right
+  const char* c = "primary3"; //top left
+  const char* d = "primary4"; //bottom left
   if(strcmp(name,a)==0){
     combi1 = new TGeoCombiTrans(Form("%s_combi1", name), -0.4*m, 0.35*m, 0, rot1);
     combi1->RegisterYourself();
   }
   if(strcmp(name,b)==0){
-    combi1 = new TGeoCombiTrans(Form("%s_combi1", name), 0.65*m, 0.12*m, 0, rot1);
+    combi1 = new TGeoCombiTrans(Form("%s_combi1", name), 0.60*m, 0.13*m, 0, rot1);
     combi1->RegisterYourself();
   }
   if(strcmp(name,c)==0){
-    combi1 = new TGeoCombiTrans(Form("%s_combi1", name), -2*m, 0*m, 0, rot1);
+    combi1 = new TGeoCombiTrans(Form("%s_combi1", name), -0.67*m, -0.97*m, 0, rot1);
     combi1->RegisterYourself();
   }
   if(strcmp(name,d)==0){
-    combi1 = new TGeoCombiTrans(Form("%s_combi1", name), 0*m, -2*m, 0, rot1);
+    combi1 = new TGeoCombiTrans(Form("%s_combi1", name), 0.33*m, -1.2*m, 0, rot1);
     combi1->RegisterYourself();
   }
 
