@@ -2,6 +2,7 @@
 // telescope structure.
 // Nov/21/2012 Akira Okumura <oxon@mac.com>
 
+#include "TGeoSphere.h"
 #include "TH2D.h"
 #include "TCanvas.h"
 #include "TGraph.h"
@@ -174,71 +175,51 @@ AMirror* TetragonSegmentedMirror::BuildMirror(const char* name,
   // (R, Z) = (cr, cz) is used as the origin of the rotation error matrix
   Double_t cr = (fRmax + fRmin)/2.;
   Double_t cz = isPrimary ? disk->CalcF2(cr) : disk->CalcF1(cr);
-
-  // Define the base of the segment shape
-  // ____
-  //     ----____
-  // ------- B    Rmax  
-  // ----p1/
-  //    / /
-  // --p0/
-  // ----____
-  //     A   ---- Rmin
-  //
-  Double_t d2r = TMath::DegToRad();
-  Double_t ax = fRmin*TMath::Cos((90. - dphi)*d2r);
-  Double_t ay = fRmin*TMath::Sin((90. - dphi)*d2r);
-  //Double_t bx = fRmax*TMath::Cos((90. - dphi)*d2r);
-  Double_t by = fRmax*TMath::Sin((90. - dphi)*d2r);
-  Double_t p0x = ax - fMargin*(1./TMath::Sin(dphi*d2r) - 1.)/TMath::Tan((90. - dphi)*d2r);
-  Double_t p0y = ay + fMargin;
-  Double_t p1x = ax + (-ay + by - fMargin*(1./TMath::Sin(dphi*d2r) + 1.))/TMath::Tan((90. - dphi)*d2r);
-  Double_t p1y = by - fMargin;
-  // TGeoTrd1* trd1 = new TGeoTrd1(Form("%s_trd1", name), p0x, p1x, (zmax - zmin)/2., (p1y - p0y)/2.); (0.4971)*m, (0.6696)*m
-  TGeoTrd1* trd1 = new TGeoTrd1(Form("%s_trd1", name), (0.4971)*m, (0.4971)*m, (0.6696)*m, (p1y - p0y)/2.);
-
-
-  // TGeoRotation* rot1 = new TGeoRotation(Form("%s_rot1", name), 0., -90., 0.);
-  TGeoRotation* rot1 = new TGeoRotation(Form("%s_rot1", name), -11.25, 0, 0.);
-  rot1->RegisterYourself();
-
-  // TGeoCombiTrans* combi1 = new TGeoCombiTrans(Form("%s_combi1", name), 0, (p0y + p1y)/2. - cr, (zmax + zmin)/2. - cz, rot1);
-  // X and Y are switeched for translation
-  TGeoCombiTrans* combi1;
-  const char* a = "primary1";
-  const char* b = "primary2";
-  const char* c = "primary3";
-  const char* d = "primary4";
-  if(strcmp(name,a)==0){
-    combi1 = new TGeoCombiTrans(Form("%s_combi1", name), -0.4*m, 0.35*m, 0, rot1);
-    combi1->RegisterYourself();
-  }
-  if(strcmp(name,b)==0){
-    combi1 = new TGeoCombiTrans(Form("%s_combi1", name), 0.65*m, 0.12*m, 0, rot1);
-    combi1->RegisterYourself();
-  }
-  if(strcmp(name,c)==0){
-    combi1 = new TGeoCombiTrans(Form("%s_combi1", name), -2*m, 0*m, 0, rot1);
-    combi1->RegisterYourself();
-  }
-  if(strcmp(name,d)==0){
-    combi1 = new TGeoCombiTrans(Form("%s_combi1", name), 0*m, -2*m, 0, rot1);
-    combi1->RegisterYourself();
-  }
-
-  // TGeoTranslation* tr2 = new TGeoTranslation(Form("%s_tr2", name), 0, -cr, -cz);
-  TGeoTranslation* tr2 = new TGeoTranslation(Form("%s_tr2", name), 0, 0, 0);
-  tr2->RegisterYourself();
   
-  TGeoCompositeShape* comp
-    = new TGeoCompositeShape(Form("%s_comp", name),
-                             Form("%s:%s*%s:%s",
-                                  trd1->GetName(), combi1->GetName(),
-                                  disk->GetName(), tr2->GetName()));
-  
-  AMirror* mirror = new AMirror(Form("%s_mirror", name), comp);
-  
+  Double_t kF = 148.5 * cm;        // focal length
+  Double_t kMirrorR = kF * 2;      // the radius of curvature
+  Double_t kMirrorD = 15 * cm;     // facet diameter, circular mirror
+  Double_t kMirrorT = 1.2954 * cm; // mirror thickness
+  Double_t theta = TMath::ASin(kMirrorD / 2. / kMirrorR) * TMath::RadToDeg();
+
+  const int kNMirror = 15;
+  Double_t xy[kNMirror][3] = {{30.2514, -8.001, 3.3274}, {30.2514, 8.001, 3.3274},
+        {44.1198, -16.002, 7.62}, {44.1198, 0, 6.7056}, {44.1198, 16.002, 7.62},
+        {57.9628, -24.003, 13.8938}, {57.9628, -8.001, 12.0142}, {57.9628, 8.001, 12.0142}, {57.9628, 24.003, 13.8938},
+        {71.8312, -32.004, 22.5298}, {71.8312, -16.002, 19.5072}, 
+        { 71.8312, 0, 18.5166}, {71.8312, 16.002, 19.5072}, {71.8312, 32.004, 22.5298}};
+  // clang-format on
+
+  for (int i = 0; i < kNMirror; i++) {
+    if(strcmp(name,"mirror%d")==0){
+      Double_t x = xy[i][0] * cm;
+      Double_t y = xy[i][1] * cm;
+      Double_t z = xy[i][2] * cm;
+      Double_t r2d = TMath::RadToDeg();
+      Double_t r2 = TMath::Power(x, 2) + TMath::Power(y, 2);
+    
+      // each mirror center is relocated from the origin (0, 0, 0) to (x, y, z)
+      TGeoTranslation* trans =
+          new TGeoTranslation(Form("mirTrans%d", i), x, y, z);
+
+      // and is rotated to compose a DC optics
+      Double_t phi = TMath::ATan2(y, x) * r2d;
+      theta = TMath::ATan2(TMath::Sqrt(r2), 2 * kF - z) * r2d;
+      TGeoRotation* rot = new TGeoRotation("", phi - 90., theta, 0);
+
+      // make a matrix from translation and rotation matrices
+      TGeoTranslation* transZ = new TGeoTranslation(0, 0, kMirrorR);
+      TGeoCombiTrans* combi = new TGeoCombiTrans(*trans, *rot);
+      combi->RegisterYourself();
+      TGeoHMatrix* hmat = new TGeoHMatrix((*combi) * (*transZ));
+    }
+  }
+
+  //TGeoSphere* mirSphere = new TGeoSphere("mirSphere", kMirrorR, kMirrorR + kMirrorT, 180. - theta, 180.);
+  TGeoSphere* mirSphere = new TGeoSphere("mirSphere", kMirrorR, kMirrorR + kMirrorT, 170., 180.);
+  AMirror* mirror = new AMirror("mirror", mirSphere);
   return mirror;
+  
 }
 //______________________________________________________________________________
 PentagonSegmentedMirror::PentagonSegmentedMirror(Double_t rmin, Double_t rmax, Double_t phimin, Double_t phimax) :

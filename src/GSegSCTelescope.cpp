@@ -293,116 +293,31 @@ void GSegSCTelescope::addPrimaryF() {
   Double_t margin = 10*mm;
   Double_t phimin = 0;
   Double_t phimax = 22.5;
+  Double_t theta1 = 0;
+  Double_t theta2 = 22.5;
+
+  Double_t kF = 148.5 * cm;        // focal length
+  Double_t kMirrorR = kF * 2;      // the radius of curvature
+  Double_t kMirrorD = 15 * cm;     // facet diameter, circular mirror
+  Double_t kMirrorT = 1.2954 * cm; // mirror thickness
+  Double_t theta = TMath::ASin(kMirrorD / 2. / kMirrorR) * TMath::RadToDeg();
   
-  TetragonSegmentedMirror mirror(rmin + margin, rmax, phimin, phimax);
-  mirror.SetMargin(margin);
-  mirror.SetPositionErrors(0*mm, 0*mm, 0*mm);
-  mirror.SetRotationErrors(0, 0, 0);
-  Double_t roughness = (*(vSegP2.at(1))).roughness; 
-  mirror.SetRougness(roughness);
-  addPrimaryMirror(Form("primary%d", count), &mirror);
+  const int kNMirror = 15;
+  Double_t xy[kNMirror][3] = {{30.2514, -8.001, 3.3274}, {30.2514, 8.001, 3.3274},
+        {44.1198, -16.002, 7.62}, {44.1198, 0, 6.7056}, {44.1198, 16.002, 7.62},
+        {57.9628, -24.003, 13.8938}, {57.9628, -8.001, 12.0142}, {57.9628, 8.001, 12.0142}, {57.9628, 24.003, 13.8938},
+        {71.8312, -32.004, 22.5298}, {71.8312, -16.002, 19.5072}, 
+        { 71.8312, 0, 18.5166}, {71.8312, 16.002, 19.5072}, {71.8312, 32.004, 22.5298}};
 
-  TetragonSegmentedMirror mirror2(rmin + margin, rmax, phimin, phimax);
-  mirror2.SetMargin(margin);
-  mirror2.SetPositionErrors(0*mm, 0*mm, 0*mm);
-  mirror2.SetRotationErrors(0, 0, 0);
-  mirror2.SetRougness(roughness);
-  addPrimaryMirror(Form("primary%d", 2), &mirror2);
-
-  TetragonSegmentedMirror mirror3(rmin + margin, rmax, phimin, phimax);
-  mirror3.SetMargin(margin);
-  mirror3.SetPositionErrors(0*mm, 0*mm, 0*mm);
-  mirror3.SetRotationErrors(0, 0, 0);
-  mirror3.SetRougness(roughness);
-  addPrimaryMirror(Form("primary%d", 3), &mirror3);
-
-  TetragonSegmentedMirror mirror4(rmin + margin, rmax, phimin, phimax);
-  mirror4.SetMargin(margin);
-  mirror4.SetPositionErrors(0*mm, 0*mm, 0*mm);
-  mirror4.SetRotationErrors(0, 0, 0);
-  mirror4.SetRougness(roughness);
-  addPrimaryMirror(Form("primary%d", 4), &mirror4);
-  
-  // segment not created if reflect = 0
-  // P1 mirrors
-  // for (Int_t i = 0; i < iNumP1Mirrors; i++) {
-  //   if ( ( (*(vSegP1.at(i))).reflect) > 0) {
-  //     Double_t rmin = (*(vSegP1.at(i))).rmin;
-  //     Double_t rmax = (*(vSegP1.at(i))).rmax;
-  //     Double_t margin = ( (*(vSegP1.at(i))).margin )*mm;
-  //     rmin = rmin*m - margin/TMath::Cos(11.25/2.*TMath::DegToRad());
-  //     rmax = rmax*m;
-      
-  //     Double_t phimin = ( (*(vSegP1.at(i))).delPhi)*i;
-  //     Double_t phimax = ( (*(vSegP1.at(i))).delPhi)*(i+1);
-  //     if (debug) {
-  //       *oLog << "    P1 pentagon segmented mirror number " << i << endl;
-  //       *oLog << "        rmin/rmax " << rmin << " " << rmax << endl;
-  //       *oLog << "        margin    " << margin << endl;
-  //       *oLog << "        phimin/max " << phimin << "  " << phimax << endl;
-  //     }
-  //   TetragonSegmentedMirror mirror(rmin + margin, rmax, phimin, phimax);
-  //   Double_t posErrorX = (*(vSegP1.at(i))).posErrorX;
-  //   Double_t posErrorY = (*(vSegP1.at(i))).posErrorY;
-  //   Double_t posErrorZ = (*(vSegP1.at(i))).posErrorZ;
-  //   mirror.SetPositionErrors(posErrorX*mm, posErrorY*mm, posErrorZ*mm);
- 
-  //   Double_t rotErrorPhi = (*(vSegP1.at(i))).rotErrorPhi;
-  //   Double_t rotErrorTheta = (*(vSegP1.at(i))).rotErrorTheta;
-  //   Double_t rotErrorPsi = (*(vSegP1.at(i))).rotErrorPsi;
-  //   mirror.SetRotationErrors(rotErrorPhi, rotErrorTheta,
-  //                            rotErrorPsi);
- 
-  //   Double_t roughness = (*(vSegP1.at(i))).roughness; 
-  //   mirror.SetRougness(roughness);
-
-  //   mirror.SetMargin(margin);
-  //   iReflect = (*(vSegP1.at(i))).reflect;
-  //  // add mirror segment
-  //   addPrimaryMirror(Form("primary%d", count), &mirror);
-  //   count++;
-  //   } 
-  // }
-
-  // // P2 mirrors
-  // for (Int_t i = 0; i < iNumP2Mirrors; i++) {
-  //   if ( ( (*(vSegP2.at(i))).reflect) > 0) {
-  //     Double_t rmin = (*(vSegP2.at(i))).rmin;
-  //     Double_t rmax = (*(vSegP2.at(i))).rmax;
-  //     Double_t margin = ( (*(vSegP2.at(i))).margin )*mm;
-  //     rmin = rmin*m - margin/TMath::Cos(11.25/2.*TMath::DegToRad());
-  //     rmax = rmax*m;
-      
-  //     Double_t phimin = ( (*(vSegP2.at(i))).delPhi)*i;
-  //     Double_t phimax = ( (*(vSegP2.at(i))).delPhi)*(i+1);
-  //     if (0) {
-  //       *oLog << "    P1 pentagon segmented P2 mirror number " << i << endl;
-  //       *oLog << "        rmin/rmax " << rmin << " " << rmax << endl;
-  //       *oLog << "        margin    " << margin << endl;
-  //       *oLog << "        phimin/max " << phimin << "  " << phimax << endl;
-  //     }
-  //   TetragonSegmentedMirror mirror(rmin + margin, rmax, phimin, phimax);
-  //   Double_t posErrorX = (*(vSegP2.at(i))).posErrorX;
-  //   Double_t posErrorY = (*(vSegP2.at(i))).posErrorY;
-  //   Double_t posErrorZ = (*(vSegP2.at(i))).posErrorZ;
-  //   mirror.SetPositionErrors(posErrorX*mm, posErrorY*mm, posErrorZ*mm);
- 
-  //   Double_t rotErrorPhi = (*(vSegP2.at(i))).rotErrorPhi;
-  //   Double_t rotErrorTheta = (*(vSegP2.at(i))).rotErrorTheta;
-  //   Double_t rotErrorPsi = (*(vSegP2.at(i))).rotErrorPsi;
-  //   mirror.SetRotationErrors(rotErrorPhi, rotErrorTheta,
-  //                            rotErrorPsi);
- 
-  //   Double_t roughness = (*(vSegP2.at(i))).roughness; 
-  //   mirror.SetRougness(roughness);
-
-  //   mirror.SetMargin(margin);
-  //   iReflect = (*(vSegP2.at(i))).reflect;
-  //   // add mirror segment
-  //   addPrimaryMirror(Form("primary%d", count), &mirror);
-  //   count++;
-  //   } 
-  // }
+  for (int i = 0; i < kNMirror; i++) {
+    TetragonSegmentedMirror mirror%d(rmin + margin, rmax, phimin, phimax);
+    mirror.SetMargin(margin);
+    mirror.SetPositionErrors(10*cm, 10*cm, 10*cm);
+    mirror.SetRotationErrors(0, 0, 0);
+    Double_t roughness = (*(vSegP2.at(1))).roughness; 
+    mirror.SetRougness(roughness);
+    addPrimaryMirror(Form("primary%d", i), &mirror%d);
+  }
 };
 /*******************************************************************/
 void GSegSCTelescope::addPrimaryMirror(const char*name,
@@ -422,7 +337,6 @@ void GSegSCTelescope::addPrimaryMirror(const char*name,
   TGraph * graph = makeReflectivityGraph(iReflect);
   mir->SetReflectivity(graph); // graph owned by AMirror (and deleted)
   TGeoCombiTrans* combi = mirror->BuildMirrorCombiTrans(fPrimaryV, kTRUE);
-
   //ABorderSurfaceCondition * condition
   //  = new ABorderSurfaceCondition(fManager->GetTopVolume(), mir);
   //condition->SetGaussianRoughness(mirror->GetRoughness()*TMath::DegToRad());

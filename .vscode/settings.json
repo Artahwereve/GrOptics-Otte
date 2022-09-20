@@ -2,6 +2,7 @@
     "makefile.extensionOutputFolder": "./.vscode",
     "files.associations": {
         "BalloonTest2.C": "cpp",
-        "new": "cpp"
+        "new": "cpp",
+        "NewSCT.C": "cpp"
     }
 }
