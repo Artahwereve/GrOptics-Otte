@@ -60,14 +60,17 @@ TGeoCombiTrans* SegmentedMirror::BuildMirrorCombiTrans(AGeoAsphericDisk* disk, B
   Double_t cr = (fRmax + fRmin)/2.;
   Double_t cz = isPrimary ? disk->CalcF2(cr) : disk->CalcF1(cr);
 
-  TGeoRotation rot1("", -90. + cphi + fRotationErrorXY, fRotationErrorSagittal, 0);
-  TGeoRotation rot2("", -cphi, 0., 0.);
-  TGeoRotation rot3("", 0., fRotationErrorTangential, 0.);
-  TGeoRotation rot4("", cphi, 0., 0.);
+  // TGeoRotation rot1("", -90. + cphi + fRotationErrorXY, fRotationErrorSagittal, 0);
+  // TGeoRotation rot2("", -cphi, 0., 0.);
+  // TGeoRotation rot3("", 0., fRotationErrorTangential, 0.);
+  // TGeoRotation rot4("", cphi, 0., 0.);
 
-  TGeoTranslation tr4(cr*TMath::Cos(cphi*TMath::DegToRad()) + fPositionErrorX, cr*TMath::Sin(cphi*TMath::DegToRad()) + fPositionErrorY, cz + fPositionErrorZ);
+  // TGeoTranslation tr4(cr*TMath::Cos(cphi*TMath::DegToRad()) + fPositionErrorX, cr*TMath::Sin(cphi*TMath::DegToRad()) + fPositionErrorY, cz + fPositionErrorZ);
  
-  TGeoCombiTrans* combi = new TGeoCombiTrans(tr4, ((rot4*rot3)*rot2)*rot1);
+  TGeoRotation rot1("", 0, 0, 0);
+
+  TGeoTranslation tr4(0, 0, 0);
+  TGeoCombiTrans* combi = new TGeoCombiTrans(tr4, rot1);
 
   return combi;
 }
@@ -196,10 +199,10 @@ AMirror* TetragonSegmentedMirror::BuildMirror(const char* name,
   Double_t p1y = by - fMargin;
   // TGeoTrd1* trd1 = new TGeoTrd1(Form("%s_trd1", name), p0x, p1x, (zmax - zmin)/2., (p1y - p0y)/2.); (0.4971)*m, (0.6696)*m
   TGeoTrd1* trd1 = new TGeoTrd1(Form("%s_trd1", name), (0.4971)*m, (0.4971)*m, (0.6696)*m, (p1y - p0y)/2.);
-
+  // TGeoTrd1* trd1 = new TGeoTrd1(Form("%s_trd1", name), (2)*m, (2)*m, (2)*m, (p1y - p0y)/2.);
 
   // TGeoRotation* rot1 = new TGeoRotation(Form("%s_rot1", name), 0., -90., 0.);
-  TGeoRotation* rot1 = new TGeoRotation(Form("%s_rot1", name), -11.25, 0, 0.);
+  TGeoRotation* rot1 = new TGeoRotation(Form("%s_rot1", name), 90, 0, 0.);
   rot1->RegisterYourself();
 
   // TGeoCombiTrans* combi1 = new TGeoCombiTrans(Form("%s_combi1", name), 0, (p0y + p1y)/2. - cr, (zmax + zmin)/2. - cz, rot1);
@@ -210,19 +213,19 @@ AMirror* TetragonSegmentedMirror::BuildMirror(const char* name,
   const char* c = "primary3"; //top left
   const char* d = "primary4"; //bottom left
   if(strcmp(name,a)==0){
-    combi1 = new TGeoCombiTrans(Form("%s_combi1", name), -0.4*m, 0.35*m, 0, rot1);
+    combi1 = new TGeoCombiTrans(Form("%s_combi1", name), 0.675*m, 0.5025*m, 0, rot1);
     combi1->RegisterYourself();
   }
   if(strcmp(name,b)==0){
-    combi1 = new TGeoCombiTrans(Form("%s_combi1", name), 0.60*m, 0.13*m, 0, rot1);
+    combi1 = new TGeoCombiTrans(Form("%s_combi1", name), 0.675*m, -0.5025*m, 0, rot1);
     combi1->RegisterYourself();
   }
   if(strcmp(name,c)==0){
-    combi1 = new TGeoCombiTrans(Form("%s_combi1", name), -0.67*m, -0.97*m, 0, rot1);
+    combi1 = new TGeoCombiTrans(Form("%s_combi1", name), -0.675*m, 0.5025*m, 0, rot1);
     combi1->RegisterYourself();
   }
   if(strcmp(name,d)==0){
-    combi1 = new TGeoCombiTrans(Form("%s_combi1", name), 0.33*m, -1.2*m, 0, rot1);
+    combi1 = new TGeoCombiTrans(Form("%s_combi1", name), -0.675*m, -0.5025*m, 0, rot1);
     combi1->RegisterYourself();
   }
 

@@ -2,7 +2,6 @@ make --dry-run --always-make --keep-going --print-directory
 find: /etc/cups/certs: Permission denied
 
 make: root-config: Command not found
-
 make: Entering directory `/Users/parshadkp/Library/CloudStorage/OneDrive-GeorgiaInstituteofTechnology/Georgia Tech/NASA Balloon/GrOptics-Otte'
 
 make: Entering directory `/Users/parshadkp/Library/CloudStorage/OneDrive-GeorgiaInstituteofTechnology/Georgia Tech/NASA Balloon/GrOptics-Otte'
@@ -13,7 +12,6 @@ make: Leaving directory `/Users/parshadkp/Library/CloudStorage/OneDrive-GeorgiaI
 find: /etc/cups/certs: Permission denied
 
 make: root-config: Command not found
-
 make: Entering directory `/Users/parshadkp/Library/CloudStorage/OneDrive-GeorgiaInstituteofTechnology/Georgia Tech/NASA Balloon/GrOptics-Otte'
 
 make: Entering directory `/Users/parshadkp/Library/CloudStorage/OneDrive-GeorgiaInstituteofTechnology/Georgia Tech/NASA Balloon/GrOptics-Otte'
@@ -30,7 +28,6 @@ echo    robast ready and waiting
  
 echo "        Compiling src/grOptics.cpp ... "
 c++ -I/storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include -I. -I./include -c src/grOptics.cpp -o obj/grOptics.o
- 
 echo "Done"
 echo "        Compiling src/GArrayTel.cpp ... "
 c++ -I/storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include -I. -I./include -c src/GArrayTel.cpp -o obj/GArrayTel.o
@@ -38,14 +35,12 @@ echo "Done"
 echo "        Compiling src/GDCGeometry.cpp ... "
 c++ -I/storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include -I. -I./include -c src/GDCGeometry.cpp -o obj/GDCGeometry.o
 echo "Done"
- 
 echo "        Compiling src/GDCRayTracer.cpp ... "
 c++ -I/storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include -I. -I./include -c src/GDCRayTracer.cpp -o obj/GDCRayTracer.o
 echo "Done"
 echo "        Compiling src/GDCTelescope.cpp ... "
 c++ -I/storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include -I. -I./include -c src/GDCTelescope.cpp -o obj/GDCTelescope.o
 echo "Done"
- 
 echo "        Compiling src/GDCTelescopeFactory.cpp ... "
 c++ -I/storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include -I. -I./include -c src/GDCTelescopeFactory.cpp -o obj/GDCTelescopeFactory.o
 echo "Done"
@@ -68,7 +63,6 @@ echo "        Compiling src/GReadDCStdBase.cpp ... "
 c++ -I/storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include -I. -I./include -c src/GReadDCStdBase.cpp -o obj/GReadDCStdBase.o
 echo "Done"
 echo "        Compiling src/GReadDCStdGrISU.cpp ... "
- 
 c++ -I/storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include -I. -I./include -c src/GReadDCStdGrISU.cpp -o obj/GReadDCStdGrISU.o
 echo "Done"
 echo "        Compiling src/GReadPhotonBase.cpp ... "
@@ -96,7 +90,6 @@ echo "        Compiling src/GSCTelescopeFactory.cpp ... "
 c++ -I/storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include -I. -I./include -c src/GSCTelescopeFactory.cpp -o obj/GSCTelescopeFactory.o
 echo "Done"
 echo "        Compiling src/GSegSCTelescope.cpp ... "
- 
 c++ -I/storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include -I. -I./include -c src/GSegSCTelescope.cpp -o obj/GSegSCTelescope.o
 echo "Done"
 echo "        Compiling src/GSegSCTelescopeFactory.cpp ... "
