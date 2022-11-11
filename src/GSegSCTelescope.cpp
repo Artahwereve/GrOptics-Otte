@@ -172,7 +172,7 @@ void GSegSCTelescope::buildTelescope()
   gGeoManager = 0;
   fManager = new AOpticsManager("manager","The optics manager of SEGSC");
   //fManager->SetVisLevel(5);// should be 0 or 1
-  //fManager->SetNsegments(50);
+  fManager->SetNsegments(100);
   fManager->DisableFresnelReflection(1);
 
   // Make dummy material
@@ -244,9 +244,9 @@ void GSegSCTelescope::makePrimarySecondaryDisks() {
                                     fRpMax, fRpMin);
 
   // fPrimaryV = new AGeoAsphericDisk("primaryV",
-  //                                  0, 0,
-  //                                  0 , 0, 
-  //                                   1.65981*m, 0);
+  //                                  1*m - 0.01*m, 0.5,
+  //                                  1*m, 0.5, 
+  //                                   1*m, 0);
 
   if (debug) {
     *oLog << "   primary coefficients " << endl;
@@ -257,6 +257,7 @@ void GSegSCTelescope::makePrimarySecondaryDisks() {
     }
   }
   fPrimaryV->SetPolynomials(fNp - 1, &fP[1], fNp - 1, &fP[1]);
+  // fPrimaryV->SetPolynomials(1, &1.0, 1, &1.0);
 
   // Make the ideal volume of the secondary mirror
   if (debug) {
@@ -681,32 +682,33 @@ void GSegSCTelescope::addEntranceWindow() {
   // Could be used as the focusing lens
   gGeoManager = fManager;
  
-  // bool debug = false;
-  // if (debug) {
-  //   *oLog << "  --  GSegSCTelescope::addEntranceWindow" << endl;
-  //   *oLog << "        fEntranceWindowThickness " << fEntranceWindowThickness << " fEntranceWindowOffset " << fEntranceWindowOffset << " fEntranceWindowN " << fEntranceWindowN <<endl;
-  //   //    if (bEntranceWindowAbsFlag) *oLog << " fEntranceWindowAbsLength "<<fEntranceWindowAbsLength<<endl;
-  //   *oLog << "        fEntranceWindowAbsLength "<<fEntranceWindowAbsLength<<endl;
-  // }
+  bool debug = false;
+  if (debug) {
+    *oLog << "  --  GSegSCTelescope::addEntranceWindow" << endl;
+    *oLog << "        fEntranceWindowThickness " << fEntranceWindowThickness << " fEntranceWindowOffset " << fEntranceWindowOffset << " fEntranceWindowN " << fEntranceWindowN <<endl;
+    //    if (bEntranceWindowAbsFlag) *oLog << " fEntranceWindowAbsLength "<<fEntranceWindowAbsLength<<endl;
+    *oLog << "        fEntranceWindowAbsLength "<<fEntranceWindowAbsLength<<endl;
+  }
 
-  // const Double_t kZf = fF * fZf;
+  const Double_t kZf = fF * fZf;
   // TGeoTube* ewind = new TGeoTube("ewind", 0., fRf*m, fEntranceWindowThickness/2);
-  // TGeoTranslation* ewindTrans = new TGeoTranslation("ewindTrans", 0., 0., kZf+fEntranceWindowOffset);
-  // ALens* ewindLen = new ALens("ewindLen", ewind);
-  // ewindLen->SetConstantRefractiveIndex(fEntranceWindowN);
-  // if (bEntranceWindowAbsFlag) ewindLen->SetConstantAbsorptionLength(fEntranceWindowAbsLength);
+  TGeoTube* ewind = new TGeoTube("ewind", 0., 1.6*m, fEntranceWindowThickness/2);
+  TGeoTranslation* ewindTrans = new TGeoTranslation("ewindTrans", 0., 0., kZf+fEntranceWindowOffset);
+  ALens* ewindLen = new ALens("ewindLen", ewind);
+  ewindLen->SetConstantRefractiveIndex(fEntranceWindowN);
+  if (bEntranceWindowAbsFlag) ewindLen->SetConstantAbsorptionLength(fEntranceWindowAbsLength);
 
-  // fManager->GetTopVolume()->AddNode(ewindLen, 1, ewindTrans);
+  fManager->GetTopVolume()->AddNode(ewindLen, 1, ewindTrans);
 
-  // double lowang = 15.;//deg                                                                   
-  // double hiang = 65.;//deg  
-  // TF1 *offset = new TF1("offset","[2]*(1-[0] * ( cos(TMath::DegToRad()*x) / ( sqrt( 1-pow([0]*sin(TMath::DegToRad()*x)/[1],2) ) ) ) / [1] )",0,90);
-  // offset->SetParameter(0,1); //Vacuum is assumed as a good approximation of n_air
-  // offset->SetParameter(1,fEntranceWindowN);
-  // offset->SetParameter(2,fEntranceWindowThickness);
-  // fFocalPlaneOffsetCorrection = offset->Integral(lowang,hiang)/(hiang-lowang);
+  double lowang = 15.;//deg                                                                   
+  double hiang = 65.;//deg  
+  TF1 *offset = new TF1("offset","[2]*(1-[0] * ( cos(TMath::DegToRad()*x) / ( sqrt( 1-pow([0]*sin(TMath::DegToRad()*x)/[1],2) ) ) ) / [1] )",0,90);
+  offset->SetParameter(0,1); //Vacuum is assumed as a good approximation of n_air
+  offset->SetParameter(1,fEntranceWindowN);
+  offset->SetParameter(2,fEntranceWindowThickness);
+  fFocalPlaneOffsetCorrection = offset->Integral(lowang,hiang)/(hiang-lowang);
 
-  // if(debug) *oLog << "         fFocalPlaneOffsetCorrection " <<  fFocalPlaneOffsetCorrection << endl;
+  if(debug) *oLog << "         fFocalPlaneOffsetCorrection " <<  fFocalPlaneOffsetCorrection << endl;
   
 };
 /*************************************************************************************/
@@ -770,13 +772,13 @@ void GSegSCTelescope::addMAPMTFocalPlane()  {
   const double kCameraOffset = -2.56*cm; //old
   // const double kCameraOffset = 2*cm;
   // const double kCamR = 460.8984*mm;
-  const double focus = 1.65451*m;
+  const double focus = (-0.84861)*m;
 
   // Make a disk focal plane
   TGeoBBox* tubeCamera = new TGeoBBox("tubeCamera", kCameraBoxX-1*cm, kCameraBoxY-1*cm, 1*mm);
   AFocalSurface* focalPlane = new AFocalSurface("focalPlane", tubeCamera);
   AOpticalComponent* mapmt = new AOpticalComponent("mapmt", tubeCamera);
-  mapmt->AddNode(focalPlane, 1, new TGeoTranslation(0, 0, focus));
+  mapmt->AddNode(focalPlane, 1, new TGeoTranslation(0, 0, 0));
 
   // Make a camera box
   TGeoBBox* tubeCameraBox = new TGeoBBox("tubeCameraBox", kCameraBoxX, kCameraBoxY, kCameraBoxH/2);
@@ -794,7 +796,7 @@ void GSegSCTelescope::addMAPMTFocalPlane()  {
   // AObscuration* cameraBox = new AObscuration("cameraBox", boxComposite);
 
   AObscuration* cameraBox = new AObscuration("cameraBox", tubeCameraBox);
-  mapmt->AddNode(cameraBox, 1, new TGeoTranslation(0, 0, 0));
+  mapmt->AddNode(cameraBox, 1, new TGeoTranslation(0, 0, focus));
   
   fManager->GetTopVolume()->AddNode(cameraBox,1,new TGeoCombiTrans("cFocS",
                                                              0.0,
@@ -992,20 +994,20 @@ void GSegSCTelescope::injectPhoton(const ROOT::Math::XYZVector &photonLocT,
   // for debugging and testing only
 
   
-  fphotonInjectLoc[0] = 3.0;
-  fphotonInjectLoc[1] = 0.0;
-  fphotonInjectLoc[2] = 0.0;
+  // fphotonInjectLoc[0] = 3.0;
+  // fphotonInjectLoc[1] = 0.0;
+  // fphotonInjectLoc[2] = 0.0;
 
-  fphotonInjectDir[0] = 0.0;
-  fphotonInjectDir[1] = 0.0;
-  fphotonInjectDir[2] = -1.0;
+  // fphotonInjectDir[0] = 0.0;
+  // fphotonInjectDir[1] = 0.0;
+  // fphotonInjectDir[2] = -1.0;
   
-  *oLog << "        TESTING WITH THESE VALUES" << endl;
-  *oLog << "             specified location and direction " << endl;
-  for (int i = 0;i<3;i++) {
-  *oLog << i << "  " << fphotonInjectLoc[i] << "  " 
-  	  << fphotonInjectDir[i] << endl;
-  }
+  // *oLog << "        TESTING WITH THESE VALUES" << endl;
+  // *oLog << "             specified location and direction " << endl;
+  // for (int i = 0;i<3;i++) {
+  // *oLog << i << "  " << fphotonInjectLoc[i] << "  " 
+  // 	  << fphotonInjectDir[i] << endl;
+  // }
 
   photonLocT.GetCoordinates(fInitialInjectLoc);
   photonLocT.GetCoordinates(fphotonInjectLoc);
