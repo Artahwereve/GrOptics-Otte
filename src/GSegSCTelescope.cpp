@@ -692,11 +692,17 @@ void GSegSCTelescope::addEntranceWindow() {
 
   const Double_t kZf = fF * fZf;
   // TGeoTube* ewind = new TGeoTube("ewind", 0., fRf*m, fEntranceWindowThickness/2);
-  TGeoTube* ewind = new TGeoTube("ewind", 0., 1.6*m, fEntranceWindowThickness/2);
-  TGeoTranslation* ewindTrans = new TGeoTranslation("ewindTrans", 0., 0., kZf+fEntranceWindowOffset);
+  // TGeoTube* ewind = new TGeoTube("ewind", 0., 0.5641*m, fEntranceWindowThickness/2);
+  // edits
+  AGeoAsphericDisk * ewind = new AGeoAsphericDisk("ewind", 0, 0, 0, 0, 0.5641*m);
+  Double_t coefficients[3] = {-4.3304382218444141e-5 /(mm), 7.8231607966343787e-11 / (mm * mm * mm),
+                              7.4697933801370512e-17 / (mm * mm * mm * mm * mm)};
+  ewind->SetPolynomials(0, 0, 3, coefficients);
+  TGeoTranslation* ewindTrans = new TGeoTranslation("ewindTrans", 0., 0., -5.3*mm);
+  //edits end
   ALens* ewindLen = new ALens("ewindLen", ewind);
   ewindLen->SetConstantRefractiveIndex(fEntranceWindowN);
-  if (bEntranceWindowAbsFlag) ewindLen->SetConstantAbsorptionLength(fEntranceWindowAbsLength);
+  // if (bEntranceWindowAbsFlag) ewindLen->SetConstantAbsorptionLength(fEntranceWindowAbsLength);
 
   fManager->GetTopVolume()->AddNode(ewindLen, 1, ewindTrans);
 
@@ -727,6 +733,20 @@ void GSegSCTelescope::addIdealFocalPlane()  {
 
   //Double_t focalPlaneHalfThickness = 1*um;
   //Double_t focalPlaneHalfThickness = 10*cm;
+
+  // //edits 
+  // const double kCameraBoxX = 0.215*m; // the camera box X
+  // const double kCameraBoxY = 0.143*m; // the camera box Y
+  // const double kCameraBoxH = 0.13*m; // the camera box height (N/A in cfg)
+  // const double kCameraOffset = -2.56*cm; //old
+  // // const double kCameraOffset = 2*cm;
+  // // const double kCamR = 460.8984*mm;
+  // const double focus = (-0.84861)*m;
+
+  // // Make a disk focal plane
+  // TGeoBBox* idealCameraV = new TGeoBBox("idealCameraV", kCameraBoxX-1*cm, kCameraBoxY-1*cm, 1*mm);
+  // //edits end
+
   AGeoAsphericDisk* idealCameraV = new AGeoAsphericDisk("idealCameraV", kZf + 1*um, 0, kZf, 0, fRf*m, 0);
   //AGeoAsphericDisk* idealCameraV = new AGeoAsphericDisk("idealCameraV", 1*m, 1*m, 1*m, 1*m, 1*m, 1*m);
 
@@ -775,13 +795,20 @@ void GSegSCTelescope::addMAPMTFocalPlane()  {
   const double focus = (-0.84861)*m;
 
   // Make a disk focal plane
-  TGeoBBox* tubeCamera = new TGeoBBox("tubeCamera", kCameraBoxX-1*cm, kCameraBoxY-1*cm, 1*mm);
-  AFocalSurface* focalPlane = new AFocalSurface("focalPlane", tubeCamera);
-  AOpticalComponent* mapmt = new AOpticalComponent("mapmt", tubeCamera);
-  mapmt->AddNode(focalPlane, 1, new TGeoTranslation(0, 0, 0));
+  // TGeoBBox* tubeCamera = new TGeoBBox("tubeCamera", kCameraBoxX-1*cm, kCameraBoxY-1*cm, 1*mm);
+  // AFocalSurface* focalPlane = new AFocalSurface("focalPlane", tubeCamera);
+  // AOpticalComponent* mapmt = new AOpticalComponent("mapmt", tubeCamera);
+
+  TGeoBBox* mapmtCathodeV = new TGeoBBox("mapmtCathodeV", kCameraBoxX, 
+                                         kCameraBoxY, kCameraBoxH/2); // very thin box
+  AFocalSurface* mapmtCathode = new AFocalSurface("mapmtCathode", mapmtCathodeV);
+  mapmtCathode->SetLineColor(iMAPMTCathodeColor);
+  AOpticalComponent* mapmt = new AOpticalComponent("mapmt", mapmtCathodeV);
+
+  mapmt->AddNode(mapmtCathode, 1, new TGeoTranslation(0, 0, focus));
 
   // Make a camera box
-  TGeoBBox* tubeCameraBox = new TGeoBBox("tubeCameraBox", kCameraBoxX, kCameraBoxY, kCameraBoxH/2);
+  // TGeoBBox* mapmtCathode = new TGeoBBox("mapmtCathode", kCameraBoxX, kCameraBoxY, kCameraBoxH/2);
   // double t = 1*cm;
   // TGeoSphere* tubeCameraBox2 = new TGeoSphere("tubeCameraBox2", kCamR, kCamR + 5*mm, 88, 92, 88, 92); //change angles
   // TGeoBBox* tubeCameraBox2 = new TGeoBBox("tubeCameraBox2", kCameraBoxX - t, kCameraBoxY - t, kCameraBoxH/2 - t);
@@ -795,10 +822,10 @@ void GSegSCTelescope::addMAPMTFocalPlane()  {
 
   // AObscuration* cameraBox = new AObscuration("cameraBox", boxComposite);
 
-  AObscuration* cameraBox = new AObscuration("cameraBox", tubeCameraBox);
-  mapmt->AddNode(cameraBox, 1, new TGeoTranslation(0, 0, focus));
+  // AObscuration* cameraBox = new AObscuration("cameraBox", mapmtCathode);
+  // mapmt->AddNode(cameraBox, 1, new TGeoTranslation(0, 0, focus));
   
-  fManager->GetTopVolume()->AddNode(cameraBox,1,new TGeoCombiTrans("cFocS",
+  fManager->GetTopVolume()->AddNode(mapmtCathode,1,new TGeoCombiTrans("cFocS",
                                                              0.0,
                                                              0.0,
                                                              focus,
@@ -862,11 +889,15 @@ void GSegSCTelescope::addMAPMTFocalPlane()  {
 //   TGeoBBox* mapmtBackObsV = new TGeoBBox("mapmtBackObsV",
 //                                          fMAPMTWidth/fSubCells/2., fMAPMTWidth/fSubCells/2.,
 //                                          backObsThickness);
+//   // TGeoBBox* mapmtBackObsV = new TGeoBBox("mapmtBackObsV",
+//   //                                        0.215*m, 0.143*m,
+//   //                                        0.13*m);
   
 //   AObscuration* mapmtBackObs = new AObscuration("mapmtBackObs", mapmtBackObsV);
 //   mapmtBackObs->SetLineColor(iMAPMTObscurationColor);
 //   Double_t backObsPosition = -fMAPMTLength/2. + backObsThickness;
 //   mapmt->AddNode(mapmtBackObs, 1, new TGeoTranslation(0, 0,backObsPosition+1*m)); //Both the red and the glass circle?
+//   // mapmt->AddNode(mapmtBackObs, 1, new TGeoTranslation(0, 0,(-0.84861)*m));
 //   Double_t backObsTopPositionRelToMapmtCenter = backObsPosition + backObsThickness;
   
 //   if(debug) {
@@ -943,14 +974,14 @@ void GSegSCTelescope::addMAPMTFocalPlane()  {
 //                                                   + fMAPMTOffset + dz));
 
 //   }
-  // fManager->GetTopVolume()->AddNode(focVol,1,new TGeoCombiTrans("cFocS",
-  //                                                            0.0,
-  //                                                            0.0,
-  //                                                            kZf-fFocalPlaneOffsetCorrection,
-  //                                                            new TGeoRotation("rFocS",
-  //                                                                             0.0,
-  //                                                                             0.0,
-	// 								      0.0)));
+//   fManager->GetTopVolume()->AddNode(focVol,1,new TGeoCombiTrans("cFocS",
+//                                                              0.0,
+//                                                              0.0,
+//                                                              kZf-fFocalPlaneOffsetCorrection,
+//                                                              new TGeoRotation("rFocS",
+//                                                                               0.0,
+//                                                                               0.0,
+// 									      0.0)));
 //   /* 
 //  fManager->GetTopVolume()->AddNode(focVol,1,new TGeoCombiTrans("cFocS",
 //                                                                0.0,
