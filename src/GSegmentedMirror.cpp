@@ -191,32 +191,29 @@ AMirror* TetragonSegmentedMirror::BuildMirror(const char* name,
   // clang-format on
 
   for (int i = 0; i < kNMirror; i++) {
-    if(strcmp(name,"mirror%d")==0){
-      Double_t x = xy[i][0] * cm;
-      Double_t y = xy[i][1] * cm;
-      Double_t z = xy[i][2] * cm;
-      Double_t r2d = TMath::RadToDeg();
-      Double_t r2 = TMath::Power(x, 2) + TMath::Power(y, 2);
+    Double_t x = xy[i][0] * cm;
+    Double_t y = xy[i][1] * cm;
+    Double_t z = xy[i][2] * cm;
+    Double_t r2d = TMath::RadToDeg();
+    Double_t r2 = TMath::Power(x, 2) + TMath::Power(y, 2);
     
-      // each mirror center is relocated from the origin (0, 0, 0) to (x, y, z)
-      TGeoTranslation* trans =
-          new TGeoTranslation(Form("mirTrans%d", i), x, y, z);
+    // each mirror center is relocated from the origin (0, 0, 0) to (x, y, z)
+    TGeoTranslation* trans =
+        new TGeoTranslation(Form("mirTrans%d", i), x, y, z);
 
-      // and is rotated to compose a DC optics
-      Double_t phi = TMath::ATan2(y, x) * r2d;
-      theta = TMath::ATan2(TMath::Sqrt(r2), 2 * kF - z) * r2d;
-      TGeoRotation* rot = new TGeoRotation("", phi - 90., theta, 0);
+    // and is rotated to compose a DC optics
+    Double_t phi = TMath::ATan2(y, x) * r2d;
+    theta = TMath::ATan2(TMath::Sqrt(r2), 2 * kF - z) * r2d;
+    TGeoRotation* rot = new TGeoRotation("", phi - 90., theta, 0);
 
-      // make a matrix from translation and rotation matrices
-      TGeoTranslation* transZ = new TGeoTranslation(0, 0, kMirrorR);
-      TGeoCombiTrans* combi = new TGeoCombiTrans(*trans, *rot);
-      combi->RegisterYourself();
-      TGeoHMatrix* hmat = new TGeoHMatrix((*combi) * (*transZ));
-    }
+    // make a matrix from translation and rotation matrices
+    TGeoTranslation* transZ = new TGeoTranslation(0, 0, kMirrorR);
+    TGeoCombiTrans* combi = new TGeoCombiTrans(*trans, *rot);
+    combi->RegisterYourself();
+    TGeoHMatrix* hmat = new TGeoHMatrix((*combi) * (*transZ));
   }
 
-  //TGeoSphere* mirSphere = new TGeoSphere("mirSphere", kMirrorR, kMirrorR + kMirrorT, 180. - theta, 180.);
-  TGeoSphere* mirSphere = new TGeoSphere("mirSphere", kMirrorR, kMirrorR + kMirrorT, 170., 180.);
+  TGeoSphere* mirSphere = new TGeoSphere("mirSphere", kMirrorR, kMirrorR + kMirrorT, 180. - theta, 180.);
   AMirror* mirror = new AMirror("mirror", mirSphere);
   return mirror;
   

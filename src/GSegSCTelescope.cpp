@@ -293,8 +293,6 @@ void GSegSCTelescope::addPrimaryF() {
   Double_t margin = 10*mm;
   Double_t phimin = 0;
   Double_t phimax = 22.5;
-  Double_t theta1 = 0;
-  Double_t theta2 = 22.5;
 
   Double_t kF = 148.5 * cm;        // focal length
   Double_t kMirrorR = kF * 2;      // the radius of curvature
@@ -310,13 +308,13 @@ void GSegSCTelescope::addPrimaryF() {
         { 71.8312, 0, 18.5166}, {71.8312, 16.002, 19.5072}, {71.8312, 32.004, 22.5298}};
 
   for (int i = 0; i < kNMirror; i++) {
-    TetragonSegmentedMirror mirror%d(rmin + margin, rmax, phimin, phimax);
+    TetragonSegmentedMirror mirror(rmin + margin, rmax, phimin, phimax);
     mirror.SetMargin(margin);
     mirror.SetPositionErrors(10*cm, 10*cm, 10*cm);
     mirror.SetRotationErrors(0, 0, 0);
     Double_t roughness = (*(vSegP2.at(1))).roughness; 
     mirror.SetRougness(roughness);
-    addPrimaryMirror(Form("primary%d", i), &mirror%d);
+    addPrimaryMirror(Form("primary%d", i), &mirror);
   }
 };
 /*******************************************************************/
