@@ -79,6 +79,7 @@ using namespace std;
 #include "ARay.h"
 #include "ARayArray.h"
 #include "ARayShooter.h"
+#include "ASellmeierFormula.h"
 
 #include "GUtilityFuncts.h"
 #include "GDefinition.h"
@@ -217,7 +218,7 @@ void GSegSCTelescope::buildTelescope()
 };
 /*************************************************************************************/
 void GSegSCTelescope::makePrimarySecondaryDisks() {
-
+  // Not used
   bool debug = false;
 
   if (debug) {
@@ -242,7 +243,6 @@ void GSegSCTelescope::makePrimarySecondaryDisks() {
                                    kZp + fP[0] - 1*um, 0,
                                    kZp + fP[0] , 0, 
                                     fRpMax, fRpMin);
-
   // fPrimaryV = new AGeoAsphericDisk("primaryV",
   //                                  1*m - 0.01*m, 0.5,
   //                                  1*m, 0.5, 
@@ -293,6 +293,8 @@ void GSegSCTelescope::addPrimaryF() {
   if (debug) {
     *oLog << "  --  GSegSCTelescope::addPrimaryF" << endl;
    }
+
+  // Added each mirror seprately
   Int_t count = 1;
   Double_t rmin = 0*m;
   Double_t rmax = 0.84861*m;
@@ -413,7 +415,7 @@ void GSegSCTelescope::addPrimaryF() {
 /*******************************************************************/
 void GSegSCTelescope::addPrimaryMirror(const char*name,
                                        SegmentedMirror *mirror) {
-
+  // Calls GSegmentedMirror to position the mirrors.
   gGeoManager = fManager;
   
   bool debug = false;
@@ -438,7 +440,7 @@ void GSegSCTelescope::addPrimaryMirror(const char*name,
 /*******************************************************************/
 
 void GSegSCTelescope::addSecondaryJ() {
-
+  // Not used
   bool debug = false;
   
   if (debug) {
@@ -626,7 +628,7 @@ void GSegSCTelescope::addSecondaryMirror(const char*name, SegmentedMirror *mirro
 };
 /*******************************************************************/
 void GSegSCTelescope::addPrimaryBaffle() {
-
+  // Removed
   gGeoManager = fManager;
 
   const Double_t kZp = (fF)*fZp;
@@ -652,7 +654,7 @@ void GSegSCTelescope::addPrimaryBaffle() {
 }
 /*******************************************************************/
 void GSegSCTelescope::addSecondaryBaffle() {
-
+  // Not used
   gGeoManager = fManager;
 
   const Double_t kZs = (fF)*fZs;
@@ -679,7 +681,7 @@ void GSegSCTelescope::addSecondaryBaffle() {
 }
 /*******************************************************************/
 void GSegSCTelescope::addEntranceWindow() {
-  // Could be used as the focusing lens
+  // Used as the focusing lens
   gGeoManager = fManager;
  
   bool debug = false;
@@ -695,13 +697,19 @@ void GSegSCTelescope::addEntranceWindow() {
   // TGeoTube* ewind = new TGeoTube("ewind", 0., 0.5641*m, fEntranceWindowThickness/2);
   // edits
   AGeoAsphericDisk * ewind = new AGeoAsphericDisk("ewind", 0, 0, 0, 0, 0.5641*m);
-  Double_t coefficients[3] = {-4.3304382218444141e-5 /(mm), 7.8231607966343787e-11 / (mm * mm * mm),
-                              7.4697933801370512e-17 / (mm * mm * mm * mm * mm)};
-  ewind->SetPolynomials(0, 0, 3, coefficients);
+  // Double_t coefficients[3] = {-4.3304382218444141e-5 /(mm), 7.8231607966343787e-11 / (mm * mm * mm),
+  //                             7.4697933801370512e-17 / (mm * mm * mm * mm * mm)};
+  // ewind->SetPolynomials(0, 0, 3, coefficients);
   TGeoTranslation* ewindTrans = new TGeoTranslation("ewindTrans", 0., 0., -5.3*mm);
   //edits end
   ALens* ewindLen = new ALens("ewindLen", ewind);
-  ewindLen->SetConstantRefractiveIndex(fEntranceWindowN);
+  // edits for refractive index that is not supported with ROBAST-2.4.4
+  auto SPB2 =
+    std::make_shared<ASellmeierFormula>(0.999964, 0.200362, 2.16314, 0.00564364, 0.0230819, 63.9044);
+  std::cout << SPB2->GetIndex(0.58756 * um) << std::endl;
+  ewindLen->SetRefractiveIndex(SPB2);
+  // edits for refractive index end
+  // ewindLen->SetConstantRefractiveIndex(fEntranceWindowN);
   // if (bEntranceWindowAbsFlag) ewindLen->SetConstantAbsorptionLength(fEntranceWindowAbsLength);
 
   fManager->GetTopVolume()->AddNode(ewindLen, 1, ewindTrans);
@@ -771,6 +779,7 @@ void GSegSCTelescope::addIdealFocalPlane()  {
 /*************************************************************************************/
 
 void GSegSCTelescope::addMAPMTFocalPlane()  {
+  // Adds the camera.
   bool debug = false;
 
   if (debug) {
