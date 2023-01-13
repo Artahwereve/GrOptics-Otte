@@ -703,10 +703,10 @@ void GSegSCTelescope::addEntranceWindow() {
   TGeoTranslation* ewindTrans = new TGeoTranslation("ewindTrans", 0., 0., -5.3*mm);
   //edits end
   ALens* ewindLen = new ALens("ewindLen", ewind);
-  // edits for refractive index that is not supported with ROBAST-2.4.4
-  auto SPB2 =
-    std::make_shared<ASellmeierFormula>(0.999964, 0.200362, 2.16314, 0.00564364, 0.0230819, 63.9044);
-  std::cout << SPB2->GetIndex(0.58756 * um) << std::endl;
+  // edits for refractive index
+  ASellmeierFormula* SPB2 = new ASellmeierFormula(0.999964, 0.200362, 2.16314, 0.00564364, 0.0230819, 63.9044);
+  std::cout << "Refractive Index at 600 nm: "
+            << SPB2->GetIndex(600 * nm) << std::endl;
   ewindLen->SetRefractiveIndex(SPB2);
   // edits for refractive index end
   // ewindLen->SetConstantRefractiveIndex(fEntranceWindowN);
@@ -797,7 +797,7 @@ void GSegSCTelescope::addMAPMTFocalPlane()  {
   //Edits
   const double kCameraBoxX = 0.215*m; // the camera box X
   const double kCameraBoxY = 0.143*m; // the camera box Y
-  const double kCameraBoxH = 0.13*m; // the camera box height (N/A in cfg)
+  const double kCameraBoxH = 0.001*m; // the camera box height (N/A in cfg)
   const double kCameraOffset = -2.56*cm; //old
   // const double kCameraOffset = 2*cm;
   // const double kCamR = 460.8984*mm;
