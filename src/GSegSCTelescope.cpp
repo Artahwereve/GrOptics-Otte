@@ -303,7 +303,7 @@ void GSegSCTelescope::addPrimaryF() {
   Double_t kMirrorT = 1.2954 * cm; // mirror thickness
   Double_t theta = TMath::ASin(kMirrorD / 2. / kMirrorR) * TMath::RadToDeg();
   
-  const int kNMirror = 90;
+  const int kNMirror = 84;
 
   for (int i = 0; i < kNMirror; i++) {
     TetragonSegmentedMirror mirror(rmin + margin, rmax, phimin, phimax);
@@ -650,6 +650,7 @@ void GSegSCTelescope::addIdealFocalPlane()  {
 /*************************************************************************************/
 
 void GSegSCTelescope::addMAPMTFocalPlane()  {
+// Adds the camera.
   bool debug = false;
 
   if (debug) {
@@ -663,160 +664,226 @@ void GSegSCTelescope::addMAPMTFocalPlane()  {
           << "    stopping code " << endl;
     exit(0);
   } 
+  
+  //Edits
+  const double kCameraBoxX = 0.215*m; // the camera box X
+  const double kCameraBoxY = 0.143*m; // the camera box Y
+  const double kCameraBoxH = 0.001*m; // the camera box height (N/A in cfg)
+  const double kCameraOffset = -2.56*cm; //old
+  // const double kCameraOffset = 2*cm;
+  // const double kCamR = 460.8984*mm;
+  const double focus = (148.5)*cm;
 
-  Double_t fWidthBox = 50.0*cm;
-  Double_t fHeightBox = 10.*cm;
-  TGeoMedium* med = fManager->GetMedium("med");
+  // Make a disk focal plane
+  // TGeoBBox* tubeCamera = new TGeoBBox("tubeCamera", kCameraBoxX-1*cm, kCameraBoxY-1*cm, 1*mm);
+  // AFocalSurface* focalPlane = new AFocalSurface("focalPlane", tubeCamera);
+  // AOpticalComponent* mapmt = new AOpticalComponent("mapmt", tubeCamera);
 
- // make a new volume for the camera
-  // size adequately covers os8 camera/focal surface 
-  TGeoVolume *focVol = gGeoManager->MakeBox("focVol",med,fWidthBox,
-                                            fWidthBox,fHeightBox);
-  ////////////////////////////////////////////////////////////////////////
-  // Make MAPMT photocathode without pixel structure 
-  Double_t cathodeHalfThick = 100*um;
-  //Double_t cathodeHalfThick = 2.0*mm;
-  TGeoBBox* mapmtCathodeV = new TGeoBBox("mapmtCathodeV", fPixelSize*(4/fSubCells), 
-                                         fPixelSize*(4/fSubCells), cathodeHalfThick); // very thin box
+  // // Add curvature to the camera
+  // TGeoBBox* camBox = new TGeoBBox("camBox", kCameraBoxX, 
+  //                                        kCameraBoxY, kCameraBoxH/2); // very thin box
+  // TGeoSphere* camSphere = new TGeoSphere("camSphere", focus*2, focus*2 + 1*cm, 90, 180); // fixed choice in theta and phi, so the mirrors are "square"
+  // // TGeoTranslation* transZ1 = new TGeoTranslation("transZ1", 0, 0, focus);
+  // // transZ1->RegisterYourself();
+  // // TGeoTranslation* transZ2 = new TGeoTranslation("transZ2", 0, 0, focus);
+  // // transZ2->RegisterYourself();
+  // TGeoCompositeShape* mapmtCathodeV = new TGeoCompositeShape("mapmtCathodeV", "camBox-camSphere");
+  // // end curvature
+
+  TGeoBBox* mapmtCathodeV = new TGeoBBox("mapmtCathodeV", kCameraBoxX, 
+                                       kCameraBoxY, kCameraBoxH/2); // very thin box
+
   AFocalSurface* mapmtCathode = new AFocalSurface("mapmtCathode", mapmtCathodeV);
   mapmtCathode->SetLineColor(iMAPMTCathodeColor);
-  if (debug) *oLog << "cathodeHalfThick " << cathodeHalfThick << endl;
+  AOpticalComponent* mapmt = new AOpticalComponent("mapmt", mapmtCathodeV);
 
-  //////////////////////////////////////////////////////////////////////
-  // Make a single MAPMT
-  TGeoBBox* mapmtV = new TGeoBBox("mapmtV", fMAPMTWidth/fSubCells/2., fMAPMTWidth/fSubCells/2.,
-                                  fMAPMTLength/2.);
-  AOpticalComponent* mapmt = new AOpticalComponent("mapmt", mapmtV);
+  mapmt->AddNode(mapmtCathode, 1, new TGeoTranslation(0, 0, 0));
 
-  ///////////////////////////////////////////////////////////
-  // make input window
-  TGeoBBox* mapmtInputWindowV = new TGeoBBox("mapmtInputWindowV",
-                                             fMAPMTWidth/fSubCells/2., fMAPMTWidth/fSubCells/2.,
-                                             fInputWindowThickness/2.);
-  if (debug) *oLog << " fInputWindowThickness/2. " << fInputWindowThickness/2. << endl;
+  // Make a camera box
+  // TGeoBBox* mapmtCathode = new TGeoBBox("mapmtCathode", kCameraBoxX, kCameraBoxY, kCameraBoxH/2);
+  // double t = 1*cm;
+  // TGeoSphere* tubeCameraBox2 = new TGeoSphere("tubeCameraBox2", kCamR, kCamR + 5*mm, 88, 92, 88, 92); //change angles
+  // TGeoBBox* tubeCameraBox2 = new TGeoBBox("tubeCameraBox2", kCameraBoxX - t, kCameraBoxY - t, kCameraBoxH/2 - t);
 
-  ALens* mapmtInputWindow = new ALens("mapmtInputWindow", mapmtInputWindowV, med);
-  mapmtInputWindow->SetLineColor(iMAPMTWindowColor);
-  ARefractiveIndex* bk7 = AGlassCatalog::GetRefractiveIndex("N-BK7");
-  mapmtInputWindow->SetRefractiveIndex(bk7);
-  mapmt->AddNodeOverlap(mapmtInputWindow, 
-                        1, new TGeoTranslation(0, 0, fMAPMTLength/2. - fInputWindowThickness/2.));
+  // TGeoTranslation* transZ1 = new TGeoTranslation("transZ1", 0, 0, 0 + kCameraOffset + kCameraBoxH/2);
+  // transZ1->RegisterYourself();
+  // TGeoTranslation* transZ2 = new TGeoTranslation("transZ2", 0, 0, 0 + kCameraOffset + kCameraBoxH/2 - t - 1*mm);
+  // transZ2->RegisterYourself();
 
-  if (debug) *oLog << "fMAPMTLength/2. - fInputWindowThickness/2. " 
-                   << fMAPMTLength/2. - fInputWindowThickness/2. << endl;
+  // TGeoCompositeShape* boxComposite = new TGeoCompositeShape("boxComposite", "tubeCameraBox:transZ1-tubeCameraBox2:transZ2");
 
-  Double_t fWindowBottomRelToMapmtCenter = 
-    (fMAPMTLength/2. - fInputWindowThickness/2.) - fInputWindowThickness/2.; // rel. to mapmt center
+  // AObscuration* cameraBox = new AObscuration("cameraBox", boxComposite);
 
-  Double_t cathodePosition = fMAPMTLength/2. - fInputWindowThickness - fMAPMTGap - cathodeHalfThick;
-  mapmt->AddNode(mapmtCathode, 1, new TGeoTranslation(0, 0, cathodePosition));
-  if (debug) *oLog << "cathodePosition " << cathodePosition << endl;
-
-  Double_t fCathodeTopRelToMapmtCenter = cathodePosition + cathodeHalfThick;
+  // AObscuration* cameraBox = new AObscuration("cameraBox", mapmtCathode);
+  // mapmt->AddNode(cameraBox, 1, new TGeoTranslation(0, 0, focus));
   
-  Double_t backObsThickness = 1*mm;
-  TGeoBBox* mapmtBackObsV = new TGeoBBox("mapmtBackObsV",
-                                         fMAPMTWidth/fSubCells/2., fMAPMTWidth/fSubCells/2.,
-                                         backObsThickness);
-  
-  AObscuration* mapmtBackObs = new AObscuration("mapmtBackObs", mapmtBackObsV);
-  mapmtBackObs->SetLineColor(iMAPMTObscurationColor);
-  Double_t backObsPosition = -fMAPMTLength/2. + backObsThickness;
-  mapmt->AddNode(mapmtBackObs, 1, new TGeoTranslation(0, 0,backObsPosition ));
-  Double_t backObsTopPositionRelToMapmtCenter = backObsPosition + backObsThickness;
-  
-  if(debug) {
-    *oLog << " fWindowBottomRelToMapmtCenter  " << fWindowBottomRelToMapmtCenter << endl;
-    *oLog << " fCathodeTopRelToMapmtCenter  " << fCathodeTopRelToMapmtCenter << endl;
-    *oLog << " backObsTopPositionRelToMapmtCenter  " << backObsTopPositionRelToMapmtCenter << endl;
-  }
-  
-  fCathodeTopRelToFocalSurface =  fCathodeTopRelToMapmtCenter + fMAPMTOffset -
-    fCathodeTopRelToMapmtCenter;
-  fWindowBottomRelToFocalSurface = fWindowBottomRelToMapmtCenter + fMAPMTOffset -
-    fCathodeTopRelToMapmtCenter;
-  fMAPOscurationTopRelToFocalSurface = backObsTopPositionRelToMapmtCenter + fMAPMTOffset -
-    fCathodeTopRelToMapmtCenter;
-  
-  // sanity check
-  Double_t fCathodeBottomRelToFocalSurface = fCathodeTopRelToFocalSurface - cathodeHalfThick*2.0; 
-  fCathodeBottomRelToOscurationTop = fCathodeBottomRelToFocalSurface - fMAPOscurationTopRelToFocalSurface;
-
-  if (fCathodeBottomRelToOscurationTop < 0.0) {
-    *oLog << " fCathodeBottomRelToOscurationTop, " << fCathodeBottomRelToOscurationTop 
-          << ",  is less than zero. Cathode is below the obscuration. Need to increase MAPMT length"
-          << "    stopping code " << endl;
-    exit(0);
-  }
-  
-  const Double_t kZf = fF * fZf;
-  //*oLog << "  =================== kZf " << kZf << endl;
-  // Make the focal plane
-  Double_t mapmtPositionReltoFocalSurface = - fMAPMTLength/2. + fInputWindowThickness + fMAPMTGap;
-  //*oLog << " xxxxxxxxxxx  mapmtPositionReltoFocalSurface " << mapmtPositionReltoFocalSurface << endl;
-  Int_t n = 1;
-  // loop from -iNum to +iNum
-  Int_t iNum = 7; // set to 1, make gl plot and use CheckPoint to see location of center module
-  if (bSingleMAPMTmodule == false) {
-    for(Int_t i = -iNum; i <= iNum; i++){
-      Double_t dx = i*fMAPMTWidth;
-      for(Int_t j = -iNum; j <= iNum; j++){
-        if((TMath::Abs(i) + TMath::Abs(j) >= 11) || (TMath::Abs(i)*TMath::Abs(j) == 21)){
-          continue;
-        } // if
-	if (fSubCells == 1){
-	  Double_t dy = j*fMAPMTWidth;
-	  Double_t r2 = (i*i + j*j)*fMAPMTWidth*fMAPMTWidth;
-	  Double_t dz = fKappa1*TMath::Power(fF, -1)*r2 + fKappa2*TMath::Power(fF, -3)*r2*r2;
-	  focVol->AddNode(mapmt, n, new TGeoTranslation(dx, dy, 
-							mapmtPositionReltoFocalSurface +
-							+ fMAPMTOffset + dz));
-	  n++;
-	}
-	else{
-	  for (Int_t k = -fSubCells/2; k<fSubCells/2; k++){
-	    for (Int_t l = -fSubCells/2; l<fSubCells/2; l++){
-	      Double_t subdx = dx+(k+1/2)*(fMAPMTWidth/fSubCells);
-	      Double_t dy = j*fMAPMTWidth+(l+1/2)*(fMAPMTWidth/fSubCells);
-	      Double_t r2 = subdx*subdx+dy*dy;
-	      Double_t dz = fKappa1*TMath::Power(fF, -1)*r2 + fKappa2*TMath::Power(fF, -3)*r2*r2;
-	      focVol->AddNode(mapmt, n, new TGeoTranslation(subdx, dy, 
-							    mapmtPositionReltoFocalSurface +
-							    + fMAPMTOffset + dz));
-	      n++;
-	    }
-	  }
-	}
-      } // y
-    } // x
-  }
-  else {
-    Double_t dx = 0.0;
-    Double_t dy = 0.0;
-    Double_t dz = 0.0;
-    focVol->AddNode(mapmt, 1, new TGeoTranslation(dx, dy, 
-                                                  mapmtPositionReltoFocalSurface +
-                                                  + fMAPMTOffset + dz));
-
-  }
-  fManager->GetTopVolume()->AddNode(focVol,1,new TGeoCombiTrans("cFocS",
+  fManager->GetTopVolume()->AddNode(mapmtCathode,1,new TGeoCombiTrans("cFocS",
                                                              0.0,
                                                              0.0,
-                                                             kZf-fFocalPlaneOffsetCorrection,
+                                                             focus,
                                                              new TGeoRotation("rFocS",
                                                                               0.0,
                                                                               0.0,
 									      0.0)));
-  /* 
- fManager->GetTopVolume()->AddNode(focVol,1,new TGeoCombiTrans("cFocS",
-                                                               0.0,
-                                                               0.0,
-                                                               kZf,
-                                                               new TGeoRotation("rFocS",
-                                                                                0.0,
-                                                                                0.0,
-                                                                                0.0)));
-										*/
+//Edits end
+
+//   Double_t fWidthBox = 50.0*cm;
+//   Double_t fHeightBox = 10.*cm;
+//   TGeoMedium* med = fManager->GetMedium("med");
+
+//  // make a new volume for the camera
+//   // size adequately covers os8 camera/focal surface 
+//   TGeoVolume *focVol = gGeoManager->MakeBox("focVol",med,fWidthBox,
+//                                             fWidthBox,fHeightBox);
+//   ////////////////////////////////////////////////////////////////////////
+//   // Make MAPMT photocathode without pixel structure 
+//   Double_t cathodeHalfThick = 100*um;
+//   //Double_t cathodeHalfThick = 2.0*mm;
+//   TGeoBBox* mapmtCathodeV = new TGeoBBox("mapmtCathodeV", fPixelSize*(4/fSubCells), 
+//                                          fPixelSize*(4/fSubCells), cathodeHalfThick); // very thin box
+//   AFocalSurface* mapmtCathode = new AFocalSurface("mapmtCathode", mapmtCathodeV);
+//   mapmtCathode->SetLineColor(iMAPMTCathodeColor);
+//   if (debug) *oLog << "cathodeHalfThick " << cathodeHalfThick << endl;
+
+//   //////////////////////////////////////////////////////////////////////
+//   // Make a single MAPMT
+//   TGeoBBox* mapmtV = new TGeoBBox("mapmtV", fMAPMTWidth/fSubCells/2., fMAPMTWidth/fSubCells/2.,
+//                                   fMAPMTLength/2.);
+//   AOpticalComponent* mapmt = new AOpticalComponent("mapmt", mapmtV);
+
+//   ///////////////////////////////////////////////////////////
+//   // make input window
+//   TGeoBBox* mapmtInputWindowV = new TGeoBBox("mapmtInputWindowV",
+//                                              fMAPMTWidth/fSubCells/2., fMAPMTWidth/fSubCells/2.,
+//                                              fInputWindowThickness/2.);
+//   if (debug) *oLog << " fInputWindowThickness/2. " << fInputWindowThickness/2. << endl;
+
+//   ALens* mapmtInputWindow = new ALens("mapmtInputWindow", mapmtInputWindowV, med);
+//   mapmtInputWindow->SetLineColor(iMAPMTWindowColor);
+//   ARefractiveIndex* bk7 = AGlassCatalog::GetRefractiveIndex("N-BK7");
+//   mapmtInputWindow->SetRefractiveIndex(bk7);
+//   mapmt->AddNodeOverlap(mapmtInputWindow, 
+//                         1, new TGeoTranslation(0, 0, - fMAPMTLength/2. + fInputWindowThickness/2.)); //Glass looking circle
+
+//   if (debug) *oLog << "fMAPMTLength/2. - fInputWindowThickness/2. " 
+//                    << fMAPMTLength/2. - fInputWindowThickness/2. << endl;
+
+//   Double_t fWindowBottomRelToMapmtCenter = 
+//     (fMAPMTLength/2. - fInputWindowThickness/2.) - fInputWindowThickness/2.; // rel. to mapmt center
+
+//   Double_t cathodePosition = fMAPMTLength/2. - fInputWindowThickness - fMAPMTGap - cathodeHalfThick;
+//   mapmt->AddNode(mapmtCathode, 1, new TGeoTranslation(0, 0, cathodePosition)); //Black circle
+//   if (debug) *oLog << "cathodePosition " << cathodePosition << endl;
+
+//   Double_t fCathodeTopRelToMapmtCenter = cathodePosition + cathodeHalfThick;
+  
+//   Double_t backObsThickness = 1*mm;
+//   TGeoBBox* mapmtBackObsV = new TGeoBBox("mapmtBackObsV",
+//                                          fMAPMTWidth/fSubCells/2., fMAPMTWidth/fSubCells/2.,
+//                                          backObsThickness);
+//   // TGeoBBox* mapmtBackObsV = new TGeoBBox("mapmtBackObsV",
+//   //                                        0.215*m, 0.143*m,
+//   //                                        0.13*m);
+  
+//   AObscuration* mapmtBackObs = new AObscuration("mapmtBackObs", mapmtBackObsV);
+//   mapmtBackObs->SetLineColor(iMAPMTObscurationColor);
+//   Double_t backObsPosition = -fMAPMTLength/2. + backObsThickness;
+//   mapmt->AddNode(mapmtBackObs, 1, new TGeoTranslation(0, 0,backObsPosition+1*m)); //Both the red and the glass circle?
+//   // mapmt->AddNode(mapmtBackObs, 1, new TGeoTranslation(0, 0,(-0.84861)*m));
+//   Double_t backObsTopPositionRelToMapmtCenter = backObsPosition + backObsThickness;
+  
+//   if(debug) {
+//     *oLog << " fWindowBottomRelToMapmtCenter  " << fWindowBottomRelToMapmtCenter << endl;
+//     *oLog << " fCathodeTopRelToMapmtCenter  " << fCathodeTopRelToMapmtCenter << endl;
+//     *oLog << " backObsTopPositionRelToMapmtCenter  " << backObsTopPositionRelToMapmtCenter << endl;
+//   }
+  
+//   fCathodeTopRelToFocalSurface =  fCathodeTopRelToMapmtCenter + fMAPMTOffset -
+//     fCathodeTopRelToMapmtCenter;
+//   fWindowBottomRelToFocalSurface = fWindowBottomRelToMapmtCenter + fMAPMTOffset -
+//     fCathodeTopRelToMapmtCenter;
+//   fMAPOscurationTopRelToFocalSurface = backObsTopPositionRelToMapmtCenter + fMAPMTOffset -
+//     fCathodeTopRelToMapmtCenter;
+  
+//   // sanity check
+//   Double_t fCathodeBottomRelToFocalSurface = fCathodeTopRelToFocalSurface - cathodeHalfThick*2.0; 
+//   fCathodeBottomRelToOscurationTop = fCathodeBottomRelToFocalSurface - fMAPOscurationTopRelToFocalSurface;
+
+//   if (fCathodeBottomRelToOscurationTop < 0.0) {
+//     *oLog << " fCathodeBottomRelToOscurationTop, " << fCathodeBottomRelToOscurationTop 
+//           << ",  is less than zero. Cathode is below the obscuration. Need to increase MAPMT length"
+//           << "    stopping code " << endl;
+//     exit(0);
+//   }
+  
+//   const Double_t kZf = fF * fZf;
+//   //*oLog << "  =================== kZf " << kZf << endl;
+//   // Make the focal plane
+//   Double_t mapmtPositionReltoFocalSurface = - fMAPMTLength/2. + fInputWindowThickness + fMAPMTGap;
+//   //*oLog << " xxxxxxxxxxx  mapmtPositionReltoFocalSurface " << mapmtPositionReltoFocalSurface << endl;
+//   Int_t n = 1;
+//   // loop from -iNum to +iNum
+//   Int_t iNum = 7; // set to 1, make gl plot and use CheckPoint to see location of center module
+//   if (bSingleMAPMTmodule == false) {
+//     for(Int_t i = -iNum; i <= iNum; i++){
+//       Double_t dx = i*fMAPMTWidth;
+//       for(Int_t j = -iNum; j <= iNum; j++){
+//         if((TMath::Abs(i) + TMath::Abs(j) >= 11) || (TMath::Abs(i)*TMath::Abs(j) == 21)){
+//           continue;
+//         } // if
+// 	if (fSubCells == 1){
+// 	  Double_t dy = j*fMAPMTWidth;
+// 	  Double_t r2 = (i*i + j*j)*fMAPMTWidth*fMAPMTWidth;
+// 	  Double_t dz = fKappa1*TMath::Power(fF, -1)*r2 + fKappa2*TMath::Power(fF, -3)*r2*r2;
+// 	  focVol->AddNode(mapmt, n, new TGeoTranslation(dx, dy, 
+// 							mapmtPositionReltoFocalSurface +
+// 							+ fMAPMTOffset + dz));
+// 	  n++;
+// 	}
+// 	else{
+// 	  for (Int_t k = -fSubCells/2; k<fSubCells/2; k++){
+// 	    for (Int_t l = -fSubCells/2; l<fSubCells/2; l++){
+// 	      Double_t subdx = dx+(k+1/2)*(fMAPMTWidth/fSubCells);
+// 	      Double_t dy = j*fMAPMTWidth+(l+1/2)*(fMAPMTWidth/fSubCells);
+// 	      Double_t r2 = subdx*subdx+dy*dy;
+// 	      Double_t dz = fKappa1*TMath::Power(fF, -1)*r2 + fKappa2*TMath::Power(fF, -3)*r2*r2;
+// 	      focVol->AddNode(mapmt, n, new TGeoTranslation(subdx, dy, 
+// 							    mapmtPositionReltoFocalSurface +
+// 							    + fMAPMTOffset + dz));
+// 	      n++;
+// 	    }
+// 	  }
+// 	}
+//       } // y
+//     } // x
+//   }
+//   else {
+//     Double_t dx = 0.0;
+//     Double_t dy = 0.0;
+//     Double_t dz = 0.0;
+//     focVol->AddNode(mapmt, 1, new TGeoTranslation(dx, dy, 
+//                                                   mapmtPositionReltoFocalSurface +
+//                                                   + fMAPMTOffset + dz));
+
+//   }
+//   fManager->GetTopVolume()->AddNode(focVol,1,new TGeoCombiTrans("cFocS",
+//                                                              0.0,
+//                                                              0.0,
+//                                                              kZf-fFocalPlaneOffsetCorrection,
+//                                                              new TGeoRotation("rFocS",
+//                                                                               0.0,
+//                                                                               0.0,
+// 									      0.0)));
+//   /* 
+//  fManager->GetTopVolume()->AddNode(focVol,1,new TGeoCombiTrans("cFocS",
+//                                                                0.0,
+//                                                                0.0,
+//                                                                kZf,
+//                                                                new TGeoRotation("rFocS",
+//                                                                                 0.0,
+//                                                                                 0.0,
+//                                                                                 0.0)));
+// 										*/
 };
 /*************************************************************************************/
 
