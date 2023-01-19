@@ -2,6 +2,7 @@
     "makefile.extensionOutputFolder": "./.vscode",
     "files.associations": {
         "SellmeierFit.C": "cpp",
-        "HESS1.C": "cpp"
+        "HESS1.C": "cpp",
+        "BalloonTest2.C": "cpp"
     }
 }

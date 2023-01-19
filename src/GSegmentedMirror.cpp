@@ -209,7 +209,8 @@ AMirror* TetragonSegmentedMirror::BuildMirror(const char* name,
   TGeoBBox* trd1 = new TGeoBBox(Form("%s_trd1", name),halfwidth,halflength,2*m);
   
   //Additions
-  const double kF = 848.61*mm; // focal length
+  const double kF = (1659.81/2)*mm;
+  // const double kF = 848.61*mm; // focal length
   const double kMirrorR = kF*2; // the radius of curvature
   const double kMirrorD = 0.6696*m; //  side length, rectangular mirror
   const double kMirrorT = 10.16*mm; // mirror thickness, intentionally use a very thin thickness to avoid unnecessary reflection on the edges

@@ -45,6 +45,8 @@ using namespace std;
 
 #include "TGeoManager.h"
 #include "TGeoBBox.h"
+#include "TGeoSphere.h"
+#include "TGeoCompositeShape.h"
 #include "TGeoMaterial.h"
 #include "TGeoMatrix.h"
 #include "TGeoVolume.h"
@@ -711,6 +713,16 @@ void GSegSCTelescope::addEntranceWindow() {
   // edits for refractive index end
   // ewindLen->SetConstantRefractiveIndex(fEntranceWindowN);
   // if (bEntranceWindowAbsFlag) ewindLen->SetConstantAbsorptionLength(fEntranceWindowAbsLength);
+  
+  //Cover for Corrector lens
+  AGeoAsphericDisk * cover = new AGeoAsphericDisk("cover", 1*cm, 0, 0, 0, 1*m, 0.5641*m);
+  // TGeoBBox* cover = new TGeoBBox("cover", 1*m, 1*m, 1*cm);
+  AObscuration * coverobs = new AObscuration("coverobs", cover);
+  // coverobs->SetConstantAbsorptionLength(1);
+  coverobs->SetLineColor(1);
+  TGeoTranslation* coverTrans = new TGeoTranslation("coverTrans", 0., 0., -5.3*mm);
+  fManager->GetTopVolume()->AddNode(coverobs, 1, coverTrans);
+  //End Edits
 
   fManager->GetTopVolume()->AddNode(ewindLen, 1, ewindTrans);
 
@@ -801,15 +813,27 @@ void GSegSCTelescope::addMAPMTFocalPlane()  {
   const double kCameraOffset = -2.56*cm; //old
   // const double kCameraOffset = 2*cm;
   // const double kCamR = 460.8984*mm;
-  const double focus = (-0.84861)*m;
+  const double focus = (-1659.81/2)*mm;
 
   // Make a disk focal plane
   // TGeoBBox* tubeCamera = new TGeoBBox("tubeCamera", kCameraBoxX-1*cm, kCameraBoxY-1*cm, 1*mm);
   // AFocalSurface* focalPlane = new AFocalSurface("focalPlane", tubeCamera);
   // AOpticalComponent* mapmt = new AOpticalComponent("mapmt", tubeCamera);
 
-  TGeoBBox* mapmtCathodeV = new TGeoBBox("mapmtCathodeV", kCameraBoxX, 
+  // Add curvature to the camera
+  TGeoBBox* camBox = new TGeoBBox("camBox", kCameraBoxX, 
                                          kCameraBoxY, kCameraBoxH/2); // very thin box
+  TGeoSphere* camSphere = new TGeoSphere("camSphere", focus*2, focus*2 + 1*cm, 90, 180); // fixed choice in theta and phi, so the mirrors are "square"
+  // TGeoTranslation* transZ1 = new TGeoTranslation("transZ1", 0, 0, focus);
+  // transZ1->RegisterYourself();
+  // TGeoTranslation* transZ2 = new TGeoTranslation("transZ2", 0, 0, focus);
+  // transZ2->RegisterYourself();
+  TGeoCompositeShape* mapmtCathodeV = new TGeoCompositeShape("mapmtCathodeV", "camBox-camSphere");
+  // end curvature
+
+  // TGeoBBox* mapmtCathodeV = new TGeoBBox("mapmtCathodeV", kCameraBoxX, 
+  //                                      kCameraBoxY, kCameraBoxH/2); // very thin box
+
   AFocalSurface* mapmtCathode = new AFocalSurface("mapmtCathode", mapmtCathodeV);
   mapmtCathode->SetLineColor(iMAPMTCathodeColor);
   AOpticalComponent* mapmt = new AOpticalComponent("mapmt", mapmtCathodeV);
