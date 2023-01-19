@@ -45,7 +45,7 @@ endif
 # set the ROBAST details
 
 ROBAST_VER_NUM := 2.4.4
-ROBAST_VER := /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-$(ROBAST_VER_NUM)
+ROBAST_VER := /storage/home/hhive1/arogers66/GrOptics/ROBAST-$(ROBAST_VER_NUM)
 #ROBAST_VER := ROBAST-telescope_factory
 ROBAST_TGZ := ROBAST-$(ROBAST_VER_NUM).tar.gz
 ROBAST_BASE_URL := https://codeload.github.com/ROBAST/ROBAST/tar.gz

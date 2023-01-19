@@ -81,12 +81,13 @@ TGeoCombiTrans* SegmentedMirror::BuildMirrorCombiTrans(const char* name,AGeoAsph
         Double_t x = xy[i][0] * cm;
         Double_t y = xy[i][1] * cm;
         Double_t z = xy[i][2] * cm;
+        std::cout<< x << y << z << std::endl;
         Double_t r2d = TMath::RadToDeg();
         Double_t r2 = TMath::Power(x, 2) + TMath::Power(y, 2);
       
         // each mirror center is relocated from the origin (0, 0, 0) to (x, y, z)
         TGeoTranslation* trans =
-            new TGeoTranslation(Form("mirTrans%d", i), x, y, z+kMirrorR);
+            new TGeoTranslation(Form("mirTrans%d", i), x, y, z);
         trans->RegisterYourself();
 
         // and is rotated to compose a DC optics

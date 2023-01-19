@@ -3,7 +3,18 @@
 
 obj/GArrayTel.o: ./include/GDefinition.h ./include/GUtilityFuncts.h
 obj/GArrayTel.o: ./include/GTelescope.h ./include/GDCTelescope.h
-obj/GArrayTel.o: ./include/GSCTelescope.h ./include/GTelescopeFactory.h
+obj/GArrayTel.o: ./include/GSCTelescope.h
+obj/GArrayTel.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AOpticsManager.h
+obj/GArrayTel.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARayArray.h
+obj/GArrayTel.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARay.h
+obj/GArrayTel.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AFocalSurface.h
+obj/GArrayTel.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AOpticalComponent.h
+obj/GArrayTel.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ABorderSurfaceCondition.h
+obj/GArrayTel.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ALens.h
+obj/GArrayTel.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARefractiveIndex.h
+obj/GArrayTel.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AMirror.h
+obj/GArrayTel.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AObscuration.h
+obj/GArrayTel.o: ./include/GTelescopeFactory.h
 obj/GArrayTel.o: ./include/GDCTelescopeFactory.h ./include/GReadDCStdBase.h
 obj/GArrayTel.o: ./include/GReadDCStdGrISU.h ./include/GReadPhotonBase.h
 obj/GArrayTel.o: ./include/GReadPhotonGrISU.h ./include/GArrayTel.h
@@ -12,6 +23,16 @@ obj/GArray_Tel_noGraphs_4.0deg.o: ./include/GUtilityFuncts.h
 obj/GArray_Tel_noGraphs_4.0deg.o: ./include/GTelescope.h
 obj/GArray_Tel_noGraphs_4.0deg.o: ./include/GDCTelescope.h
 obj/GArray_Tel_noGraphs_4.0deg.o: ./include/GSCTelescope.h
+obj/GArray_Tel_noGraphs_4.0deg.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AOpticsManager.h
+obj/GArray_Tel_noGraphs_4.0deg.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARayArray.h
+obj/GArray_Tel_noGraphs_4.0deg.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARay.h
+obj/GArray_Tel_noGraphs_4.0deg.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AFocalSurface.h
+obj/GArray_Tel_noGraphs_4.0deg.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AOpticalComponent.h
+obj/GArray_Tel_noGraphs_4.0deg.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ABorderSurfaceCondition.h
+obj/GArray_Tel_noGraphs_4.0deg.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ALens.h
+obj/GArray_Tel_noGraphs_4.0deg.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARefractiveIndex.h
+obj/GArray_Tel_noGraphs_4.0deg.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AMirror.h
+obj/GArray_Tel_noGraphs_4.0deg.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AObscuration.h
 obj/GArray_Tel_noGraphs_4.0deg.o: ./include/GTelescopeFactory.h
 obj/GArray_Tel_noGraphs_4.0deg.o: ./include/GDCTelescopeFactory.h
 obj/GArray_Tel_noGraphs_4.0deg.o: ./include/GReadDCStdBase.h
@@ -68,11 +89,32 @@ obj/GReadPhotonGrISU.o: ./include/GReadPhotonBase.h
 obj/GReadPhotonGrISU.o: ./include/GReadPhotonGrISU.h
 obj/GReadSCStd.o: ./include/GDefinition.h ./include/GPilot.h
 obj/GReadSCStd.o: ./include/GUtilityFuncts.h ./include/GTelescope.h
-obj/GReadSCStd.o: ./include/GSCTelescope.h ./include/GTelescopeFactory.h
+obj/GReadSCStd.o: ./include/GSCTelescope.h
+obj/GReadSCStd.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AOpticsManager.h
+obj/GReadSCStd.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARayArray.h
+obj/GReadSCStd.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARay.h
+obj/GReadSCStd.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AFocalSurface.h
+obj/GReadSCStd.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AOpticalComponent.h
+obj/GReadSCStd.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ABorderSurfaceCondition.h
+obj/GReadSCStd.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ALens.h
+obj/GReadSCStd.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARefractiveIndex.h
+obj/GReadSCStd.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AMirror.h
+obj/GReadSCStd.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AObscuration.h
+obj/GReadSCStd.o: ./include/GTelescopeFactory.h
 obj/GReadSCStd.o: ./include/GSCTelescopeFactory.h ./include/GReadSCStd.h
 obj/GReadSegSCStd.o: ./include/GDefinition.h ./include/GPilot.h
 obj/GReadSegSCStd.o: ./include/GUtilityFuncts.h ./include/GTelescope.h
 obj/GReadSegSCStd.o: ./include/GSegSCTelescope.h
+obj/GReadSegSCStd.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AOpticsManager.h
+obj/GReadSegSCStd.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARayArray.h
+obj/GReadSegSCStd.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARay.h
+obj/GReadSegSCStd.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AFocalSurface.h
+obj/GReadSegSCStd.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AOpticalComponent.h
+obj/GReadSegSCStd.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ABorderSurfaceCondition.h
+obj/GReadSegSCStd.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ALens.h
+obj/GReadSegSCStd.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARefractiveIndex.h
+obj/GReadSegSCStd.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AMirror.h
+obj/GReadSegSCStd.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AObscuration.h
 obj/GReadSegSCStd.o: ./include/GTelescopeFactory.h
 obj/GReadSegSCStd.o: ./include/GSegSCTelescopeFactory.h
 obj/GReadSegSCStd.o: ./include/GReadSegSCStd.h
@@ -81,20 +123,71 @@ obj/GRootDCNavigator.o: ./include/GGeometryBase.h ./include/GDCGeometry.h
 obj/GRootDCNavigator.o: ./include/GTelescope.h ./include/GDCTelescope.h
 obj/GRootDCNavigator.o: ./include/GRootDCNavigator.h
 obj/GRootWriter.o: ./include/GDefinition.h ./include/GRootWriter.h
+obj/GSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AOpticsManager.h
+obj/GSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARayArray.h
+obj/GSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARay.h
+obj/GSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AFocalSurface.h
+obj/GSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AOpticalComponent.h
+obj/GSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ABorderSurfaceCondition.h
+obj/GSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ALens.h
+obj/GSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARefractiveIndex.h
+obj/GSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AMirror.h
+obj/GSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AObscuration.h
+obj/GSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AGeoAsphericDisk.h
+obj/GSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AGlassCatalog.h
+obj/GSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ACauchyFormula.h
+obj/GSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ASchottFormula.h
+obj/GSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ASellmeierFormula.h
 obj/GSCTelescope.o: ./include/GUtilityFuncts.h ./include/GDefinition.h
 obj/GSCTelescope.o: ./include/GTelescope.h ./include/GSCTelescope.h
 obj/GSCTelescopeFactory.o: ./include/GDefinition.h ./include/GPilot.h
-obj/GSCTelescopeFactory.o: ./include/GUtilityFuncts.h ./include/GTelescope.h
-obj/GSCTelescopeFactory.o: ./include/GSCTelescope.h
+obj/GSCTelescopeFactory.o: ./include/GUtilityFuncts.h
+obj/GSCTelescopeFactory.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AOpticsManager.h
+obj/GSCTelescopeFactory.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARayArray.h
+obj/GSCTelescopeFactory.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARay.h
+obj/GSCTelescopeFactory.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AFocalSurface.h
+obj/GSCTelescopeFactory.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AOpticalComponent.h
+obj/GSCTelescopeFactory.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ABorderSurfaceCondition.h
+obj/GSCTelescopeFactory.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ALens.h
+obj/GSCTelescopeFactory.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARefractiveIndex.h
+obj/GSCTelescopeFactory.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AMirror.h
+obj/GSCTelescopeFactory.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AObscuration.h
+obj/GSCTelescopeFactory.o: ./include/GTelescope.h ./include/GSCTelescope.h
 obj/GSCTelescopeFactory.o: ./include/GTelescopeFactory.h
 obj/GSCTelescopeFactory.o: ./include/GSCTelescopeFactory.h
 obj/GSCTelescopeFactory.o: ./include/GReadSCStd.h
+obj/GSegSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AGeoAsphericDisk.h
+obj/GSegSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AGlassCatalog.h
+obj/GSegSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ACauchyFormula.h
+obj/GSegSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARefractiveIndex.h
+obj/GSegSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ASchottFormula.h
+obj/GSegSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ASellmeierFormula.h
+obj/GSegSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ABorderSurfaceCondition.h
+obj/GSegSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ALens.h
+obj/GSegSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AOpticalComponent.h
+obj/GSegSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AMirror.h
+obj/GSegSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AObscuration.h
+obj/GSegSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AOpticsManager.h
+obj/GSegSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARayArray.h
+obj/GSegSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARay.h
+obj/GSegSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AFocalSurface.h
+obj/GSegSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARayShooter.h
 obj/GSegSCTelescope.o: ./include/GUtilityFuncts.h ./include/GDefinition.h
 obj/GSegSCTelescope.o: ./include/GSegmentedMirror.h
 obj/GSegSCTelescope.o: ./include/GSegmentedObscuration.h
 obj/GSegSCTelescope.o: ./include/GTelescope.h ./include/GSegSCTelescope.h
 obj/GSegSCTelescopeFactory.o: ./include/GDefinition.h ./include/GPilot.h
 obj/GSegSCTelescopeFactory.o: ./include/GUtilityFuncts.h
+obj/GSegSCTelescopeFactory.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AOpticsManager.h
+obj/GSegSCTelescopeFactory.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARayArray.h
+obj/GSegSCTelescopeFactory.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARay.h
+obj/GSegSCTelescopeFactory.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AFocalSurface.h
+obj/GSegSCTelescopeFactory.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AOpticalComponent.h
+obj/GSegSCTelescopeFactory.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ABorderSurfaceCondition.h
+obj/GSegSCTelescopeFactory.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ALens.h
+obj/GSegSCTelescopeFactory.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARefractiveIndex.h
+obj/GSegSCTelescopeFactory.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AMirror.h
+obj/GSegSCTelescopeFactory.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AObscuration.h
 obj/GSegSCTelescopeFactory.o: ./include/GTelescope.h
 obj/GSegSCTelescopeFactory.o: ./include/GSegSCTelescope.h
 obj/GSegSCTelescopeFactory.o: ./include/GSCTelescope.h
@@ -102,26 +195,88 @@ obj/GSegSCTelescopeFactory.o: ./include/GTelescopeFactory.h
 obj/GSegSCTelescopeFactory.o: ./include/GSCTelescopeFactory.h
 obj/GSegSCTelescopeFactory.o: ./include/GSegSCTelescopeFactory.h
 obj/GSegSCTelescopeFactory.o: ./include/GReadSegSCStd.h
+obj/GSegmentedMirror.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ABorderSurfaceCondition.h
+obj/GSegmentedMirror.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AGeoAsphericDisk.h
+obj/GSegmentedMirror.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AGlassCatalog.h
+obj/GSegmentedMirror.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ACauchyFormula.h
+obj/GSegmentedMirror.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARefractiveIndex.h
+obj/GSegmentedMirror.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ASchottFormula.h
+obj/GSegmentedMirror.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ASellmeierFormula.h
+obj/GSegmentedMirror.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ALens.h
+obj/GSegmentedMirror.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AOpticalComponent.h
+obj/GSegmentedMirror.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AMirror.h
+obj/GSegmentedMirror.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AObscuration.h
+obj/GSegmentedMirror.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AOpticsManager.h
+obj/GSegmentedMirror.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARayArray.h
+obj/GSegmentedMirror.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARay.h
+obj/GSegmentedMirror.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AFocalSurface.h
+obj/GSegmentedMirror.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARayShooter.h
 obj/GSegmentedMirror.o: ./include/GSegmentedMirror.h
+obj/GSegmentedObscuration.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ABorderSurfaceCondition.h
+obj/GSegmentedObscuration.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AGeoAsphericDisk.h
+obj/GSegmentedObscuration.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AGlassCatalog.h
+obj/GSegmentedObscuration.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ACauchyFormula.h
+obj/GSegmentedObscuration.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARefractiveIndex.h
+obj/GSegmentedObscuration.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ASchottFormula.h
+obj/GSegmentedObscuration.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ASellmeierFormula.h
+obj/GSegmentedObscuration.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ALens.h
+obj/GSegmentedObscuration.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AOpticalComponent.h
+obj/GSegmentedObscuration.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AMirror.h
+obj/GSegmentedObscuration.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AObscuration.h
+obj/GSegmentedObscuration.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AOpticsManager.h
+obj/GSegmentedObscuration.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARayArray.h
+obj/GSegmentedObscuration.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARay.h
+obj/GSegmentedObscuration.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AFocalSurface.h
+obj/GSegmentedObscuration.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARayShooter.h
 obj/GSegmentedObscuration.o: ./include/GSegmentedObscuration.h
 obj/GSimulateOptics.o: ./include/GDefinition.h ./include/GUtilityFuncts.h
 obj/GSimulateOptics.o: ./include/GTelescope.h ./include/GDCTelescope.h
-obj/GSimulateOptics.o: ./include/GSCTelescope.h ./include/GTelescopeFactory.h
+obj/GSimulateOptics.o: ./include/GSCTelescope.h
+obj/GSimulateOptics.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AOpticsManager.h
+obj/GSimulateOptics.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARayArray.h
+obj/GSimulateOptics.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARay.h
+obj/GSimulateOptics.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AFocalSurface.h
+obj/GSimulateOptics.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AOpticalComponent.h
+obj/GSimulateOptics.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ABorderSurfaceCondition.h
+obj/GSimulateOptics.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ALens.h
+obj/GSimulateOptics.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARefractiveIndex.h
+obj/GSimulateOptics.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AMirror.h
+obj/GSimulateOptics.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AObscuration.h
+obj/GSimulateOptics.o: ./include/GTelescopeFactory.h
 obj/GSimulateOptics.o: ./include/GDCTelescopeFactory.h
 obj/GSimulateOptics.o: ./include/GReadDCStdBase.h ./include/GReadDCStdGrISU.h
 obj/GSimulateOptics.o: ./include/GReadPhotonBase.h
 obj/GSimulateOptics.o: ./include/GReadPhotonGrISU.h ./include/GArrayTel.h
 obj/GSimulateOptics.o: ./include/GSimulateOptics.h ./include/GRootWriter.h
+obj/GTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AOpticsManager.h
+obj/GTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARayArray.h
+obj/GTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARay.h
+obj/GTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AFocalSurface.h
+obj/GTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AOpticalComponent.h
+obj/GTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ABorderSurfaceCondition.h
+obj/GTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ALens.h
+obj/GTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARefractiveIndex.h
+obj/GTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AMirror.h
+obj/GTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AObscuration.h
 obj/GTelescope.o: ./include/GDefinition.h ./include/GTelescope.h
 obj/GTelescope.o: ./include/GGeometryBase.h ./include/GDCGeometry.h
 obj/GTelescope.o: ./include/GRayTracerBase.h
 obj/GTelescopeFactory.o: ./include/GDefinition.h ./include/GTelescope.h
 obj/GTelescopeFactory.o: ./include/GTelescopeFactory.h
 obj/GUtilityFuncts.o: ./include/GDefinition.h ./include/GUtilityFuncts.h
-obj/GrOpticsDict.o: include/GRootWriter.h
 obj/grOptics.o: ./include/GDefinition.h ./include/GUtilityFuncts.h
 obj/grOptics.o: ./include/GPilot.h ./include/GTelescope.h
 obj/grOptics.o: ./include/GDCTelescope.h ./include/GSCTelescope.h
+obj/grOptics.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AOpticsManager.h
+obj/grOptics.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARayArray.h
+obj/grOptics.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARay.h
+obj/grOptics.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AFocalSurface.h
+obj/grOptics.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AOpticalComponent.h
+obj/grOptics.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ABorderSurfaceCondition.h
+obj/grOptics.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ALens.h
+obj/grOptics.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARefractiveIndex.h
+obj/grOptics.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AMirror.h
+obj/grOptics.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AObscuration.h
 obj/grOptics.o: ./include/GSegSCTelescope.h ./include/GTelescopeFactory.h
 obj/grOptics.o: ./include/GDCTelescopeFactory.h
 obj/grOptics.o: ./include/GSCTelescopeFactory.h
@@ -133,7 +288,18 @@ obj/grOptics.o: ./include/GSimulateOptics.h ./include/GRootWriter.h
 obj/grReaderFactory.o: ./include/GDefinition.h ./include/GUtilityFuncts.h
 obj/grReaderFactory.o: ./include/GPilot.h ./include/GSegmentedMirror.h
 obj/grReaderFactory.o: ./include/GTelescope.h ./include/GDCTelescope.h
-obj/grReaderFactory.o: ./include/GSCTelescope.h ./include/GSegSCTelescope.h
+obj/grReaderFactory.o: ./include/GSCTelescope.h
+obj/grReaderFactory.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AOpticsManager.h
+obj/grReaderFactory.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARayArray.h
+obj/grReaderFactory.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARay.h
+obj/grReaderFactory.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AFocalSurface.h
+obj/grReaderFactory.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AOpticalComponent.h
+obj/grReaderFactory.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ABorderSurfaceCondition.h
+obj/grReaderFactory.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ALens.h
+obj/grReaderFactory.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARefractiveIndex.h
+obj/grReaderFactory.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AMirror.h
+obj/grReaderFactory.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AObscuration.h
+obj/grReaderFactory.o: ./include/GSegSCTelescope.h
 obj/grReaderFactory.o: ./include/GTelescopeFactory.h
 obj/grReaderFactory.o: ./include/GDCTelescopeFactory.h
 obj/grReaderFactory.o: ./include/GSCTelescopeFactory.h
@@ -144,3 +310,23 @@ obj/grReaderFactory.o: ./include/GReadPhotonBase.h
 obj/grReaderFactory.o: ./include/GReadPhotonGrISU.h ./include/GArrayTel.h
 obj/grReaderFactory.o: ./include/GSimulateOptics.h ./include/GRootWriter.h
 obj/testUtilities.o: ./include/GDefinition.h ./include/GUtilityFuncts.h
+obj/GSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AOpticsManager.h
+obj/GSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARayArray.h
+obj/GSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARay.h
+obj/GSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AFocalSurface.h
+obj/GSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AOpticalComponent.h
+obj/GSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ABorderSurfaceCondition.h
+obj/GSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ALens.h
+obj/GSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARefractiveIndex.h
+obj/GSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AMirror.h
+obj/GSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AObscuration.h
+obj/GSegSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AOpticsManager.h
+obj/GSegSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARayArray.h
+obj/GSegSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARay.h
+obj/GSegSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AFocalSurface.h
+obj/GSegSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AOpticalComponent.h
+obj/GSegSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ABorderSurfaceCondition.h
+obj/GSegSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ALens.h
+obj/GSegSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/ARefractiveIndex.h
+obj/GSegSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AMirror.h
+obj/GSegSCTelescope.o: /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include/AObscuration.h
