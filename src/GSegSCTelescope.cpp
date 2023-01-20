@@ -822,13 +822,13 @@ void GSegSCTelescope::addMAPMTFocalPlane()  {
 
   // Add curvature to the camera
   TGeoBBox* camBox = new TGeoBBox("camBox", kCameraBoxX, 
-                                         kCameraBoxY, kCameraBoxH/2); // very thin box
-  TGeoSphere* camSphere = new TGeoSphere("camSphere", focus*2, focus*2 + 1*cm, 90, 180); // fixed choice in theta and phi, so the mirrors are "square"
+                                         kCameraBoxY, 2*m); // very thin box
+  TGeoSphere* camSphere = new TGeoSphere("camSphere", (852.91*2)*mm, (852.91*2)*mm + 1*cm, 90, 180); // fixed choice in theta and phi, so the mirrors are "square"
   // TGeoTranslation* transZ1 = new TGeoTranslation("transZ1", 0, 0, focus);
   // transZ1->RegisterYourself();
   // TGeoTranslation* transZ2 = new TGeoTranslation("transZ2", 0, 0, focus);
   // transZ2->RegisterYourself();
-  TGeoCompositeShape* mapmtCathodeV = new TGeoCompositeShape("mapmtCathodeV", "camBox-camSphere");
+  TGeoCompositeShape* mapmtCathodeV = new TGeoCompositeShape("mapmtCathodeV", "camBox*camSphere");
   // end curvature
 
   // TGeoBBox* mapmtCathodeV = new TGeoBBox("mapmtCathodeV", kCameraBoxX, 
@@ -838,7 +838,7 @@ void GSegSCTelescope::addMAPMTFocalPlane()  {
   mapmtCathode->SetLineColor(iMAPMTCathodeColor);
   AOpticalComponent* mapmt = new AOpticalComponent("mapmt", mapmtCathodeV);
 
-  mapmt->AddNode(mapmtCathode, 1, new TGeoTranslation(0, 0, focus));
+  mapmt->AddNode(mapmtCathode, 1, new TGeoTranslation(0, 0, 0));
 
   // Make a camera box
   // TGeoBBox* mapmtCathode = new TGeoBBox("mapmtCathode", kCameraBoxX, kCameraBoxY, kCameraBoxH/2);
@@ -861,7 +861,7 @@ void GSegSCTelescope::addMAPMTFocalPlane()  {
   fManager->GetTopVolume()->AddNode(mapmtCathode,1,new TGeoCombiTrans("cFocS",
                                                              0.0,
                                                              0.0,
-                                                             focus,
+                                                             focus+((852.91*2)*mm),
                                                              new TGeoRotation("rFocS",
                                                                               0.0,
                                                                               0.0,
