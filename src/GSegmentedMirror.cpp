@@ -209,7 +209,7 @@ AMirror* TetragonSegmentedMirror::BuildMirror(const char* name,
   
   Double_t kF = 148.5 * cm;        // focal length
   Double_t kMirrorR = kF * 2;      // the radius of curvature
-  Double_t kMirrorD = 15 * cm;     // facet diameter, circular mirror
+  Double_t kMirrorD = (15*2) * cm;     // facet diameter, circular mirror
   Double_t kMirrorT = 1.2954 * cm; // mirror thickness
   Double_t theta = TMath::ASin(kMirrorD / 2. / kMirrorR) * TMath::RadToDeg();
 
