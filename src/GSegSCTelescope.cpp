@@ -666,13 +666,13 @@ void GSegSCTelescope::addMAPMTFocalPlane()  {
   } 
   
   //Edits
-  const double kCameraBoxX = 0.215*m; // the camera box X
-  const double kCameraBoxY = 0.143*m; // the camera box Y
+  const double kCameraBoxX = 0.25*m; // the camera box X
+  const double kCameraBoxY = 0.25*m; // the camera box Y
   const double kCameraBoxH = 0.001*m; // the camera box height (N/A in cfg)
   const double kCameraOffset = -2.56*cm; //old
   // const double kCameraOffset = 2*cm;
   // const double kCamR = 460.8984*mm;
-  const double focus = (148.5)*cm;
+  const double focus = (148.5*2)*cm;
 
   // Make a disk focal plane
   // TGeoBBox* tubeCamera = new TGeoBBox("tubeCamera", kCameraBoxX-1*cm, kCameraBoxY-1*cm, 1*mm);
