@@ -4,6 +4,7 @@
         "BalloonTest2.C": "cpp",
         "new": "cpp",
         "NewSCT.C": "cpp",
-        "TrinityTest.C": "cpp"
+        "TrinityTest.C": "cpp",
+        "HESS1.C": "cpp"
     }
 }
