@@ -1008,7 +1008,8 @@ void GSegSCTelescope::injectPhoton(const ROOT::Math::XYZVector &photonLocT,
   double dz = fphotonInjectDir[2];
 
   SafeDelete(ray);
-  ray = new ARay(0, fphotWaveLgt, x*m, y*m, z*m, t, dx, dy, dz);
+  // ray = new ARay(0, fphotWaveLgt, x*m, y*m, z*m, t, dx, dy, dz);
+  ray = new ARay(0, fphotWaveLgt, (x/4)*m, (y/4)*m, z*m, t, dx, dy, dz);
 
   gGeoManager = fManager;
 
