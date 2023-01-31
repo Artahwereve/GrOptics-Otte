@@ -726,6 +726,26 @@ void GSegSCTelescope::addEntranceWindow() {
 
   fManager->GetTopVolume()->AddNode(ewindLen, 1, ewindTrans);
 
+  // Camera Block
+  // const double kCameraBoxX = 0.215*m; // the camera box X
+  // const double kCameraBoxY = 0.143*m; // the camera box Y
+  const double kCameraBoxX = (0.215/2)*m; // the camera box X
+  const double kCameraBoxY = (0.143/2)*m;
+  const double kCameraBoxH = 0.001*m; // the camera box height (N/A in cfg)
+  const double kCameraOffset = -2.56*cm; //old
+  // const double kCameraOffset = 2*cm;
+  // const double kCamR = 460.8984*mm;
+  const double focus = (-848.61)*mm;
+  TGeoBBox* camBox2 = new TGeoBBox("camBox2", kCameraBoxX, 
+                                         kCameraBoxY, 2*m); // very thin box
+  TGeoSphere* camSphere2 = new TGeoSphere("camSphere2", (852.91*2)*mm, (852.91*2)*mm + 0.01*cm, 90, 180);
+  TGeoCompositeShape* CamBlock = new TGeoCompositeShape("CamBlock", "camBox2*camSphere2");
+  // AFocalSurface* CamBlock1 = new AFocalSurface("CamBlock1", CamBlock);
+  AObscuration* CamBlockobs = new AObscuration("CamBlockobs", CamBlock);
+  CamBlockobs->SetLineColor(1);
+  fManager->GetTopVolume()->AddNode(CamBlockobs, 1, new TGeoTranslation(0, 0, (focus+1)+((852.91*2)*mm)));
+  // Camera Block
+
   double lowang = 15.;//deg                                                                   
   double hiang = 65.;//deg  
   TF1 *offset = new TF1("offset","[2]*(1-[0] * ( cos(TMath::DegToRad()*x) / ( sqrt( 1-pow([0]*sin(TMath::DegToRad()*x)/[1],2) ) ) ) / [1] )",0,90);
@@ -807,13 +827,16 @@ void GSegSCTelescope::addMAPMTFocalPlane()  {
   } 
   
   //Edits
-  const double kCameraBoxX = 0.215*m; // the camera box X
-  const double kCameraBoxY = 0.143*m; // the camera box Y
+  const double kCameraBoxX = (0.215/2)*m; // the camera box X
+  const double kCameraBoxY = (0.143/2)*m; // the camera box Y
+  // const double kCameraBoxX = 10*mm; // the camera box X
+  // const double kCameraBoxY = 10*mm; // the camera box Y
   const double kCameraBoxH = 0.001*m; // the camera box height (N/A in cfg)
   const double kCameraOffset = -2.56*cm; //old
   // const double kCameraOffset = 2*cm;
   // const double kCamR = 460.8984*mm;
-  const double focus = (-1659.81/2)*mm;
+  const double focus = (-848.61)*mm;
+  // const double focus = (-870.61)*mm; // fake focus
 
   // Make a disk focal plane
   // TGeoBBox* tubeCamera = new TGeoBBox("tubeCamera", kCameraBoxX-1*cm, kCameraBoxY-1*cm, 1*mm);
@@ -823,7 +846,7 @@ void GSegSCTelescope::addMAPMTFocalPlane()  {
   // Add curvature to the camera
   TGeoBBox* camBox = new TGeoBBox("camBox", kCameraBoxX, 
                                          kCameraBoxY, 2*m); // very thin box
-  TGeoSphere* camSphere = new TGeoSphere("camSphere", (852.91*2)*mm, (852.91*2)*mm + 1*cm, 90, 180); // fixed choice in theta and phi, so the mirrors are "square"
+  TGeoSphere* camSphere = new TGeoSphere("camSphere", (852.91*2)*mm, (852.91*2)*mm + 0.0001*cm, 90, 180); // fixed choice in theta and phi, so the mirrors are "square"
   // TGeoTranslation* transZ1 = new TGeoTranslation("transZ1", 0, 0, focus);
   // transZ1->RegisterYourself();
   // TGeoTranslation* transZ2 = new TGeoTranslation("transZ2", 0, 0, focus);
@@ -837,6 +860,7 @@ void GSegSCTelescope::addMAPMTFocalPlane()  {
   AFocalSurface* mapmtCathode = new AFocalSurface("mapmtCathode", mapmtCathodeV);
   mapmtCathode->SetLineColor(iMAPMTCathodeColor);
   AOpticalComponent* mapmt = new AOpticalComponent("mapmt", mapmtCathodeV);
+
 
   mapmt->AddNode(mapmtCathode, 1, new TGeoTranslation(0, 0, 0));
 
@@ -1101,7 +1125,7 @@ void GSegSCTelescope::injectPhoton(const ROOT::Math::XYZVector &photonLocT,
   double dz = fphotonInjectDir[2];
 
   SafeDelete(ray);
-  ray = new ARay(0, fphotWaveLgt, x*m, y*m, z*m, t, dx, dy, dz);
+  ray = new ARay(0, fphotWaveLgt, (x/12)*m, (y/12)*m, (z/5)*m, t, (dx*0), (dy*0), dz);
 
   gGeoManager = fManager;
 

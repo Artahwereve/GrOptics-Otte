@@ -204,8 +204,8 @@ AMirror* TetragonSegmentedMirror::BuildMirror(const char* name,
   // Extra parameters
   double mwidth = 49.71*cm;
   double mlength = (66.96)*cm;
-  double halfwidth = (mwidth/2)*cm;
-  double halflength = (mlength/2)*cm;
+  double halfwidth = (mwidth/2);
+  double halflength = (mlength/2);
   TGeoBBox* trd1 = new TGeoBBox(Form("%s_trd1", name),halfwidth,halflength,2*m);
   
   //Additions
@@ -213,7 +213,7 @@ AMirror* TetragonSegmentedMirror::BuildMirror(const char* name,
   // const double kF = 848.61*mm; // focal length
   const double kMirrorR = kF*2; // the radius of curvature
   const double kMirrorD = 0.6696*m; //  side length, rectangular mirror
-  const double kMirrorT = 10.16*mm; // mirror thickness, intentionally use a very thin thickness to avoid unnecessary reflection on the edges
+  const double kMirrorT = 0.001*mm; // mirror thickness, intentionally use a very thin thickness to avoid unnecessary reflection on the edges
   double theta = TMath::ASin(kMirrorD/TMath::Sqrt(3)/kMirrorR)*TMath::RadToDeg();
   TGeoSphere* mirSphere = new TGeoSphere(Form("%s_mirSphere", name), kMirrorR, kMirrorR + kMirrorT, 90, 180); // fixed choice in theta and phi, so the mirrors are "square"
   
