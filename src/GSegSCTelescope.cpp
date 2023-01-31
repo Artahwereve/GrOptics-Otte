@@ -314,6 +314,24 @@ void GSegSCTelescope::addPrimaryF() {
     mirror.SetRougness(roughness);
     addPrimaryMirror(Form("%d", i), &mirror);
   }
+
+  // Camera Block
+  // const double kCameraBoxX = 0.215*m; // the camera box X
+  // const double kCameraBoxY = 0.143*m; // the camera box Y
+  const double kCameraBoxX = (0.25/2)*m; // the camera box X
+  const double kCameraBoxY = (0.25/2)*m;
+  const double kCameraBoxH = 0.001*m; // the camera box height (N/A in cfg)
+  const double kCameraOffset = -2.56*cm; //old
+  // const double kCameraOffset = 2*cm;
+  // const double kCamR = 460.8984*mm;
+  const double focus = (148.5)*cm;
+  TGeoBBox* CamBlock = new TGeoBBox("CamBlock", kCameraBoxX, 
+                                         kCameraBoxY, 2*m); // very thin box
+  // AFocalSurface* CamBlock1 = new AFocalSurface("CamBlock1", CamBlock);
+  AObscuration* CamBlockobs = new AObscuration("CamBlockobs", CamBlock);
+  CamBlockobs->SetLineColor(1);
+  fManager->GetTopVolume()->AddNode(CamBlockobs, 1, new TGeoTranslation(0, 0, ((focus*2)+1)*mm));
+  // Camera Block
 };
 /*******************************************************************/
 void GSegSCTelescope::addPrimaryMirror(const char*name,
@@ -1009,7 +1027,7 @@ void GSegSCTelescope::injectPhoton(const ROOT::Math::XYZVector &photonLocT,
 
   SafeDelete(ray);
   // ray = new ARay(0, fphotWaveLgt, x*m, y*m, z*m, t, dx, dy, dz);
-  ray = new ARay(0, fphotWaveLgt, (x/4)*m, (y/4)*m, z*m, t, dx, dy, dz);
+  ray = new ARay(0, fphotWaveLgt, (x/4)*m, (y/4)*m, z*m, t, dx*0, dy*0, dz);
 
   gGeoManager = fManager;
 
