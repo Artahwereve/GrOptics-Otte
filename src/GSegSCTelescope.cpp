@@ -326,11 +326,11 @@ void GSegSCTelescope::addPrimaryF() {
   // const double kCamR = 460.8984*mm;
   const double focus = (148.5)*cm;
   TGeoBBox* CamBlock = new TGeoBBox("CamBlock", kCameraBoxX, 
-                                         kCameraBoxY, 2*m); // very thin box
+                                         kCameraBoxY, kCameraBoxH); // very thin box
   // AFocalSurface* CamBlock1 = new AFocalSurface("CamBlock1", CamBlock);
   AObscuration* CamBlockobs = new AObscuration("CamBlockobs", CamBlock);
   CamBlockobs->SetLineColor(1);
-  fManager->GetTopVolume()->AddNode(CamBlockobs, 1, new TGeoTranslation(0, 0, ((focus*2)+1)*mm));
+  fManager->GetTopVolume()->AddNode(CamBlockobs, 1, new TGeoTranslation(0, 0, ((focus*2)+(1*mm))));
   // Camera Block
 };
 /*******************************************************************/
@@ -684,8 +684,8 @@ void GSegSCTelescope::addMAPMTFocalPlane()  {
   } 
   
   //Edits
-  const double kCameraBoxX = 0.25*m; // the camera box X
-  const double kCameraBoxY = 0.25*m; // the camera box Y
+  const double kCameraBoxX = (0.25/2)*m; // the camera box X
+  const double kCameraBoxY = (0.25/2)*m; // the camera box Y
   const double kCameraBoxH = 0.001*m; // the camera box height (N/A in cfg)
   const double kCameraOffset = -2.56*cm; //old
   // const double kCameraOffset = 2*cm;
