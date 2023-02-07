@@ -173,7 +173,7 @@ void GSegSCTelescope::buildTelescope()
   gGeoManager = 0;
   fManager = new AOpticsManager("manager","The optics manager of SEGSC");
   //fManager->SetVisLevel(5);// should be 0 or 1
-  //fManager->SetNsegments(50);
+  fManager->SetNsegments(100);
   fManager->DisableFresnelReflection(1);
 
   // Make dummy material
@@ -190,9 +190,9 @@ void GSegSCTelescope::buildTelescope()
 
   makePrimarySecondaryDisks();
   addPrimaryF();
-  //addSecondaryJ();
-  //addSecondaryObscuration();
-  //addPrimaryObscuration();
+  addSecondaryJ();
+  addSecondaryObscuration();
+  addPrimaryObscuration();
 
   //The entrance window MUST be added prior to the camera in order to properly compute
   //the focal plane offset introduced by the window's refraction (not elegant, I know...) 
@@ -300,7 +300,7 @@ void GSegSCTelescope::addPrimaryF() {
   Double_t kF = 148.5 * cm;        // focal length
   Double_t kMirrorR = kF * 2;      // the radius of curvature
   Double_t kMirrorD = 15 * cm;     // facet diameter, circular mirror
-  Double_t kMirrorT = 1.2954 * cm; // mirror thickness
+  Double_t kMirrorT = 0.0001 * cm; // mirror thickness
   Double_t theta = TMath::ASin(kMirrorD / 2. / kMirrorR) * TMath::RadToDeg();
   
   const int kNMirror = 84;
@@ -310,9 +310,12 @@ void GSegSCTelescope::addPrimaryF() {
     mirror.SetMargin(margin);
     mirror.SetPositionErrors(0*cm, 0*cm, 0*cm);
     mirror.SetRotationErrors(0, 0, 0);
-    Double_t roughness = (*(vSegP2.at(1))).roughness; 
-    mirror.SetRougness(roughness);
+    // combi = new TGeoCombiTrans(Form("%d_combi", i), (0.675/2)*m, (0.5025/2)*m, 0, rot1);
+    // combi->RegisterYourself();
+    // Double_t roughness = (*(vSegP2.at(1))).roughness; 
+    // mirror.SetRougness(roughness);
     addPrimaryMirror(Form("%d", i), &mirror);
+    
   }
 
   // Camera Block
@@ -690,7 +693,7 @@ void GSegSCTelescope::addMAPMTFocalPlane()  {
   const double kCameraOffset = -2.56*cm; //old
   // const double kCameraOffset = 2*cm;
   // const double kCamR = 460.8984*mm;
-  const double focus = (148.5*2)*cm;
+  const double focus = (148.5)*cm;
 
   // Make a disk focal plane
   // TGeoBBox* tubeCamera = new TGeoBBox("tubeCamera", kCameraBoxX-1*cm, kCameraBoxY-1*cm, 1*mm);
@@ -738,7 +741,7 @@ void GSegSCTelescope::addMAPMTFocalPlane()  {
   fManager->GetTopVolume()->AddNode(mapmtCathode,1,new TGeoCombiTrans("cFocS",
                                                              0.0,
                                                              0.0,
-                                                             focus,
+                                                             focus*2,
                                                              new TGeoRotation("rFocS",
                                                                               0.0,
                                                                               0.0,
@@ -1589,9 +1592,9 @@ void GSegSCTelescope::initialize() {
   iTelID = 0;
   iStdID = 0;
 
-  fTX = 15.0;  // set to 15 later, after confirming code
-  fTY = 15.0;
-  fTZ = 15.0;
+  fTX = 16.0;  // set to 15 later, after confirming code
+  fTY = 16.0;
+  fTZ = 16.0;
 
   fTelRadius = 0.0;
   fFMeters = 0.0;
