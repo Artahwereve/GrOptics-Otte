@@ -333,7 +333,7 @@ void GSegSCTelescope::addPrimaryF() {
   // AFocalSurface* CamBlock1 = new AFocalSurface("CamBlock1", CamBlock);
   AObscuration* CamBlockobs = new AObscuration("CamBlockobs", CamBlock);
   CamBlockobs->SetLineColor(1);
-  fManager->GetTopVolume()->AddNode(CamBlockobs, 1, new TGeoTranslation(0, 0, ((focus*2)+(1*mm))));
+  fManager->GetTopVolume()->AddNode(CamBlockobs, 1, new TGeoTranslation(0, 0, (1*mm)));
   // Camera Block
 };
 /*******************************************************************/
@@ -741,7 +741,7 @@ void GSegSCTelescope::addMAPMTFocalPlane()  {
   fManager->GetTopVolume()->AddNode(mapmtCathode,1,new TGeoCombiTrans("cFocS",
                                                              0.0,
                                                              0.0,
-                                                             focus*2,
+                                                             0.0,
                                                              new TGeoRotation("rFocS",
                                                                               0.0,
                                                                               0.0,

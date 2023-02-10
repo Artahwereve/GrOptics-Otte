@@ -5,6 +5,7 @@
         "new": "cpp",
         "NewSCT.C": "cpp",
         "TrinityTest.C": "cpp",
-        "HESS1.C": "cpp"
+        "HESS1.C": "cpp",
+        "TrinityTestFull.C": "cpp"
     }
 }
