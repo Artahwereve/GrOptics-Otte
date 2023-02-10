@@ -6,6 +6,7 @@
         "NewSCT.C": "cpp",
         "TrinityTest.C": "cpp",
         "HESS1.C": "cpp",
-        "TrinityTestFull.C": "cpp"
+        "TrinityTestFull.C": "cpp",
+        "SellmeierFit.C": "cpp"
     }
 }

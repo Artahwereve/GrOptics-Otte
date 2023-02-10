@@ -173,7 +173,7 @@ void GSegSCTelescope::buildTelescope()
   gGeoManager = 0;
   fManager = new AOpticsManager("manager","The optics manager of SEGSC");
   //fManager->SetVisLevel(5);// should be 0 or 1
-  fManager->SetNsegments(100);
+  fManager->SetNsegments(50);
   fManager->DisableFresnelReflection(1);
 
   // Make dummy material
@@ -307,7 +307,7 @@ void GSegSCTelescope::addPrimaryF() {
 
   for (int i = 0; i < kNMirror; i++) {
     TetragonSegmentedMirror mirror(rmin + margin, rmax, phimin, phimax);
-    mirror.SetMargin(margin);
+    // mirror.SetMargin(margin);
     mirror.SetPositionErrors(0*cm, 0*cm, 0*cm);
     mirror.SetRotationErrors(0, 0, 0);
     // combi = new TGeoCombiTrans(Form("%d_combi", i), (0.675/2)*m, (0.5025/2)*m, 0, rot1);
@@ -1594,7 +1594,7 @@ void GSegSCTelescope::initialize() {
 
   fTX = 16.0;  // set to 15 later, after confirming code
   fTY = 16.0;
-  fTZ = 16.0;
+  fTZ = 10.0;
 
   fTelRadius = 0.0;
   fFMeters = 0.0;

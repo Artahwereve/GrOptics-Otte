@@ -107,12 +107,12 @@ TGeoCombiTrans* SegmentedMirror::BuildMirrorCombiTrans(const char* name,AGeoAsph
       
         // each mirror center is relocated from the origin (0, 0, 0) to (x, y, z)
         TGeoTranslation* trans =
-            new TGeoTranslation(Form("mirTrans%d", i), x, y, z);
+            new TGeoTranslation(Form("mirTrans%d", i), x, y, z+kF);
         trans->RegisterYourself();
 
         // and is rotated to compose a DC optics
-        Double_t phi = TMath::ATan2(y, x) * r2d;
-        theta = TMath::ATan2(TMath::Sqrt(r2), 2 * kF - z)* r2d;
+        Double_t phi = (TMath::ATan2(y, x)) * r2d;
+        theta = (TMath::ATan2(TMath::Sqrt(r2), 2 * kF - z))* r2d;
         TGeoRotation* rot = new TGeoRotation("", phi - 90., theta, 0);
 
         // make a matrix from translation and rotation matrices
@@ -230,13 +230,13 @@ AMirror* TetragonSegmentedMirror::BuildMirror(const char* name,
   
   Double_t kF = 148.5 * cm;        // focal length
   Double_t kMirrorR = kF * 2;      // the radius of curvature
-  Double_t kMirrorD = (15*2) * cm;     // facet diameter, circular mirror
+  Double_t kMirrorD = 15 * cm;     // facet diameter, circular mirror
   Double_t kMirrorT = 1.2954 * cm; // mirror thickness
   Double_t theta = TMath::ASin(kMirrorD / 2. / kMirrorR) * TMath::RadToDeg();
 
   // clang-format on
-    // TGeoSphere* mirSphere = new TGeoSphere("mirSphere", kMirrorR, kMirrorR + kMirrorT, 180. - theta, 180.);
-    AGeoAsphericDisk * mirSphere = new AGeoAsphericDisk("mirSphere", 0, 0, 0, 0, (7.5 * cm));
+    TGeoSphere* mirSphere = new TGeoSphere("mirSphere", kMirrorR, kMirrorR + kMirrorT, 180. - theta, 180.);
+    // AGeoAsphericDisk * mirSphere = new AGeoAsphericDisk("mirSphere", 0, 0, 0, 0, (7.5 * cm));
     AMirror* mirror = new AMirror("mirror", mirSphere);
     return mirror;
   //TGeoSphere* mirSphere = new TGeoSphere("mirSphere", kMirrorR, kMirrorR + kMirrorT, 180. - theta, 180.);
