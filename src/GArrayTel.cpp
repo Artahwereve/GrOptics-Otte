@@ -507,6 +507,7 @@ void GArrayTel::makeTelescopeTest(const string& testfile) {
   // set number of photons
   //int nPhotons = 5000;
   int nPhotons = 20000;
+  // int nPhotons = 10;
 
   vector<double> vDeg;
   double setdeg = 0.0;

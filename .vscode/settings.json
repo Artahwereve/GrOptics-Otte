@@ -3,6 +3,8 @@
     "files.associations": {
         "SellmeierFit.C": "cpp",
         "HESS1.C": "cpp",
-        "BalloonTest2.C": "cpp"
+        "BalloonTest2.C": "cpp",
+        "TrinityTestFull.C": "cpp",
+        "TrinityTest.C": "cpp"
     }
 }

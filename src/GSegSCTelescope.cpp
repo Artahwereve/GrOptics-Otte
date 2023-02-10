@@ -698,7 +698,7 @@ void GSegSCTelescope::addEntranceWindow() {
   // TGeoTube* ewind = new TGeoTube("ewind", 0., fRf*m, fEntranceWindowThickness/2);
   // TGeoTube* ewind = new TGeoTube("ewind", 0., 0.5641*m, fEntranceWindowThickness/2);
   // edits
-  AGeoAsphericDisk * ewind = new AGeoAsphericDisk("ewind", 0, 0, 0, 0, 0.5641*m);
+  AGeoAsphericDisk * ewind = new AGeoAsphericDisk("ewind", 0, 0, 0, 0, 460.8984*mm);
   // Double_t coefficients[3] = {-4.3304382218444141e-5 /(mm), 7.8231607966343787e-11 / (mm * mm * mm),
   //                             7.4697933801370512e-17 / (mm * mm * mm * mm * mm)};
   // ewind->SetPolynomials(0, 0, 3, coefficients);
@@ -715,7 +715,7 @@ void GSegSCTelescope::addEntranceWindow() {
   // if (bEntranceWindowAbsFlag) ewindLen->SetConstantAbsorptionLength(fEntranceWindowAbsLength);
   
   //Cover for Corrector lens
-  AGeoAsphericDisk * cover = new AGeoAsphericDisk("cover", 1*cm, 0, 0, 0, 1*m, 0.5641*m);
+  AGeoAsphericDisk * cover = new AGeoAsphericDisk("cover", 1*cm, 0, 0, 0, 1*m, 460.8984*mm);
   // TGeoBBox* cover = new TGeoBBox("cover", 1*m, 1*m, 1*cm);
   AObscuration * coverobs = new AObscuration("coverobs", cover);
   // coverobs->SetConstantAbsorptionLength(1);
