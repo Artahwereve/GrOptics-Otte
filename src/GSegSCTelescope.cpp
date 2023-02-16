@@ -284,6 +284,7 @@ void GSegSCTelescope::makePrimarySecondaryDisks() {
 
 void GSegSCTelescope::addPrimaryF() {
   bool debug = false;
+  // gGeoManager = fManager;
 
   if (debug) {
     *oLog << "  --  GSegSCTelescope::addPrimaryF" << endl;
@@ -306,8 +307,11 @@ void GSegSCTelescope::addPrimaryF() {
   const int kNMirror = 84;
 
   for (int i = 0; i < kNMirror; i++) {
+    // AGeoAsphericDisk * mirSphere = new AGeoAsphericDisk("mirSphere", 0, 0, 0, 0, (7.5 * cm));
+    // AMirror* mirror = new AMirror("mirror", mirSphere);
+    // return mirror;
     TetragonSegmentedMirror mirror(rmin + margin, rmax, phimin, phimax);
-    // AMirror* mir = mirror->BuildMirror("mir", fPrimaryV, kTRUE);
+    // AMirror* mir = new AMirror("mir", mirror);
     
     // Double_t kF = 148.5 * cm;        // focal length
     // Double_t kMirrorR = kF * 2;      // the radius of curvature
@@ -329,7 +333,7 @@ void GSegSCTelescope::addPrimaryF() {
     // };
     // // clang-format on
 
-    //     Double_t x = xy[i][0] * cm;
+    //     Double_t x = -1*xy[i][0] * cm;
     //     Double_t y = xy[i][1] * cm;
     //     Double_t z = xy[i][2] * cm;
     //     Double_t r2d = TMath::RadToDeg();
@@ -337,7 +341,7 @@ void GSegSCTelescope::addPrimaryF() {
       
     //     // each mirror center is relocated from the origin (0, 0, 0) to (x, y, z)
     //     TGeoTranslation* trans =
-    //         new TGeoTranslation(Form("mirTrans%d", i), x, y, z);
+    //         new TGeoTranslation(Form("mirTrans%d", i), x, y, z-kF);
     //     trans->RegisterYourself();
 
     //     // and is rotated to compose a DC optics
@@ -350,17 +354,17 @@ void GSegSCTelescope::addPrimaryF() {
     //     TGeoCombiTrans* combi = new TGeoCombiTrans(*trans, *rot);
     //     combi->RegisterYourself();
     //     TGeoHMatrix* hmat = new TGeoHMatrix((*combi) * (*transZ));
-      
+    //     fManager->GetTopVolume()->AddNode(mirror, 1, combi);
     
     // mirror.SetMargin(margin);
-    mirror.SetPositionErrors(0*cm, 0*cm, 0*cm);
-    mirror.SetRotationErrors(0, 0, 0);
+    // mirror.SetPositionErrors(0*cm, 0*cm, 0*cm);
+    // mirror.SetRotationErrors(0, 0, 0);
     addPrimaryMirror(Form("%d", i), &mirror);
     // combi = new TGeoCombiTrans(Form("%d_combi", i), (0.675/2)*m, (0.5025/2)*m, 0, rot1);
     // combi->RegisterYourself();
     // Double_t roughness = (*(vSegP2.at(1))).roughness; 
     // mirror.SetRougness(roughness);
-    // fManager->GetTopVolume()->AddNode(mirror, 1, combi);
+        
   }
 
 

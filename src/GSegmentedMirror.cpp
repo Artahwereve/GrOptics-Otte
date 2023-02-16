@@ -73,7 +73,7 @@ TGeoCombiTrans* SegmentedMirror::BuildMirrorCombiTrans(const char* name,AGeoAsph
 
   // TGeoTranslation tr4(0, 0, 0);
   // TGeoCombiTrans* combi = new TGeoCombiTrans(tr4, rot1);
-  // combi->RegisterYourself();
+  // // combi->RegisterYourself();
   // return combi;
   // TGeoHMatrix* hmat = new TGeoHMatrix((*combi) * (*transZ));
 
@@ -239,8 +239,8 @@ AMirror* TetragonSegmentedMirror::BuildMirror(const char* name,
   Double_t theta = TMath::ASin(kMirrorD / 2. / kMirrorR) * TMath::RadToDeg();
 
   // clang-format on
-    // TGeoSphere* mirSphere = new TGeoSphere("mirSphere", kMirrorR, kMirrorR + kMirrorT, 180. - theta, 180.);
-    AGeoAsphericDisk * mirSphere = new AGeoAsphericDisk("mirSphere", 0, 0, 0, 0, (7.5 * cm));
+    TGeoSphere* mirSphere = new TGeoSphere("mirSphere", kMirrorR, kMirrorR + kMirrorT, 180. - theta, 180.);
+    // AGeoAsphericDisk * mirSphere = new AGeoAsphericDisk("mirSphere", 0, 0, 0, 0, (7.5 * cm));
     AMirror* mirror = new AMirror("mirror", mirSphere);
     return mirror;
   //TGeoSphere* mirSphere = new TGeoSphere("mirSphere", kMirrorR, kMirrorR + kMirrorT, 180. - theta, 180.);
