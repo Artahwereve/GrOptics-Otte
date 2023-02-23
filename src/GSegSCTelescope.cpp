@@ -284,7 +284,6 @@ void GSegSCTelescope::makePrimarySecondaryDisks() {
 
 void GSegSCTelescope::addPrimaryF() {
   bool debug = false;
-  // gGeoManager = fManager;
 
   if (debug) {
     *oLog << "  --  GSegSCTelescope::addPrimaryF" << endl;
@@ -302,71 +301,22 @@ void GSegSCTelescope::addPrimaryF() {
   Double_t kMirrorR = kF * 2;      // the radius of curvature
   Double_t kMirrorD = 15 * cm;     // facet diameter, circular mirror
   Double_t kMirrorT = 0.0001 * cm; // mirror thickness
-  Double_t theta = TMath::ASin(kMirrorD / 2. / kMirrorR) * TMath::RadToDeg();
+  //Double_t theta = TMath::ASin(kMirrorD / 2. / kMirrorR) * TMath::RadToDeg();
   
   const int kNMirror = 84;
 
   for (int i = 0; i < kNMirror; i++) {
-    // AGeoAsphericDisk * mirSphere = new AGeoAsphericDisk("mirSphere", 0, 0, 0, 0, (7.5 * cm));
-    // AMirror* mirror = new AMirror("mirror", mirSphere);
-    // return mirror;
     TetragonSegmentedMirror mirror(rmin + margin, rmax, phimin, phimax);
-    // AMirror* mir = new AMirror("mir", mirror);
-    
-    // Double_t kF = 148.5 * cm;        // focal length
-    // Double_t kMirrorR = kF * 2;      // the radius of curvature
-    // Double_t kMirrorD = 15 * cm;     // facet diameter, circular mirror
-    // Double_t kMirrorT = 1.2954 * cm; // mirror thickness
-    // Double_t theta = TMath::ASin(kMirrorD / 2. / kMirrorR) * TMath::RadToDeg();
-
-    // const int kNMirror = 84;
-    
-    // Double_t xy[kNMirror][3] = {{30.2514, -8.001, 3.3274}, {30.2514, 8.001, 3.3274},
-    //     {44.1198, -16.002, 7.62}, {44.1198, 0, 6.7056}, {44.1198, 16.002, 7.62},
-    //     {57.9628, -24.003, 13.8938}, {57.9628, -8.001, 12.0142}, {57.9628, 8.001, 12.0142}, {57.9628, 24.003, 13.8938},
-    //     {71.8312, -32.004, 22.5298}, {71.8312, -16.002, 19.5072}, { 71.8312, 0, 18.5166}, {71.8312, 16.002, 19.5072}, {71.8312, 32.004, 22.5298},
-    //     {22.054769255679297, 22.197980900044563, 3.3274}, {8.19663074432071, 30.198980900044567, 3.3274}, {35.91803851135859, 30.20786760988867, 7.62}, {22.059900000000003, 38.20886760988867, 6.7056}, {8.201761488641417, 46.209867609888676, 7.62}, {49.76860776703789, 38.19575727447665, 13.8938}, {35.9104692556793, 46.19675727447665, 12.0142}, {22.052330744320713, 54.19775727447666, 12.0142}, {8.194192232962127, 62.19875727447666, 13.8938}, {63.63187702271718, 46.20564398432076, 22.5298}, {49.77373851135859, 54.20664398432076, 19.5072}, {35.9156, 62.20764398432076, 18.5166}, {22.05746148864142, 70.20864398432076, 19.5072}, {8.199322977282833, 78.20964398432076, 22.5298},
-    //     {-8.196630744320698, 30.19898090004457, 3.3274}, {-22.05476925567929, 22.197980900044573, 3.3274}, {-8.201761488641399, 46.20986760988868, 7.62}, {-22.0599, 38.208867609888685, 6.7056}, {-35.918038511358574, 30.207867609888687, 7.62}, {-8.194192232962102, 62.19875727447666, 13.8938}, {-22.05233074432069, 54.197757274476665, 12.0142}, {-35.91046925567928, 46.196757274476674, 12.0142}, {-49.76860776703787, 38.19575727447668, 13.8938}, {-8.199322977282804, 78.20964398432076, 22.5298}, {-22.057461488641394, 70.20864398432077, 19.5072}, {-35.9156, 62.207643984320775, 18.5166}, {-49.77373851135857, 54.20664398432078, 19.5072}, {-63.63187702271716, 46.20564398432079, 22.5298},
-    //     {-30.2514, 8.001, 3.3274}, {-30.2514, -8.001, 3.3274}, {-44.1198, 16.002, 7.62}, {-44.1198, 0, 6.7056}, {-44.1198, -16.002, 7.62}, {-57.9628, 24.003, 13.8938}, {-57.9628, 8.001, 12.0142}, {-57.9628, -8.0001, 12.0142}, {-57.9628, -24.003, 13.8938}, {-71.8312, 32.004, 22.5298}, {-71.8312, 16.002, 19.5072}, {-71.8312, 0, 18.5166}, {-71.8312, -16.002, 19.5072}, {-71.8312, -32.004, 22.5298},
-    //     {-22.054769255679304, -22.197980900044556, 3.3274}, {-8.196630744320723, -30.19898090004456, 3.3274}, {-35.9180385113586, -30.20786760988866, 7.62}, {-22.0599, -38.208867609888664, 6.7056}, {-8.201761488641438, -46.20986760988867, 7.62}, {-49.7686077670379, -38.195757274476634, 13.8938}, {-35.91046925567932, -46.196757274476646, 12.0142}, {-22.052330744320734, -54.19775727447665, 12.0142}, {-8.194192232962152, -62.19875727447666, 13.8938}, {-63.63187702271719, -46.20564398432073, 22.5298}, {-49.77373851135861, -54.20664398432074, 19.5072}, {-35.9156, -62.20764398432075, 18.5166}, {-22.057461488641444, -70.20864398432076, 19.5072}, {-8.199322977282861, -78.20964398432076, 22.5298},
-    //     {8.196630744320707, -30.198980900044564, 3.3274}, {22.054769255679293, -22.197980900044566, 3.3274}, {8.201761488641413, -46.20986760988867, 7.62}, {22.0599, -38.20886760988867, 6.7056}, {35.91803851135859, -30.207867609888673, 7.62}, {8.19419223296212, -62.198757274476655, 13.8938}, {22.052330744320706, -54.19775727447666, 12.0142}, {35.910469255679295, -46.19675727447665, 12.0142}, {49.76860776703788, -38.195757274476655, 13.8938}, {8.199322977282826, -78.20964398432076, 22.5298}, {22.05746148864141, -70.20864398432076, 19.5072}, {35.9156, -62.20764398432076, 18.5166}, {49.77373851135859, -54.20664398432076, 19.5072}, {63.63187702271717, -46.20564398432076, 22.5298}
-    // };
-    // // clang-format on
-
-    //     Double_t x = -1*xy[i][0] * cm;
-    //     Double_t y = xy[i][1] * cm;
-    //     Double_t z = xy[i][2] * cm;
-    //     Double_t r2d = TMath::RadToDeg();
-    //     Double_t r2 = TMath::Power(x, 2) + TMath::Power(y, 2);
-      
-    //     // each mirror center is relocated from the origin (0, 0, 0) to (x, y, z)
-    //     TGeoTranslation* trans =
-    //         new TGeoTranslation(Form("mirTrans%d", i), x, y, z-kF);
-    //     trans->RegisterYourself();
-
-    //     // and is rotated to compose a DC optics
-    //     Double_t phi = (TMath::ATan2(y, x)) * r2d;
-    //     theta = (TMath::ATan2(TMath::Sqrt(r2), 2 * kF - z))* r2d;
-    //     TGeoRotation* rot = new TGeoRotation("", phi - 90., theta, 0);
-
-    //     // make a matrix from translation and rotation matrices
-    //     TGeoTranslation* transZ = new TGeoTranslation(0, 0, kMirrorR);
-    //     TGeoCombiTrans* combi = new TGeoCombiTrans(*trans, *rot);
-    //     combi->RegisterYourself();
-    //     TGeoHMatrix* hmat = new TGeoHMatrix((*combi) * (*transZ));
-    //     fManager->GetTopVolume()->AddNode(mirror, 1, combi);
-    
     // mirror.SetMargin(margin);
-    // mirror.SetPositionErrors(0*cm, 0*cm, 0*cm);
-    // mirror.SetRotationErrors(0, 0, 0);
-    addPrimaryMirror(Form("%d", i), &mirror);
+    mirror.SetPositionErrors(0*cm, 0*cm, 0*cm);
+    mirror.SetRotationErrors(0, 0, 0);
     // combi = new TGeoCombiTrans(Form("%d_combi", i), (0.675/2)*m, (0.5025/2)*m, 0, rot1);
     // combi->RegisterYourself();
     // Double_t roughness = (*(vSegP2.at(1))).roughness; 
     // mirror.SetRougness(roughness);
-        
+    addPrimaryMirror(Form("%d", i), &mirror);
+    
   }
-
 
   // Camera Block
   // const double kCameraBoxX = 0.215*m; // the camera box X
@@ -383,7 +333,7 @@ void GSegSCTelescope::addPrimaryF() {
   // AFocalSurface* CamBlock1 = new AFocalSurface("CamBlock1", CamBlock);
   AObscuration* CamBlockobs = new AObscuration("CamBlockobs", CamBlock);
   CamBlockobs->SetLineColor(1);
-  fManager->GetTopVolume()->AddNode(CamBlockobs, 1, new TGeoTranslation(0, 0, (1*mm)));
+  fManager->GetTopVolume()->AddNode(CamBlockobs, 1, new TGeoTranslation(0, 0, (focus+1*mm)));
   // Camera Block
 };
 /*******************************************************************/
@@ -403,13 +353,18 @@ void GSegSCTelescope::addPrimaryMirror(const char*name,
 
   TGraph * graph = makeReflectivityGraph(iReflect);
   mir->SetReflectivity(graph); // graph owned by AMirror (and deleted)
-  TGeoCombiTrans* combi = mirror->BuildMirrorCombiTrans(name, fPrimaryV, kTRUE);
-    
+  TGeoCombiTrans* combi = mirror->BuildMirrorCombiTrans(name,fPrimaryV, kTRUE);
+
+  // Added to finish mirror rotation
+  Double_t kF = 148.5 * cm;        // focal length
+  Double_t kMirrorR = kF * 2;      // the radius of curvature
+  TGeoTranslation* transZ = new TGeoTranslation(0, 0, kMirrorR);
+  TGeoHMatrix* hmat = new TGeoHMatrix((*combi) * (*transZ));
   //ABorderSurfaceCondition * condition
   //  = new ABorderSurfaceCondition(fManager->GetTopVolume(), mir);
   //condition->SetGaussianRoughness(mirror->GetRoughness()*TMath::DegToRad());
     
-  fManager->GetTopVolume()->AddNode(mir, 1, combi);
+  fManager->GetTopVolume()->AddNode(mir, 1, hmat);
   
 };
 /*******************************************************************/
@@ -664,24 +619,24 @@ void GSegSCTelescope::addEntranceWindow() {
     *oLog << "        fEntranceWindowAbsLength "<<fEntranceWindowAbsLength<<endl;
   }
 
-  // const Double_t kZf = fF * fZf;
-  // TGeoTube* ewind = new TGeoTube("ewind", 0., fRf*m, fEntranceWindowThickness/2);
-  // TGeoTranslation* ewindTrans = new TGeoTranslation("ewindTrans", 0., 0., kZf+fEntranceWindowOffset);
-  // ALens* ewindLen = new ALens("ewindLen", ewind);
-  // ewindLen->SetConstantRefractiveIndex(fEntranceWindowN);
-  // if (bEntranceWindowAbsFlag) ewindLen->SetConstantAbsorptionLength(fEntranceWindowAbsLength);
+  const Double_t kZf = fF * fZf;
+  TGeoTube* ewind = new TGeoTube("ewind", 0., fRf*m, fEntranceWindowThickness/2);
+  TGeoTranslation* ewindTrans = new TGeoTranslation("ewindTrans", 0., 0., kZf+fEntranceWindowOffset);
+  ALens* ewindLen = new ALens("ewindLen", ewind);
+  ewindLen->SetConstantRefractiveIndex(fEntranceWindowN);
+  if (bEntranceWindowAbsFlag) ewindLen->SetConstantAbsorptionLength(fEntranceWindowAbsLength);
 
-  // fManager->GetTopVolume()->AddNode(ewindLen, 1, ewindTrans);
+  fManager->GetTopVolume()->AddNode(ewindLen, 1, ewindTrans);
 
-  // double lowang = 15.;//deg                                                                   
-  // double hiang = 65.;//deg  
-  // TF1 *offset = new TF1("offset","[2]*(1-[0] * ( cos(TMath::DegToRad()*x) / ( sqrt( 1-pow([0]*sin(TMath::DegToRad()*x)/[1],2) ) ) ) / [1] )",0,90);
-  // offset->SetParameter(0,1); //Vacuum is assumed as a good approximation of n_air
-  // offset->SetParameter(1,fEntranceWindowN);
-  // offset->SetParameter(2,fEntranceWindowThickness);
-  // fFocalPlaneOffsetCorrection = offset->Integral(lowang,hiang)/(hiang-lowang);
+  double lowang = 15.;//deg                                                                   
+  double hiang = 65.;//deg  
+  TF1 *offset = new TF1("offset","[2]*(1-[0] * ( cos(TMath::DegToRad()*x) / ( sqrt( 1-pow([0]*sin(TMath::DegToRad()*x)/[1],2) ) ) ) / [1] )",0,90);
+  offset->SetParameter(0,1); //Vacuum is assumed as a good approximation of n_air
+  offset->SetParameter(1,fEntranceWindowN);
+  offset->SetParameter(2,fEntranceWindowThickness);
+  fFocalPlaneOffsetCorrection = offset->Integral(lowang,hiang)/(hiang-lowang);
 
-  // if(debug) *oLog << "         fFocalPlaneOffsetCorrection " <<  fFocalPlaneOffsetCorrection << endl;
+  if(debug) *oLog << "         fFocalPlaneOffsetCorrection " <<  fFocalPlaneOffsetCorrection << endl;
   
 };
 /*************************************************************************************/
@@ -696,26 +651,26 @@ void GSegSCTelescope::addIdealFocalPlane()  {
 
   //const Double_t kZs = (fF)/fQ;
   //const Double_t kZf = kZs - (1 - fAlpha)*fF;
-  // const Double_t kZf = fF * fZf;
+  const Double_t kZf = fF * fZf;
 
-  // //Double_t focalPlaneHalfThickness = 1*um;
-  // //Double_t focalPlaneHalfThickness = 10*cm;
-  // AGeoAsphericDisk* idealCameraV = new AGeoAsphericDisk("idealCameraV", kZf - 1*um, 0, kZf, 0, fRf*m, 0);
-  // Double_t sagPar[2] = {fKappa1*TMath::Power(fF, -1),
-  //                       fKappa2*TMath::Power(fF, -3)};
-  // idealCameraV->SetPolynomials(2, sagPar, 2, sagPar);
-  // AFocalSurface* idealCamera = new AFocalSurface("idealCamera", idealCameraV);
-  // idealCamera->SetLineColor(iMAPMTCathodeColor);
+  //Double_t focalPlaneHalfThickness = 1*um;
+  //Double_t focalPlaneHalfThickness = 10*cm;
+  AGeoAsphericDisk* idealCameraV = new AGeoAsphericDisk("idealCameraV", kZf - 1*um, 0, kZf, 0, fRf*m, 0);
+  Double_t sagPar[2] = {fKappa1*TMath::Power(fF, -1),
+                        fKappa2*TMath::Power(fF, -3)};
+  idealCameraV->SetPolynomials(2, sagPar, 2, sagPar);
+  AFocalSurface* idealCamera = new AFocalSurface("idealCamera", idealCameraV);
+  idealCamera->SetLineColor(iMAPMTCathodeColor);
 
-  // AObscuration* idealCameraObs = new AObscuration("idealCameraObs", idealCameraV);
-  // idealCameraObs->SetLineColor(iMAPMTObscurationColor);
-  // fManager->GetTopVolume()->AddNode(idealCamera, 1, new TGeoTranslation(0, 0, -fFocalPlaneOffsetCorrection));
-  // //fManager->GetTopVolume()->AddNode(idealCamera, 1, new TGeoTranslation(0, 0, -2.2*mm));
+  AObscuration* idealCameraObs = new AObscuration("idealCameraObs", idealCameraV);
+  idealCameraObs->SetLineColor(iMAPMTObscurationColor);
+  fManager->GetTopVolume()->AddNode(idealCamera, 1, new TGeoTranslation(0, 0, -fFocalPlaneOffsetCorrection));
+  //fManager->GetTopVolume()->AddNode(idealCamera, 1, new TGeoTranslation(0, 0, -2.2*mm));
   
-  // Double_t obscurationOffset = -30*cm-fFocalPlaneOffsetCorrection;
-  // //Double_t obscurationOffset = -100.*um;
+  Double_t obscurationOffset = -30*cm-fFocalPlaneOffsetCorrection;
+  //Double_t obscurationOffset = -100.*um;
 
-  // fManager->GetTopVolume()->AddNode(idealCameraObs, 1, new TGeoTranslation(0, 0, obscurationOffset));
+  fManager->GetTopVolume()->AddNode(idealCameraObs, 1, new TGeoTranslation(0, 0, obscurationOffset));
 
 };
 /*************************************************************************************/
@@ -787,11 +742,11 @@ void GSegSCTelescope::addMAPMTFocalPlane()  {
 
   // AObscuration* cameraBox = new AObscuration("cameraBox", mapmtCathode);
   // mapmt->AddNode(cameraBox, 1, new TGeoTranslation(0, 0, focus));
-  
+  Double_t kF = 148.5 * cm;        // focal length
   fManager->GetTopVolume()->AddNode(mapmtCathode,1,new TGeoCombiTrans("cFocS",
                                                              0.0,
                                                              0.0,
-                                                             0.0,
+                                                             kF,
                                                              new TGeoRotation("rFocS",
                                                                               0.0,
                                                                               0.0,
