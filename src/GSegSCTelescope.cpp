@@ -300,7 +300,7 @@ void GSegSCTelescope::addPrimaryF() {
   Int_t count = 1;
   Double_t rmin = 0*m;
   Double_t rmax = 0.84861*m;
-  Double_t margin = 10*mm;
+  Double_t margin = 5*mm;
   Double_t phimin = 0;
   Double_t phimax = 22.5;
   
@@ -322,14 +322,14 @@ void GSegSCTelescope::addPrimaryF() {
   TetragonSegmentedMirror mirror3(rmin + margin, rmax, phimin, phimax);
   mirror3.SetMargin(margin);
   mirror3.SetPositionErrors(0*mm, 0*mm, 0*mm);
-  mirror3.SetRotationErrors(0, 0, 0);
+  mirror3.SetRotationErrors(90, 0, 0);
   mirror3.SetRougness(roughness);
   addPrimaryMirror(Form("primary%d", 3), &mirror3);
 
   TetragonSegmentedMirror mirror4(rmin + margin, rmax, phimin, phimax);
   mirror4.SetMargin(margin);
   mirror4.SetPositionErrors(0*mm, 0*mm, 0*mm);
-  mirror4.SetRotationErrors(0, 0, 0);
+  mirror4.SetRotationErrors(90, 0, 0);
   mirror4.SetRougness(roughness);
   addPrimaryMirror(Form("primary%d", 4), &mirror4);
 
@@ -745,7 +745,8 @@ void GSegSCTelescope::addEntranceWindow() {
   // AFocalSurface* CamBlock1 = new AFocalSurface("CamBlock1", CamBlock);
   AObscuration* CamBlockobs = new AObscuration("CamBlockobs", CamBlock);
   CamBlockobs->SetLineColor(1);
-  fManager->GetTopVolume()->AddNode(CamBlockobs, 1, new TGeoTranslation(0, 0, (focus+1)+((852.91*2)*mm)));
+  // fManager->GetTopVolume()->AddNode(CamBlockobs, 1, new TGeoTranslation(0, 0, (-1*focus+(0.1*mm))));
+  fManager->GetTopVolume()->AddNode(CamBlockobs, 1, new TGeoTranslation(0, 0, (-1*focus+(0.1*cm))));
   // Camera Block
 
   double lowang = 15.;//deg                                                                   

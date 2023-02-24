@@ -15,6 +15,7 @@
 #include "TGeoMedium.h"
 #include "TGeoMatrix.h"
 #include "TGeoTrd1.h"
+#include "TGeoTrd2.h"
 #include "TGeoTube.h"
 #include "TGeoXtru.h"
 #include "TPolyLine3D.h"
@@ -202,11 +203,16 @@ AMirror* TetragonSegmentedMirror::BuildMirror(const char* name,
   // TGeoTrd1* trd1 = new TGeoTrd1(Form("%s_trd1", name), (0.4971)*m, (0.4971)*m, (0.6696)*m, (p1y - p0y)/2.);
 
   // Extra parameters
-  double mwidth = 49.71*cm;
-  double mlength = (66.96)*cm;
-  double halfwidth = (mwidth/2);
-  double halflength = (mlength/2);
-  TGeoBBox* trd1 = new TGeoBBox(Form("%s_trd1", name),halfwidth,halflength,2*m);
+  Double_t mwidth = 49.7*cm;
+  Double_t mlength = (66.75)*cm;
+  Double_t mwidth2 = 54.3*cm;
+  Double_t halfwidth = (mwidth/2);
+  Double_t halfwidth2 = (mwidth2/2);
+  Double_t halflength = (mlength/2);
+  Double_t marginX = 10*mm;
+  Double_t marginY = 20*mm;
+  // TGeoBBox* trd1 = new TGeoBBox(Form("%s_trd1", name),halfwidth,halflength,2*m);
+  TGeoTrd1* trd1 = new TGeoTrd1(Form("%s_trd1", name), halfwidth, halfwidth2, 2*m, halflength);
   
   //Additions
   const double kF = (1659.81/2)*mm;
@@ -220,8 +226,11 @@ AMirror* TetragonSegmentedMirror::BuildMirror(const char* name,
   // TGeoTrd1* trd1 = new TGeoTrd1(Form("%s_trd1", name), (2)*m, (2)*m, (2)*m, (p1y - p0y)/2.);
 
   // TGeoRotation* rot1 = new TGeoRotation(Form("%s_rot1", name), 0., -90., 0.);
-  TGeoRotation* rot1 = new TGeoRotation(Form("%s_rot1", name), 90, 0, 0.);
+  TGeoRotation* rot1 = new TGeoRotation(Form("%s_rot1", name), 90, 90, 0);
   rot1->RegisterYourself();
+  TGeoRotation* rot2 = new TGeoRotation(Form("%s_rot1", name), 270, 90, 0);
+  rot1->RegisterYourself();
+  
 
   // TGeoCombiTrans* combi1 = new TGeoCombiTrans(Form("%s_combi1", name), 0, (p0y + p1y)/2. - cr, (zmax + zmin)/2. - cz, rot1);
   // X and Y are switeched for translation
@@ -231,19 +240,19 @@ AMirror* TetragonSegmentedMirror::BuildMirror(const char* name,
   const char* c = "primary3"; //top left
   const char* d = "primary4"; //bottom left
   if(strcmp(name,a)==0){
-    combi1 = new TGeoCombiTrans(Form("%s_combi1", name), (0.675/2)*m, (0.5025/2)*m, 0, rot1);
+    combi1 = new TGeoCombiTrans(Form("%s_combi1", name), (halflength+marginX), (halfwidth+marginY), 0, rot2);
     combi1->RegisterYourself();
   }
   if(strcmp(name,b)==0){
-    combi1 = new TGeoCombiTrans(Form("%s_combi1", name), (0.675/2)*m, -(0.5025/2)*m, 0, rot1);
+    combi1 = new TGeoCombiTrans(Form("%s_combi1", name), (halflength+marginX), -(halfwidth+marginY), 0, rot2);
     combi1->RegisterYourself();
   }
   if(strcmp(name,c)==0){
-    combi1 = new TGeoCombiTrans(Form("%s_combi1", name), -(0.675/2)*m, (0.5025/2)*m, 0, rot1);
+    combi1 = new TGeoCombiTrans(Form("%s_combi1", name), -(halflength+marginX), (halfwidth+marginY), 0, rot1);
     combi1->RegisterYourself();
   }
   if(strcmp(name,d)==0){
-    combi1 = new TGeoCombiTrans(Form("%s_combi1", name), -(0.675/2)*m, -(0.5025/2)*m, 0, rot1);
+    combi1 = new TGeoCombiTrans(Form("%s_combi1", name), -(halflength+marginX), -(halfwidth+marginY), 0, rot1);
     combi1->RegisterYourself();
   }
 
