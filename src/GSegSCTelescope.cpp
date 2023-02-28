@@ -433,6 +433,12 @@ void GSegSCTelescope::addPrimaryMirror(const char*name,
   mir->SetReflectivity(graph); // graph owned by AMirror (and deleted)
   TGeoCombiTrans* combi = mirror->BuildMirrorCombiTrans(fPrimaryV, kTRUE);
 
+  // // Test
+  // Double_t kF = (1659.81/2)*mm;        // focal length
+  // Double_t kMirrorR = kF * 2;      // the radius of curvature
+  // TGeoTranslation* transZ = new TGeoTranslation(0, 0, kMirrorR);
+  // TGeoHMatrix* hmat = new TGeoHMatrix((*combi) * (*transZ));
+
   //ABorderSurfaceCondition * condition
   //  = new ABorderSurfaceCondition(fManager->GetTopVolume(), mir);
   //condition->SetGaussianRoughness(mirror->GetRoughness()*TMath::DegToRad());
@@ -706,7 +712,7 @@ void GSegSCTelescope::addEntranceWindow() {
   TGeoTranslation* ewindTrans = new TGeoTranslation("ewindTrans", 0., 0., -5.3*mm);
   //edits end
   ALens* ewindLen = new ALens("ewindLen", ewind);
-  // edits for refractive index
+  // edits for refractive index (needs the size adjustements)
   ASellmeierFormula* SPB2 = new ASellmeierFormula(0.999964, 0.200362, 2.16314, 0.00564364, 0.0230819, 63.9044);
   std::cout << "Refractive Index at 600 nm: "
             << SPB2->GetIndex(600 * nm) << std::endl;
