@@ -577,7 +577,7 @@ void GSegSCTelescope::addPrimaryBaffle() {
   
   AObscuration* pBaffleObs = new AObscuration("pBaffleObs", pBaffle);  
 
-  fManager->GetTopVolume()->AddNode(pBaffleObs, 1, pBaffleTrans);
+  //fManager->GetTopVolume()->AddNode(pBaffleObs, 1, pBaffleTrans);
 
 }
 /*******************************************************************/
@@ -604,7 +604,7 @@ void GSegSCTelescope::addSecondaryBaffle() {
   
   AObscuration* sBaffleObs = new AObscuration("sBaffleObs", sBaffle);
 
-  fManager->GetTopVolume()->AddNode(sBaffleObs, 1, sBaffleTrans);
+  //fManager->GetTopVolume()->AddNode(sBaffleObs, 1, sBaffleTrans);
 
 }
 /*******************************************************************/
@@ -692,8 +692,8 @@ void GSegSCTelescope::addMAPMTFocalPlane()  {
   } 
   
   //Edits
-  const double kCameraBoxX = (0.25/2)*m; // the camera box X
-  const double kCameraBoxY = (0.25/2)*m; // the camera box Y
+  const double kCameraBoxX = (99.8)*mm; // the camera box X
+  const double kCameraBoxY = (99.8)*mm; // the camera box Y
   const double kCameraBoxH = 0.001*m; // the camera box height (N/A in cfg)
   const double kCameraOffset = -2.56*cm; //old
   // const double kCameraOffset = 2*cm;
@@ -929,54 +929,54 @@ void GSegSCTelescope::testFocalPlane() {
 void GSegSCTelescope::injectPhoton(const ROOT::Math::XYZVector &photonLocT,
                                 const ROOT::Math::XYZVector &photonDirT,
 				const double &photWaveLgt) {
-  // const int kNdeg = 6;
-  // const double kF = 148.5*cm;
-  // TH2D* h2[kNdeg];
-  // TGraph* graph = new TGraph();
-  // TCanvas* can = new TCanvas("can", "can", 900, 600);
-  // can->Divide(3, 2, 1e-10, 1e-10);
+  const int kNdeg = 6;
+  const double kF = 148.5*cm;
+  TH2D* h2[kNdeg];
+  TGraph* graph = new TGraph();
+  TCanvas* can = new TCanvas("can", "can", 900, 600);
+  can->Divide(3, 2, 1e-10, 1e-10);
 
-  // for (int i = 0; i < kNdeg; i++) {
-  //   double deg = i * 0.5;
-  //   TGeoTranslation raytr("raytr",
-  //                         -1.2 * kF * TMath::Sin(deg * TMath::DegToRad()), 0,
-  //                         1.2 * kF * TMath::Cos(deg * TMath::DegToRad()));
-  //   TVector3 dir;
-  //   dir.SetMagThetaPhi(1, TMath::Pi() - deg * TMath::DegToRad(), 0);
-  //   double lambda = 400 * nm;  // dummy
+  for (int i = 0; i < kNdeg; i++) {
+    double deg = i * 0.1;
+    TGeoTranslation raytr("raytr",
+                          -1.2 * kF * TMath::Sin(deg * TMath::DegToRad()), 0,
+                          1.2 * kF * TMath::Cos(deg * TMath::DegToRad()));
+    TVector3 dir;
+    dir.SetMagThetaPhi(1, TMath::Pi() - deg * TMath::DegToRad(), 0);
+    double lambda = 400 * nm;  // dummy
 
-  //   h2[i] = new TH2D(Form("h%d", i),
-  //                    Form("#it{#theta} = %3.1f#circ;x (mm); y (mm)", deg), 500,
-  //                    -50, 100, 500, -75, 75);
+    h2[i] = new TH2D(Form("h%d", i),
+                     Form("#it{#theta} = %3.1f#circ;x (mm); y (mm)", deg), 16,
+                     -50, 50, 16, -50, 50);
 
-  //   ARayArray* array =
-  //       ARayShooter::RandomCircle(lambda, 2 * m, 10000, 0, &raytr, &dir);
+    ARayArray* array =
+        ARayShooter::RandomCircle(lambda, 2 * m, 10000, 0, &raytr, &dir);
 
-  //   fManager->TraceNonSequential(*array);
+    fManager->TraceNonSequential(*array);
 
-  //   TObjArray* focused = array->GetFocused();
+    TObjArray* focused = array->GetFocused();
 
-  //   for (Int_t k = 0; k <= focused->GetLast(); k++) {
-  //     ARay* ray = (ARay*)(*focused)[k];
-  //     Double_t p[4];
-  //     ray->GetLastPoint(p);
-  //     h2[i]->Fill((p[0] - 27 * deg) / mm,
-  //                 p[1] / mm);  // 27 is a rough plate scale
+    for (Int_t k = 0; k <= focused->GetLast(); k++) {
+      ARay* ray = (ARay*)(*focused)[k];
+      Double_t p[4];
+      ray->GetLastPoint(p);
+      h2[i]->Fill((p[0] - 27 * deg) / mm,
+                  p[1] / mm);  // 27 is a rough plate scale
 
-  //     if (i == kNdeg - 1 && k < 40) {
-  //       TPolyLine3D* pol = ray->MakePolyLine3D();
-  //       pol->SetLineColor(2);
-  //       pol->SetLineWidth(2);
-  //       can->cd();
-  //       pol->Draw();
-  //     }  // if
-  //   }    // k
+      if (i == kNdeg - 1 && k < 40) {
+        TPolyLine3D* pol = ray->MakePolyLine3D();
+        pol->SetLineColor(2);
+        pol->SetLineWidth(2);
+        can->cd();
+        pol->Draw();
+      }  // if
+    }    // k
 
-  //   delete array;
-  //   can->cd(i + 1);
-  //   h2[i]->Draw("colz");
-  //   can->Update();
-  // }  // i        
+    delete array;
+    can->cd(i + 1);
+    h2[i]->Draw("colz");
+    can->Update();
+  }  // i        
   gGeoManager = fManager;
 
   bool debug = false;

@@ -506,7 +506,8 @@ void GArrayTel::makeTelescopeTest(const string& testfile) {
   }
   // set number of photons
   //int nPhotons = 5000;
-  int nPhotons = 20000;
+  //int nPhotons = 20000;
+  int nPhotons = 1;
 
   vector<double> vDeg;
   double setdeg = 0.0;
@@ -586,7 +587,7 @@ void GArrayTel::makeTelescopeTest(const string& testfile) {
   // set direction and wavelength of incoming photons
   double lambda = 400.0;
 
-  for (unsigned ideg=0;ideg<vDeg.size();ideg++) {
+  for (unsigned ideg=0;ideg<1;ideg++){//vDeg.size();ideg++) {
     // set directions
     double theta = vDeg[ideg]*(TMath::DegToRad());
     if (debug) {
@@ -611,14 +612,14 @@ void GArrayTel::makeTelescopeTest(const string& testfile) {
       } 
     
       tel->injectPhoton(photonLoc,photonDir,lambda);
-      
+      //return;
       ROOT::Math::XYZVector cameraLoc(0.0,0.0,0.0);
       ROOT::Math::XYZVector cameraDir(0.0,0.0,0.0);
       double cameraTime = 0.0;
       bool onCamera = false;
       
       onCamera = tel->getCameraPhotonLocation(&cameraLoc,&cameraDir,&cameraTime);
-
+      cout << onCamera <<endl;
       if (onCamera) {
 	// convert to minutes of arc, first subtract focus location since we just want spread
 	double xMin = (cameraLoc.X() / 10.0) / fPlateScaleFactor;  // xMin now in degrees
