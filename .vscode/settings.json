@@ -5,6 +5,12 @@
         "HESS1.C": "cpp",
         "BalloonTest2.C": "cpp",
         "TrinityTestFull.C": "cpp",
-        "TrinityTest.C": "cpp"
+        "TrinityTest.C": "cpp",
+        "ostream": "cpp",
+        "new": "cpp",
+        "CombineResults.C": "cpp",
+        "LightYield.C": "cpp",
+        "BalloonTestNew.C": "cpp",
+        "fstream": "cpp"
     }
 }

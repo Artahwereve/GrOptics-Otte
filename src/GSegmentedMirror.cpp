@@ -74,6 +74,12 @@ TGeoCombiTrans* SegmentedMirror::BuildMirrorCombiTrans(AGeoAsphericDisk* disk, B
   TGeoTranslation tr4(0, 0, 0);
   TGeoCombiTrans* combi = new TGeoCombiTrans(tr4, rot1);
 
+  // // Test
+  // Double_t kF = (1659.81/2)*mm;        // focal length
+  // Double_t kMirrorR = kF * 2;      // the radius of curvature
+  // TGeoTranslation* transZ = new TGeoTranslation(0, 0, kMirrorR);
+  // TGeoHMatrix* hmat = new TGeoHMatrix((*combi) * (*transZ));
+
   return combi;
 }
 

@@ -296,6 +296,26 @@ void GSegSCTelescope::addPrimaryF() {
     *oLog << "  --  GSegSCTelescope::addPrimaryF" << endl;
    }
 
+  // gGeoManager = fManager;
+  // const double kF = (1659.81/2)*mm;
+  // // const double kF = 848.61*mm; // focal length
+  // const double kMirrorR = kF*2; // the radius of curvature
+  // Double_t mwidth = 1.1*m;
+  // Double_t mlength = (1.3)*m;
+  // Double_t mwidth2 = 54.3*cm;
+  // Double_t halfwidth = (mwidth/2);
+  // Double_t halfwidth2 = (mwidth2/2);
+  // Double_t halflength = (mlength/2);
+  // Double_t marginX = 10*mm;
+  // Double_t marginY = 20*mm;
+  // const double kMirrorT = 0.001*mm; // mirror thickness, intentionally use a very thin thickness to avoid unnecessary reflection on the edges
+  // TGeoSphere* mirSphere = new TGeoSphere("mirSphere", kMirrorR, kMirrorR + kMirrorT, 90, 180); // fixed choice in theta and phi, so the mirrors are "square"
+  // TGeoBBox* trd1 = new TGeoBBox("trd1",halfwidth,halflength,2*m);
+  // TGeoCompositeShape* comp
+  //   = new TGeoCompositeShape("comp", "mirSphere*trd1");
+
+  // AMirror* mir = new AMirror("mir", comp);
+  // fManager->GetTopVolume()->AddNode(mir, 1, 0);
   // Added each mirror seprately
   Int_t count = 1;
   Double_t rmin = 0*m;
@@ -636,28 +656,18 @@ void GSegSCTelescope::addSecondaryMirror(const char*name, SegmentedMirror *mirro
 };
 /*******************************************************************/
 void GSegSCTelescope::addPrimaryBaffle() {
-  // Removed
   gGeoManager = fManager;
 
-  const Double_t kZp = (fF)*fZp;
-
-  bool debug = false;
-  if (debug) {
-    *oLog << "  --  GSegSCTelescope::addPrimaryBaffle" << endl;
-    *oLog << "       fRpMax "<<fRpMax<<" kZp "<<kZp<<" fP[0] "<<fP[0] << endl;
-    *oLog << "       fpBRadOffset "<<fpBRadOffset<<" fpBZOffset "<<fpBZOffset<<" fpBLen "<<fpBLen<<" fpBTilt "<<fpBTilt << endl;
-  }
-
-  TGeoCone* pBaffle = new TGeoCone("pBaffle", fpBLen*TMath::Cos(TMath::DegToRad()*fpBTilt)/2,
-				   fRpMax+fpBRadOffset, 
-				   fRpMax+fpBRadOffset+1*cm, 
-				   fRpMax+fpBRadOffset+fpBLen*TMath::Tan(TMath::DegToRad()*fpBTilt), 
-				   fRpMax+fpBRadOffset+fpBLen*TMath::Tan(TMath::DegToRad()*fpBTilt)+1*cm);
-  TGeoTranslation* pBaffleTrans = new TGeoTranslation("pBaffleTrans", 0., 0., kZp+fP[0]+fpBZOffset+fpBLen*TMath::Cos(TMath::DegToRad()*fpBTilt)/2);
-  
-  AObscuration* pBaffleObs = new AObscuration("pBaffleObs", pBaffle);  
-
-  fManager->GetTopVolume()->AddNode(pBaffleObs, 1, pBaffleTrans);
+  //Cover for Corrector lens
+  // AGeoAsphericDisk * cover = new AGeoAsphericDisk("cover", 1*cm, 0, 0, 0, 1*m, 460.8984*mm);
+  AGeoAsphericDisk * cover = new AGeoAsphericDisk("cover", 1*cm, 0, 0, 0, 1*m, 0.5*m);
+  // TGeoBBox* cover = new TGeoBBox("cover", 1*m, 1*m, 1*cm);
+  AObscuration * coverobs = new AObscuration("coverobs", cover);
+  // coverobs->SetConstantAbsorptionLength(1);
+  coverobs->SetLineColor(1);
+  TGeoTranslation* coverTrans = new TGeoTranslation("coverTrans", 0., 0., -5.3*mm);
+  fManager->GetTopVolume()->AddNode(coverobs, 1, coverTrans);
+  //End Edits
 
 }
 /*******************************************************************/
@@ -665,26 +675,27 @@ void GSegSCTelescope::addSecondaryBaffle() {
   // Not used
   gGeoManager = fManager;
 
-  const Double_t kZs = (fF)*fZs;
-  fsBTilt = -fsBTilt; 
-
-  bool debug = false;
-  if (debug) {
-    *oLog << "  --  GSegSCTelescope::addSecondaryBaffle" << endl;
-    *oLog << "       fRsMax "<<fRsMax<<" kZs "<<kZs<<" fS[0] "<<fS[0] << endl;
-    *oLog << "       fsBRadOffset "<<fsBRadOffset<<" fsBZOffset "<<fsBZOffset<<" fsBLen "<<fsBLen<<" fsBTilt "<<fsBTilt << endl;
-  }
-
-  TGeoCone* sBaffle = new TGeoCone("sBaffle", fsBLen*TMath::Cos(TMath::DegToRad()*fsBTilt)/2,
-				   fRsMax+fsBRadOffset, 
-				   fRsMax+fsBRadOffset+1*cm, 
-				   fRsMax+fsBRadOffset+fsBLen*TMath::Tan(TMath::DegToRad()*fsBTilt), 
-				   fRsMax+fsBRadOffset+fsBLen*TMath::Tan(TMath::DegToRad()*fsBTilt)+1*cm);
-  TGeoTranslation* sBaffleTrans = new TGeoTranslation("sBaffleTrans", 0., 0., kZs+fS[0]-fsBZOffset-fsBLen*TMath::Cos(TMath::DegToRad()*fsBTilt)/2);
-  
-  AObscuration* sBaffleObs = new AObscuration("sBaffleObs", sBaffle);
-
-  fManager->GetTopVolume()->AddNode(sBaffleObs, 1, sBaffleTrans);
+  // Camera Block
+  // const double kCameraBoxX = 0.215*m; // the camera box X
+  // const double kCameraBoxY = 0.143*m; // the camera box Y
+  const double kCameraBoxX = (0.215/2)*m; // the camera box X
+  const double kCameraBoxY = (0.143/2)*m;
+  const double kCameraBoxH = 1*mm; // the camera box height (N/A in cfg)
+  const double kCameraOffset = -2.56*cm; //old
+  // const double kCameraOffset = 2*cm;
+  // const double kCamR = 460.8984*mm;
+  // const double focus = (848.61)*mm;
+  const double focus = 863.37*mm;
+  TGeoBBox* camBox2 = new TGeoBBox("camBox2", kCameraBoxX, 
+                                         kCameraBoxY, 2*m); // very thin box
+  TGeoSphere* camSphere2 = new TGeoSphere("camSphere2", (852.91*2)*mm, (852.91*2)*mm + 0.01*cm, 90, 180);
+  TGeoCompositeShape* CamBlock = new TGeoCompositeShape("CamBlock", "camBox2*camSphere2");
+  // AFocalSurface* CamBlock1 = new AFocalSurface("CamBlock1", CamBlock);
+  AObscuration* CamBlockobs = new AObscuration("CamBlockobs", CamBlock);
+  CamBlockobs->SetLineColor(1);
+  // fManager->GetTopVolume()->AddNode(CamBlockobs, 1, new TGeoTranslation(0, 0, (-1*focus+(0.1*mm))));
+  fManager->GetTopVolume()->AddNode(CamBlockobs, 1, new TGeoTranslation(0, 0, ((852.91*2*mm)-focus)+(0.1*cm)));
+  // Camera Block
 
 }
 /*******************************************************************/
@@ -705,10 +716,10 @@ void GSegSCTelescope::addEntranceWindow() {
   // TGeoTube* ewind = new TGeoTube("ewind", 0., 0.5641*m, fEntranceWindowThickness/2);
   // edits
   // AGeoAsphericDisk * ewind = new AGeoAsphericDisk("ewind", 0, 0, 0, 0, 460.8984*mm);
-  AGeoAsphericDisk * ewind = new AGeoAsphericDisk("ewind", 0, 0, 0, 0, 0.5*m);
-  // Double_t coefficients[3] = {-4.3304382218444141e-5 /(mm), 7.8231607966343787e-11 / (mm * mm * mm),
-  //                             7.4697933801370512e-17 / (mm * mm * mm * mm * mm)};
-  // ewind->SetPolynomials(0, 0, 3, coefficients);
+  AGeoAsphericDisk * ewind = new AGeoAsphericDisk("ewind", 0, 0, 1, 0, 0.5*m);
+  Double_t coefficients[3] = {-4.3304382218444141e-5 /(mm), 7.8231607966343787e-11 / (mm * mm * mm),
+                               7.4697933801370512e-17 / (mm * mm * mm * mm * mm)};
+  ewind->SetPolynomials(0, 0, 3, coefficients);
   TGeoTranslation* ewindTrans = new TGeoTranslation("ewindTrans", 0., 0., -5.3*mm);
   //edits end
   ALens* ewindLen = new ALens("ewindLen", ewind);
@@ -717,43 +728,10 @@ void GSegSCTelescope::addEntranceWindow() {
   std::cout << "Refractive Index at 600 nm: "
             << SPB2->GetIndex(600 * nm) << std::endl;
   ewindLen->SetRefractiveIndex(SPB2);
+  fManager->GetTopVolume()->AddNode(ewindLen, 1, ewindTrans);
   // edits for refractive index end
   // ewindLen->SetConstantRefractiveIndex(fEntranceWindowN);
   // if (bEntranceWindowAbsFlag) ewindLen->SetConstantAbsorptionLength(fEntranceWindowAbsLength);
-  
-  //Cover for Corrector lens
-  // AGeoAsphericDisk * cover = new AGeoAsphericDisk("cover", 1*cm, 0, 0, 0, 1*m, 460.8984*mm);
-  AGeoAsphericDisk * cover = new AGeoAsphericDisk("cover", 1*cm, 0, 0, 0, 1*m, 0.5*m);
-  // TGeoBBox* cover = new TGeoBBox("cover", 1*m, 1*m, 1*cm);
-  AObscuration * coverobs = new AObscuration("coverobs", cover);
-  // coverobs->SetConstantAbsorptionLength(1);
-  coverobs->SetLineColor(1);
-  TGeoTranslation* coverTrans = new TGeoTranslation("coverTrans", 0., 0., -5.3*mm);
-  fManager->GetTopVolume()->AddNode(coverobs, 1, coverTrans);
-  //End Edits
-
-  fManager->GetTopVolume()->AddNode(ewindLen, 1, ewindTrans);
-
-  // Camera Block
-  // const double kCameraBoxX = 0.215*m; // the camera box X
-  // const double kCameraBoxY = 0.143*m; // the camera box Y
-  const double kCameraBoxX = (0.215/2)*m; // the camera box X
-  const double kCameraBoxY = (0.143/2)*m;
-  const double kCameraBoxH = 1*mm; // the camera box height (N/A in cfg)
-  const double kCameraOffset = -2.56*cm; //old
-  // const double kCameraOffset = 2*cm;
-  // const double kCamR = 460.8984*mm;
-  const double focus = (-848.61)*mm;
-  TGeoBBox* camBox2 = new TGeoBBox("camBox2", kCameraBoxX, 
-                                         kCameraBoxY, 2*m); // very thin box
-  TGeoSphere* camSphere2 = new TGeoSphere("camSphere2", (852.91*2)*mm, (852.91*2)*mm + 0.01*cm, 90, 180);
-  TGeoCompositeShape* CamBlock = new TGeoCompositeShape("CamBlock", "camBox2*camSphere2");
-  // AFocalSurface* CamBlock1 = new AFocalSurface("CamBlock1", CamBlock);
-  AObscuration* CamBlockobs = new AObscuration("CamBlockobs", CamBlock);
-  CamBlockobs->SetLineColor(1);
-  // fManager->GetTopVolume()->AddNode(CamBlockobs, 1, new TGeoTranslation(0, 0, (-1*focus+(0.1*mm))));
-  fManager->GetTopVolume()->AddNode(CamBlockobs, 1, new TGeoTranslation(0, 0, (-1*focus+(0.1*cm))));
-  // Camera Block
 
   double lowang = 15.;//deg                                                                   
   double hiang = 65.;//deg  
@@ -844,8 +822,8 @@ void GSegSCTelescope::addMAPMTFocalPlane()  {
   const double kCameraOffset = -2.56*cm; //old
   // const double kCameraOffset = 2*cm;
   // const double kCamR = 460.8984*mm;
-  const double focus = (-848.61)*mm;
-  // const double focus = (-870.61)*mm; // fake focus
+  // const double focus = (848.61)*mm;
+  const double focus = 863.37*mm;
 
   // Make a disk focal plane
   // TGeoBBox* tubeCamera = new TGeoBBox("tubeCamera", kCameraBoxX-1*cm, kCameraBoxY-1*cm, 1*mm);
@@ -894,7 +872,7 @@ void GSegSCTelescope::addMAPMTFocalPlane()  {
   fManager->GetTopVolume()->AddNode(mapmtCathode,1,new TGeoCombiTrans("cFocS",
                                                              0.0,
                                                              0.0,
-                                                             (-1*focus),
+                                                             (852.91*2*mm)-focus,
                                                              new TGeoRotation("rFocS",
                                                                               0.0,
                                                                               0.0,
@@ -1134,7 +1112,7 @@ void GSegSCTelescope::injectPhoton(const ROOT::Math::XYZVector &photonLocT,
   double dz = fphotonInjectDir[2];
 
   SafeDelete(ray);
-  ray = new ARay(0, fphotWaveLgt, (x/12)*m, (y/12)*m, (z/5)*m, t, (dx*0), (dy*0), dz);
+  ray = new ARay(0, fphotWaveLgt, (x/12)*m, (y/12)*m, (z)*m, t, (dx), (dy), dz);
 
   gGeoManager = fManager;
 

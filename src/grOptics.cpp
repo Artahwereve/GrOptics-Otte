@@ -66,6 +66,11 @@ using namespace std;
 #include "GRootWriter.h"
 
 TRandom3 TR3;
+static const double cm = AOpticsManager::cm();
+static const double mm = AOpticsManager::mm();
+static const double um = AOpticsManager::um();
+static const double nm = AOpticsManager::nm();
+static const double  m = AOpticsManager::m();
 
 /*! structure to hold command line entries.
  */
@@ -492,7 +497,58 @@ int main(int argc, char *argv[]) {
     mArrayTel[pilot.testTel]->makeTelescopeTest(pilot.testTelFile);
     *oLog << "app->Run after makeTelescopeTest in grOptics.cpp " << endl;
     app->Run(); 
-    return 0;
+  //   fManager = new AOpticsManager("manager","The optics manager of SEGSC");
+  //   gGeoManager = fManager;
+  //   TCanvas* can = new TCanvas("can3D", "can3D", 800, 800);
+  // const int kNdeg = 6;
+  // Double_t kF = (1659.81/2)*mm;        // focal length
+  // TH2D* h2[kNdeg];
+  // TGraph* graph = new TGraph();
+  // TCanvas* can3D = new TCanvas("can", "can", 900, 600);
+  // can->Divide(3, 2, 1e-10, 1e-10);
+
+  // for (int i = 0; i < kNdeg; i++) {
+  //   double deg = i * 0.5;
+  //   TGeoTranslation raytr("raytr",
+  //                         -1.2 * kF * TMath::Sin(deg * TMath::DegToRad()), 0,
+  //                         1.2 * kF * TMath::Cos(deg * TMath::DegToRad()));
+  //   TVector3 dir;
+  //   dir.SetMagThetaPhi(1, TMath::Pi() - deg * TMath::DegToRad(), 0);
+  //   double lambda = 400 * nm;  // dummy
+
+  //   h2[i] = new TH2D(Form("h%d", i),
+  //                    Form("#it{#theta} = %3.1f#circ;x (mm); y (mm)", deg), 500,
+  //                    -125, 125, 500, -75, 75);
+
+  //   ARayArray* array =
+  //       ARayShooter::RandomCircle(lambda, 7.5 * m, 100000, 0, &raytr, &dir);
+
+  //   manager->TraceNonSequential(*array);
+
+  //   TObjArray* focused = array->GetFocused();
+
+  //   for (Int_t k = 0; k <= focused->GetLast(); k++) {
+  //     ARay* ray = (ARay*)(*focused)[k];
+  //     Double_t p[4];
+  //     ray->GetLastPoint(p);
+  //     h2[i]->Fill((p[0] - 27 * deg) / mm,
+  //                 p[1] / mm);  // 27 is a rough plate scale
+
+  //     if (i == kNdeg - 1 && k < 30) {
+  //       TPolyLine3D* pol = ray->MakePolyLine3D();
+  //       pol->SetLineColor(2);
+  //       pol->SetLineWidth(2);
+  //       can3D->cd();
+  //       pol->Draw();
+  //     }  // if
+  //   }    // k
+
+  //   delete array;
+  //   can->cd(i + 1);
+  //   h2[i]->Draw("colz");
+  //   can->Update();
+  // }  // i
+  return 0;
   }
 
   ////////////////////////////////////////////////////////////
