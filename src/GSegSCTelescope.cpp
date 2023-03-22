@@ -1113,7 +1113,8 @@ void GSegSCTelescope::injectPhoton(const ROOT::Math::XYZVector &photonLocT,
 
   SafeDelete(ray);
   ray = new ARay(0, fphotWaveLgt, (x/12)*m, (y/12)*m, (z)*m, t, (dx), (dy), dz);
-
+  // ray = new ARay(0, fphotWaveLgt, (x)*m, (y)*m, (z)*m, t, (dx), (dy), dz);
+  
   gGeoManager = fManager;
 
   fManager->TraceNonSequential(*ray);
