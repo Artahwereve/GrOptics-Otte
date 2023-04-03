@@ -317,6 +317,9 @@ void GSegSCTelescope::addPrimaryF() {
   // AMirror* mir = new AMirror("mir", comp);
   // fManager->GetTopVolume()->AddNode(mir, 1, 0);
   // Added each mirror seprately
+
+
+  //Edits start
   Int_t count = 1;
   Double_t rmin = 0*m;
   Double_t rmax = 0.84861*m;
@@ -342,16 +345,17 @@ void GSegSCTelescope::addPrimaryF() {
   TetragonSegmentedMirror mirror3(rmin + margin, rmax, phimin, phimax);
   mirror3.SetMargin(margin);
   mirror3.SetPositionErrors(0*mm, 0*mm, 0*mm);
-  mirror3.SetRotationErrors(90, 0, 0);
+  mirror3.SetRotationErrors(0, 0, 0);
   mirror3.SetRougness(roughness);
   addPrimaryMirror(Form("primary%d", 3), &mirror3);
 
   TetragonSegmentedMirror mirror4(rmin + margin, rmax, phimin, phimax);
   mirror4.SetMargin(margin);
   mirror4.SetPositionErrors(0*mm, 0*mm, 0*mm);
-  mirror4.SetRotationErrors(90, 0, 0);
+  mirror4.SetRotationErrors(0, 0, 0);
   mirror4.SetRougness(roughness);
   addPrimaryMirror(Form("primary%d", 4), &mirror4);
+  // Edits end
 
   // segment not created if reflect = 0
   // P1 mirrors
@@ -1055,6 +1059,59 @@ void GSegSCTelescope::testFocalPlane() {
 void GSegSCTelescope::injectPhoton(const ROOT::Math::XYZVector &photonLocT,
                                 const ROOT::Math::XYZVector &photonDirT,
 				const double &photWaveLgt) {
+  
+  
+  // // PSF Angle plots
+  // const int kNdeg = 6;
+  // const double kF = -863.37*mm;
+  // TH2D* h2[kNdeg];
+  // TGraph* graph = new TGraph();
+  // TCanvas* can = new TCanvas("can", "can", 900, 600);
+  // can->Divide(3, 2, 1e-10, 1e-10);
+
+  // for (int i = 0; i < kNdeg; i++) {
+  //   double deg = i * 0.1;
+  //   TGeoTranslation raytr("raytr",
+  //                         -1.2 * kF * TMath::Sin(deg * TMath::DegToRad()), 0,
+  //                         1.2 * kF * TMath::Cos(deg * TMath::DegToRad()));
+  //   TVector3 dir;
+  //   dir.SetMagThetaPhi(1, TMath::Pi() - deg * TMath::DegToRad(), 0);
+  //   double lambda = 400 * nm;  // dummy
+
+  //   h2[i] = new TH2D(Form("h%d", i),
+  //                    Form("#it{#theta} = %3.1f#circ;x (mm); y (mm)", deg), 16,
+  //                    -50, 50, 16, -50, 50);
+
+  //   ARayArray* array =
+  //       ARayShooter::RandomCircle(lambda, 2 * m, 10000, 0, &raytr, &dir);
+
+  //   fManager->TraceNonSequential(*array);
+
+  //   TObjArray* focused = array->GetFocused();
+
+  //   for (Int_t k = 0; k <= focused->GetLast(); k++) {
+  //     ARay* ray = (ARay*)(*focused)[k];
+  //     Double_t p[4];
+  //     ray->GetLastPoint(p);
+  //     h2[i]->Fill((p[0] - 27 * deg) / mm,
+  //                 p[1] / mm);  // 27 is a rough plate scale
+
+  //     if (i == kNdeg - 1 && k < 40) {
+  //       TPolyLine3D* pol = ray->MakePolyLine3D();
+  //       pol->SetLineColor(2);
+  //       pol->SetLineWidth(2);
+  //       can->cd();
+  //       pol->Draw();
+  //     }  // if
+  //   }    // k
+
+  //   delete array;
+  //   can->cd(i + 1);
+  //   h2[i]->Draw("colz");
+  //   can->Update();
+  // }  // i        
+  // // PSF Angle plots
+  
   gGeoManager = fManager;
 
   bool debug = false;
