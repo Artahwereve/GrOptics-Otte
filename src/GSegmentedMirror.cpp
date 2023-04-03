@@ -56,23 +56,59 @@ SegmentedMirror::SegmentedMirror(Double_t rmin, Double_t rmax,
 }
 
 //______________________________________________________________________________
-TGeoCombiTrans* SegmentedMirror::BuildMirrorCombiTrans(AGeoAsphericDisk* disk, Bool_t isPrimary)
+TGeoCombiTrans* SegmentedMirror::BuildMirrorCombiTrans(const char* name, AGeoAsphericDisk* disk, Bool_t isPrimary)
 {
-  Double_t cphi = (fPhimax + fPhimin)/2.;
-  Double_t cr = (fRmax + fRmin)/2.;
-  Double_t cz = isPrimary ? disk->CalcF2(cr) : disk->CalcF1(cr);
 
-  // TGeoRotation rot1("", -90. + cphi + fRotationErrorXY, fRotationErrorSagittal, 0);
-  // TGeoRotation rot2("", -cphi, 0., 0.);
-  // TGeoRotation rot3("", 0., fRotationErrorTangential, 0.);
-  // TGeoRotation rot4("", cphi, 0., 0.);
 
-  // TGeoTranslation tr4(cr*TMath::Cos(cphi*TMath::DegToRad()) + fPositionErrorX, cr*TMath::Sin(cphi*TMath::DegToRad()) + fPositionErrorY, cz + fPositionErrorZ);
- 
-  TGeoRotation rot1("", 0, 0, 0);
+  TGeoRotation* rot1 = new TGeoRotation(Form("%s_rot1", name), 0, 0, 0);
+  rot1->RegisterYourself();
+  TGeoRotation* rot2 = new TGeoRotation(Form("%s_rot2", name), 0, 0, 0);
+  rot2->RegisterYourself();
+  TGeoRotation* rot3 = new TGeoRotation(Form("%s_rot3", name), 0, 0, 0);
+  rot3->RegisterYourself();
+  TGeoRotation* rot4 = new TGeoRotation(Form("%s_rot4", name), 0, 0, 0);
+  rot4->RegisterYourself();
 
-  TGeoTranslation tr4(0, 0, 0);
-  TGeoCombiTrans* combi = new TGeoCombiTrans(tr4, rot1);
+  // TGeoTranslation* trans1 = new TGeoTranslation(Form("%s_trans1", name), 0*mm, 20*mm, 0*mm);
+  // trans1->RegisterYourself();
+  // TGeoTranslation* trans2 = new TGeoTranslation(Form("%s_trans2", name), 0*mm, 20*mm, 0*mm);
+  // trans2->RegisterYourself();
+  // TGeoTranslation* trans3 = new TGeoTranslation(Form("%s_trans3", name), 0*mm, 20*mm, 0*mm);
+  // trans3->RegisterYourself();
+  // TGeoTranslation* trans4 = new TGeoTranslation(Form("%s_trans4", name), 0*mm, 20*mm, 0*mm);
+  // trans4->RegisterYourself();
+
+
+  // TGeoRotation* rot1 = new TGeoRotation(Form("%s_rot1", name), 0, 0.2, 0);
+  // rot1->RegisterYourself();
+  // TGeoRotation* rot2 = new TGeoRotation(Form("%s_rot2", name), 0, -0.2, 0);
+  // rot2->RegisterYourself();
+  // TGeoRotation* rot3 = new TGeoRotation(Form("%s_rot3", name), 0, -0.2, 0);
+  // rot3->RegisterYourself();
+  // TGeoRotation* rot4 = new TGeoRotation(Form("%s_rot4", name), 0, 0.2, 0);
+  // rot4->RegisterYourself();
+
+  TGeoCombiTrans* combi;
+  const char* a = "primary1"; //top right
+  const char* b = "primary2"; //bottom right
+  const char* c = "primary3"; //top left
+  const char* d = "primary4"; //bottom left
+  if(strcmp(name,a)==0){
+    combi = new TGeoCombiTrans(Form("%s_combi", name), 0, 0, 0, rot1);
+    combi->RegisterYourself();
+  }
+  if(strcmp(name,b)==0){
+    combi = new TGeoCombiTrans(Form("%s_combi", name), 0, 0, 0, rot2);
+    combi->RegisterYourself();
+  }
+  if(strcmp(name,c)==0){
+    combi = new TGeoCombiTrans(Form("%s_combi", name), 0, 0, 0, rot3);
+    combi->RegisterYourself();
+  }
+  if(strcmp(name,d)==0){
+    combi = new TGeoCombiTrans(Form("%s_combi", name), 0, 0, 0, rot4);
+    combi->RegisterYourself();
+  }
 
   // // Test
   // Double_t kF = (1659.81/2)*mm;        // focal length

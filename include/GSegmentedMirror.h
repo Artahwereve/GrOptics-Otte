@@ -42,7 +42,7 @@ public:
   virtual ~SegmentedMirror() {}
 
   virtual AMirror* BuildMirror(const char* name, AGeoAsphericDisk* disk, Bool_t isPrimary) = 0;
-  TGeoCombiTrans* BuildMirrorCombiTrans(AGeoAsphericDisk* disk, Bool_t isPrimary);
+  TGeoCombiTrans* BuildMirrorCombiTrans(const char* name, AGeoAsphericDisk* disk, Bool_t isPrimary);
 
   Double_t GetRoughness() const {return fRoughness;}
 

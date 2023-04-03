@@ -333,7 +333,7 @@ void GSegSCTelescope::addPrimaryF() {
   mirror.SetRotationErrors(0, 0, 0);
   Double_t roughness = (*(vSegP2.at(1))).roughness; 
   mirror.SetRougness(roughness);
-  addPrimaryMirror(Form("primary%d", count), &mirror);
+  addPrimaryMirror(Form("primary%d", 1), &mirror);
 
   TetragonSegmentedMirror mirror2(rmin + margin, rmax, phimin, phimax);
   mirror2.SetMargin(margin);
@@ -455,7 +455,7 @@ void GSegSCTelescope::addPrimaryMirror(const char*name,
 
   TGraph * graph = makeReflectivityGraph(iReflect);
   mir->SetReflectivity(graph); // graph owned by AMirror (and deleted)
-  TGeoCombiTrans* combi = mirror->BuildMirrorCombiTrans(fPrimaryV, kTRUE);
+  TGeoCombiTrans* combi = mirror->BuildMirrorCombiTrans(name, fPrimaryV, kTRUE);
 
   // // Test
   // Double_t kF = (1659.81/2)*mm;        // focal length
@@ -649,7 +649,7 @@ void GSegSCTelescope::addSecondaryMirror(const char*name, SegmentedMirror *mirro
   TGraph * graph = makeReflectivityGraph(iReflect);
   mir->SetReflectivity(graph);
 
-  TGeoCombiTrans* combi = mirror->BuildMirrorCombiTrans(fSecondaryV, kFALSE);
+  TGeoCombiTrans* combi = mirror->BuildMirrorCombiTrans(name, fSecondaryV, kFALSE);
 
   //ABorderSurfaceCondition * condition
   //  = new ABorderSurfaceCondition(fManager->GetTopVolume(), mir);
