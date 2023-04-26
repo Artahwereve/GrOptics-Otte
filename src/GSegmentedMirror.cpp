@@ -60,14 +60,14 @@ TGeoCombiTrans* SegmentedMirror::BuildMirrorCombiTrans(const char* name, AGeoAsp
 {
 
 
-  TGeoRotation* rot1 = new TGeoRotation(Form("%s_rot1", name), 0, 0, 0);
-  rot1->RegisterYourself();
-  TGeoRotation* rot2 = new TGeoRotation(Form("%s_rot2", name), 0, 0, 0);
-  rot2->RegisterYourself();
-  TGeoRotation* rot3 = new TGeoRotation(Form("%s_rot3", name), 0, 0, 0);
-  rot3->RegisterYourself();
-  TGeoRotation* rot4 = new TGeoRotation(Form("%s_rot4", name), 0, 0, 0);
-  rot4->RegisterYourself();
+  // TGeoRotation* rot1 = new TGeoRotation(Form("%s_rot1", name), 0, 0, 0);
+  // rot1->RegisterYourself();
+  // TGeoRotation* rot2 = new TGeoRotation(Form("%s_rot2", name), 0, 0, 0);
+  // rot2->RegisterYourself();
+  // TGeoRotation* rot3 = new TGeoRotation(Form("%s_rot3", name), 0, 0, 0);
+  // rot3->RegisterYourself();
+  // TGeoRotation* rot4 = new TGeoRotation(Form("%s_rot4", name), 0, 0, 0);
+  // rot4->RegisterYourself();
 
   // TGeoTranslation* trans1 = new TGeoTranslation(Form("%s_trans1", name), 0*mm, 20*mm, 0*mm);
   // trans1->RegisterYourself();
@@ -79,16 +79,16 @@ TGeoCombiTrans* SegmentedMirror::BuildMirrorCombiTrans(const char* name, AGeoAsp
   // trans4->RegisterYourself();
 
 
-  // TGeoRotation* rot1 = new TGeoRotation(Form("%s_rot1", name), 0, 0.2, 0);
-  // rot1->RegisterYourself();
-  // TGeoRotation* rot2 = new TGeoRotation(Form("%s_rot2", name), 0, -0.2, 0);
-  // rot2->RegisterYourself();
-  // TGeoRotation* rot3 = new TGeoRotation(Form("%s_rot3", name), 0, -0.2, 0);
-  // rot3->RegisterYourself();
-  // TGeoRotation* rot4 = new TGeoRotation(Form("%s_rot4", name), 0, 0.2, 0);
-  // rot4->RegisterYourself();
+  TGeoRotation* rot1 = new TGeoRotation();
+  TGeoRotation* rot2 = new TGeoRotation();
+  TGeoRotation* rot3 = new TGeoRotation();
+  TGeoRotation* rot4 = new TGeoRotation();
+  rot1->RotateY(0.2);
+  rot2->RotateY(-0.2);
+  rot3->RotateY(-0.2);
+  rot4->RotateY(0.2);
 
-  TGeoCombiTrans* combi;
+  TGeoCombiTrans* combi = nullptr;
   const char* a = "primary1"; //top right
   const char* b = "primary2"; //bottom right
   const char* c = "primary3"; //top left

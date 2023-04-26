@@ -7,13 +7,6 @@ make: Entering directory `/Users/parshadkp/Library/CloudStorage/OneDrive-Georgia
 echo > Makefile.depend0 && makedepend -s "#DEPEND LIST DONT DELETE" -- -I/storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include -I. -I./include -Y --  src/*.cpp  include/*.h -f Makefile.depend0 > /dev/null 2>&1 && sed "s/^[a-zA-Z0-9]*\//obj\//" Makefile.depend0 > Makefile.depend && rm -f Makefile.depend0
  
 make: Leaving directory `/Users/parshadkp/Library/CloudStorage/OneDrive-GeorgiaInstituteofTechnology/Georgia Tech/NASA Balloon/GrOptics-Otte'
- 
-find: /etc/cups/certs: Permission denied
-
-make: root-config: Command not found
-
-make: Entering directory `/Users/parshadkp/Library/CloudStorage/OneDrive-GeorgiaInstituteofTechnology/Georgia Tech/NASA Balloon/GrOptics-Otte'
-
 make: Entering directory `/Users/parshadkp/Library/CloudStorage/OneDrive-GeorgiaInstituteofTechnology/Georgia Tech/NASA Balloon/GrOptics-Otte'
 echo did not find /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4 directory
 echo     ready to download ROBAST into tar file
@@ -21,12 +14,10 @@ curl -L https://codeload.github.com/ROBAST/ROBAST/tar.gz/v2.4.4 > ROBAST-2.4.4.t
 echo     ready to untar ROBAST into /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4 directory
 tar zxf ROBAST-2.4.4.tar.gz
 echo     ready to copy robast edit files
- 
 cp ROBASTEditedFile/AOpticalComponent.cxx /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/src/.; 
 touch ROBASTEditedFile/copyFile
 cd /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4; make
 echo    robast ready and waiting
- 
 echo "        Compiling src/grOptics.cpp ... "
 c++ -I/storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include -I. -I./include -c src/grOptics.cpp -o obj/grOptics.o
 echo "Done"
@@ -36,7 +27,6 @@ echo "Done"
 echo "        Compiling src/GDCGeometry.cpp ... "
 c++ -I/storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include -I. -I./include -c src/GDCGeometry.cpp -o obj/GDCGeometry.o
 echo "Done"
- 
 echo "        Compiling src/GDCRayTracer.cpp ... "
 c++ -I/storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include -I. -I./include -c src/GDCRayTracer.cpp -o obj/GDCRayTracer.o
 echo "Done"
@@ -55,7 +45,6 @@ echo "Done"
 echo "        Compiling src/GOrderedGrid.cpp ... "
 c++ -I/storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include -I. -I./include -c src/GOrderedGrid.cpp -o obj/GOrderedGrid.o
 echo "Done"
- 
 echo "        Compiling src/GPilot.cpp ... "
 c++ -I/storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include -I. -I./include -c src/GPilot.cpp -o obj/GPilot.o
 echo "Done"
@@ -65,7 +54,6 @@ echo "Done"
 echo "        Compiling src/GReadDCStdBase.cpp ... "
 c++ -I/storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include -I. -I./include -c src/GReadDCStdBase.cpp -o obj/GReadDCStdBase.o
 echo "Done"
- 
 echo "        Compiling src/GReadDCStdGrISU.cpp ... "
 c++ -I/storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include -I. -I./include -c src/GReadDCStdGrISU.cpp -o obj/GReadDCStdGrISU.o
 echo "Done"
@@ -75,7 +63,6 @@ echo "Done"
 echo "        Compiling src/GReadPhotonGrISU.cpp ... "
 c++ -I/storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include -I. -I./include -c src/GReadPhotonGrISU.cpp -o obj/GReadPhotonGrISU.o
 echo "Done"
- 
 echo "        Compiling src/GReadSCStd.cpp ... "
 c++ -I/storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include -I. -I./include -c src/GReadSCStd.cpp -o obj/GReadSCStd.o
 echo "Done"
@@ -85,7 +72,6 @@ echo "Done"
 echo "        Compiling src/GRootDCNavigator.cpp ... "
 c++ -I/storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include -I. -I./include -c src/GRootDCNavigator.cpp -o obj/GRootDCNavigator.o
 echo "Done"
- 
 echo "        Compiling src/GRootWriter.cpp ... "
 c++ -I/storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include -I. -I./include -c src/GRootWriter.cpp -o obj/GRootWriter.o
 echo "Done"
@@ -94,19 +80,16 @@ c++ -I/storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/in
 echo "Done"
 echo "        Compiling src/GSCTelescopeFactory.cpp ... "
 c++ -I/storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include -I. -I./include -c src/GSCTelescopeFactory.cpp -o obj/GSCTelescopeFactory.o
- 
 echo "Done"
 echo "        Compiling src/GSegSCTelescope.cpp ... "
 c++ -I/storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include -I. -I./include -c src/GSegSCTelescope.cpp -o obj/GSegSCTelescope.o
 echo "Done"
- 
 echo "        Compiling src/GSegSCTelescopeFactory.cpp ... "
 c++ -I/storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include -I. -I./include -c src/GSegSCTelescopeFactory.cpp -o obj/GSegSCTelescopeFactory.o
 echo "Done"
 echo "        Compiling src/GSegmentedMirror.cpp ... "
 c++ -I/storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include -I. -I./include -c src/GSegmentedMirror.cpp -o obj/GSegmentedMirror.o
 echo "Done"
- 
 echo "        Compiling src/GSegmentedObscuration.cpp ... "
 c++ -I/storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include -I. -I./include -c src/GSegmentedObscuration.cpp -o obj/GSegmentedObscuration.o
 echo "Done"
@@ -115,7 +98,6 @@ c++ -I/storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/in
 echo "Done"
 echo "        Compiling src/GTelescope.cpp ... "
 c++ -I/storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include -I. -I./include -c src/GTelescope.cpp -o obj/GTelescope.o
- 
 echo "Done"
 echo "        Compiling src/GTelescopeFactory.cpp ... "
 c++ -I/storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include -I. -I./include -c src/GTelescopeFactory.cpp -o obj/GTelescopeFactory.o
@@ -123,7 +105,6 @@ echo "Done"
 echo "        Compiling src/GUtilityFuncts.cpp ... "
 c++ -I/storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include -I. -I./include -c src/GUtilityFuncts.cpp -o obj/GUtilityFuncts.o
 echo "Done"
- 
 echo "Generating GrOpticsDict dictionary include/GRootWriter.h ... "
 rootcint -v -f src/GrOpticsDict.cpp -c  include/GRootWriter.h include/LinkDef.h
 echo "rootcint SHELL mv src/GRootWriterDict.h include/."
@@ -132,17 +113,16 @@ echo "Done"
 echo "        Compiling src/GrOpticsDict.cpp ... "
 c++ -I/storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/include -I. -I./include -c src/GrOpticsDict.cpp -o obj/GrOpticsDict.o
 echo "Done"
- 
-make: root-config: Command not found
-
-make: gsl-config: Command not found
-
-make: root-config: Command not found
-
-make: root-config: Command not found
-
 echo "building grOptics"
-g++   obj/grOptics.o obj/GArrayTel.o obj/GDCGeometry.o obj/GDCRayTracer.o obj/GDCTelescope.o obj/GDCTelescopeFactory.o obj/GDefinition.o obj/GGeometryBase.o obj/GOrderedGrid.o obj/GPilot.o obj/GRayTracerBase.o obj/GReadDCStdBase.o obj/GReadDCStdGrISU.o obj/GReadPhotonBase.o obj/GReadPhotonGrISU.o obj/GReadSCStd.o obj/GReadSegSCStd.o obj/GRootDCNavigator.o obj/GRootWriter.o obj/GSCTelescope.o obj/GSCTelescopeFactory.o obj/GSegSCTelescope.o obj/GSegSCTelescopeFactory.o obj/GSegmentedMirror.o obj/GSegmentedObscuration.o obj/GSimulateOptics.o obj/GTelescope.o obj/GTelescopeFactory.o obj/GUtilityFuncts.o obj/GrOpticsDict.o -lGeom    -lMinuit -lTreePlayer -lGenVector   -lGeomBuilder  -lGeomPainter  -lGeom -lGed /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/libROBAST.so -lGeom  grOptics
  
+find: /etc/cups/certs: Permission denied
+make: root-config: Command not found
+make: Entering directory `/Users/parshadkp/Library/CloudStorage/OneDrive-GeorgiaInstituteofTechnology/Georgia Tech/NASA Balloon/GrOptics-Otte'
+make: root-config: Command not found
+make: gsl-config: Command not found
+make: root-config: Command not found
+make: root-config: Command not found
+
+g++   obj/grOptics.o obj/GArrayTel.o obj/GDCGeometry.o obj/GDCRayTracer.o obj/GDCTelescope.o obj/GDCTelescopeFactory.o obj/GDefinition.o obj/GGeometryBase.o obj/GOrderedGrid.o obj/GPilot.o obj/GRayTracerBase.o obj/GReadDCStdBase.o obj/GReadDCStdGrISU.o obj/GReadPhotonBase.o obj/GReadPhotonGrISU.o obj/GReadSCStd.o obj/GReadSegSCStd.o obj/GRootDCNavigator.o obj/GRootWriter.o obj/GSCTelescope.o obj/GSCTelescopeFactory.o obj/GSegSCTelescope.o obj/GSegSCTelescopeFactory.o obj/GSegmentedMirror.o obj/GSegmentedObscuration.o obj/GSimulateOptics.o obj/GTelescope.o obj/GTelescopeFactory.o obj/GUtilityFuncts.o obj/GrOpticsDict.o -lGeom    -lMinuit -lTreePlayer -lGenVector   -lGeomBuilder  -lGeomPainter  -lGeom -lGed /storage/hive/project/phy-otte/shared/analysistools/ROBAST/ROBAST-2.4.4/libROBAST.so -lGeom  grOptics
 make: Leaving directory `/Users/parshadkp/Library/CloudStorage/OneDrive-GeorgiaInstituteofTechnology/Georgia Tech/NASA Balloon/GrOptics-Otte'
  
