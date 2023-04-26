@@ -69,15 +69,6 @@ TGeoCombiTrans* SegmentedMirror::BuildMirrorCombiTrans(const char* name, AGeoAsp
   // TGeoRotation* rot4 = new TGeoRotation(Form("%s_rot4", name), 0, 0, 0);
   // rot4->RegisterYourself();
 
-  // TGeoTranslation* trans1 = new TGeoTranslation(Form("%s_trans1", name), 0*mm, 20*mm, 0*mm);
-  // trans1->RegisterYourself();
-  // TGeoTranslation* trans2 = new TGeoTranslation(Form("%s_trans2", name), 0*mm, 20*mm, 0*mm);
-  // trans2->RegisterYourself();
-  // TGeoTranslation* trans3 = new TGeoTranslation(Form("%s_trans3", name), 0*mm, 20*mm, 0*mm);
-  // trans3->RegisterYourself();
-  // TGeoTranslation* trans4 = new TGeoTranslation(Form("%s_trans4", name), 0*mm, 20*mm, 0*mm);
-  // trans4->RegisterYourself();
-
 
   TGeoRotation* rot1 = new TGeoRotation();
   TGeoRotation* rot2 = new TGeoRotation();
