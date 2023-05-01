@@ -79,25 +79,37 @@ TGeoCombiTrans* SegmentedMirror::BuildMirrorCombiTrans(const char* name, AGeoAsp
   rot3->RotateY(-0.2);
   rot4->RotateY(0.2);
 
+  Double_t mwidth = 49.7*cm;
+  Double_t mlength = (66.75)*cm;
+  Double_t mwidth2 = 54.3*cm;
+  Double_t halfwidth = (mwidth/2);
+  Double_t halfwidth2 = (mwidth2/2);
+  Double_t halflength = (mlength/2);
+  Double_t marginX = 10*mm;
+  Double_t marginY = 20*mm;
+  const double kF = (1659.81/2)*mm;
+  const double kMirrorR = kF*2; // the radius of curvature
+  // double phi = 90 - atan2(y, x)
+
   TGeoCombiTrans* combi = nullptr;
   const char* a = "primary1"; //top right
   const char* b = "primary2"; //bottom right
   const char* c = "primary3"; //top left
   const char* d = "primary4"; //bottom left
   if(strcmp(name,a)==0){
-    combi = new TGeoCombiTrans(Form("%s_combi", name), 0, 0, 0, rot1);
+    combi = new TGeoCombiTrans(Form("%s_combi", name), 0, 0, -kMirrorR, rot1);
     combi->RegisterYourself();
   }
   if(strcmp(name,b)==0){
-    combi = new TGeoCombiTrans(Form("%s_combi", name), 0, 0, 0, rot2);
+    combi = new TGeoCombiTrans(Form("%s_combi", name), 0, 0, -kMirrorR, rot2);
     combi->RegisterYourself();
   }
   if(strcmp(name,c)==0){
-    combi = new TGeoCombiTrans(Form("%s_combi", name), 0, 0, 0, rot3);
+    combi = new TGeoCombiTrans(Form("%s_combi", name), 0, 0, -kMirrorR, rot3);
     combi->RegisterYourself();
   }
   if(strcmp(name,d)==0){
-    combi = new TGeoCombiTrans(Form("%s_combi", name), 0, 0, 0, rot4);
+    combi = new TGeoCombiTrans(Form("%s_combi", name), 0, 0, -kMirrorR, rot4);
     combi->RegisterYourself();
   }
 
@@ -243,8 +255,8 @@ AMirror* TetragonSegmentedMirror::BuildMirror(const char* name,
   Double_t halfwidth2 = (mwidth2/2);
   Double_t halflength = (mlength/2);
   Double_t marginX = 10*mm;
-  Double_t marginY = 20*mm;
-  TGeoBBox* trd1 = new TGeoBBox(Form("%s_trd1", name),halfwidth,halflength,2*m);
+  Double_t marginY = 10*mm;
+  TGeoBBox* trd1 = new TGeoBBox(Form("%s_trd1", name),halflength, halfwidth,5*m);
   // TGeoTrd1* trd1 = new TGeoTrd1(Form("%s_trd1", name), halfwidth, halfwidth2, 2*m, halflength);
   
   //Additions
@@ -270,13 +282,13 @@ AMirror* TetragonSegmentedMirror::BuildMirror(const char* name,
   // TGeoCompositeShape* comp
   //    = new TGeoCompositeShape(Form("%s_trd1", name), "mirSphere*trd1");
 
-  TGeoRotation* rot1 = new TGeoRotation(Form("%s_rot1", name), -90, 0, 0);
+  TGeoRotation* rot1 = new TGeoRotation(Form("%s_rot1", name), 0, 0, 0);
   rot1->RegisterYourself();
-  TGeoRotation* rot2 = new TGeoRotation(Form("%s_rot2", name), -90, 0, 0);
+  TGeoRotation* rot2 = new TGeoRotation(Form("%s_rot2", name), 0, 0, 0);
   rot2->RegisterYourself();
-  TGeoRotation* rot3 = new TGeoRotation(Form("%s_rot3", name), -90, 0, 0);
+  TGeoRotation* rot3 = new TGeoRotation(Form("%s_rot3", name), 0, 0, 0);
   rot3->RegisterYourself();
-  TGeoRotation* rot4 = new TGeoRotation(Form("%s_rot4", name), -90, 0, 0);
+  TGeoRotation* rot4 = new TGeoRotation(Form("%s_rot4", name), 0, 0, 0);
   rot4->RegisterYourself();
 
   // TGeoCombiTrans* combi1 = new TGeoCombiTrans(Form("%s_combi1", name), 0, (p0y + p1y)/2. - cr, (zmax + zmin)/2. - cz, rot1);
@@ -286,6 +298,23 @@ AMirror* TetragonSegmentedMirror::BuildMirror(const char* name,
   const char* b = "primary2"; //bottom right
   const char* c = "primary3"; //top left
   const char* d = "primary4"; //bottom left
+  // if(strcmp(name,a)==0){
+  //   combi1 = new TGeoCombiTrans(Form("%s_combi1", name), 0, 0, 0, rot1);
+  //   combi1->RegisterYourself();
+  // }
+  // if(strcmp(name,b)==0){
+  //   combi1 = new TGeoCombiTrans(Form("%s_combi1", name), 0, 0, 0, rot2);
+  //   combi1->RegisterYourself();
+  // }
+  // if(strcmp(name,c)==0){
+  //   combi1 = new TGeoCombiTrans(Form("%s_combi1", name), 0, 0, 0, rot3);
+  //   combi1->RegisterYourself();
+  // }
+  // if(strcmp(name,d)==0){
+  //   combi1 = new TGeoCombiTrans(Form("%s_combi1", name), 0, 0, 0, rot4);
+  //   combi1->RegisterYourself();
+  // }
+
   if(strcmp(name,a)==0){
     combi1 = new TGeoCombiTrans(Form("%s_combi1", name), (halflength+marginX), (halfwidth+marginY), 0, rot1);
     combi1->RegisterYourself();
@@ -304,7 +333,7 @@ AMirror* TetragonSegmentedMirror::BuildMirror(const char* name,
   }
 
   // TGeoTranslation* tr2 = new TGeoTranslation(Form("%s_tr2", name), 0, -cr, -cz);
-  TGeoTranslation* tr2 = new TGeoTranslation(Form("%s_tr2", name), 0, 0, 0);
+  TGeoTranslation* tr2 = new TGeoTranslation(Form("%s_tr2", name), 0, 0, kMirrorR);
   tr2->RegisterYourself();
   
   //Original
