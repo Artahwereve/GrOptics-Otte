@@ -254,8 +254,8 @@ AMirror* TetragonSegmentedMirror::BuildMirror(const char* name,
   Double_t halfwidth = (mwidth/2);
   Double_t halfwidth2 = (mwidth2/2);
   Double_t halflength = (mlength/2);
-  Double_t marginX = 10*mm;
-  Double_t marginY = 10*mm;
+  Double_t marginX = 5*mm;
+  Double_t marginY = 5*mm;
   TGeoBBox* trd1 = new TGeoBBox(Form("%s_trd1", name),halflength, halfwidth,5*m);
   // TGeoTrd1* trd1 = new TGeoTrd1(Form("%s_trd1", name), halfwidth, halfwidth2, 2*m, halflength);
   
