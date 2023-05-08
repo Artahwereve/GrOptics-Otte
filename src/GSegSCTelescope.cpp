@@ -13,6 +13,9 @@ VERSION4.0
     May 2011
  */
 
+// Edits made by Parshad Patel 
+// 8May2023
+
 #include <iostream>
 #include <cstdlib>
 #include <fstream>
@@ -53,11 +56,9 @@ using namespace std;
 #include "TGeoShape.h"
 #include "TGeoNode.h"
 #include "TGeoMedium.h"
-//#include "TGeoRotation.h"
 #include "TGeoMatrix.h"
 #include "TGeoTube.h"
 #include "TGeoCone.h"
-//#include "TGeoCombiTrans.h"
 #include "AGeoAsphericDisk.h"
 #include "AGlassCatalog.h"
 #include "TView.h"
@@ -296,44 +297,46 @@ void GSegSCTelescope::addPrimaryF() {
     *oLog << "  --  GSegSCTelescope::addPrimaryF" << endl;
    }
 
-  // gGeoManager = fManager;
-  // const double kF = (1659.81/2)*mm;
-  // // const double kF = 848.61*mm; // focal length
-  // const double kMirrorR = kF*2; // the radius of curvature
-  // Double_t mwidth = 1.1*m;
-  // Double_t mlength = (1.3)*m;
-  // Double_t mwidth2 = 54.3*cm;
-  // Double_t halfwidth = (mwidth/2);
-  // Double_t halfwidth2 = (mwidth2/2);
-  // Double_t halflength = (mlength/2);
-  // Double_t marginX = 10*mm;
-  // Double_t marginY = 20*mm;
-  // const double kMirrorT = 0.001*mm; // mirror thickness, intentionally use a very thin thickness to avoid unnecessary reflection on the edges
-  // TGeoSphere* mirSphere = new TGeoSphere("mirSphere", kMirrorR, kMirrorR + kMirrorT, 90, 180); // fixed choice in theta and phi, so the mirrors are "square"
-  // TGeoBBox* trd1 = new TGeoBBox("trd1",halfwidth,halflength,2*m);
-  // TGeoCompositeShape* comp
-  //   = new TGeoCompositeShape("comp", "mirSphere*trd1");
+  /* // Can do this four times for each mirror
+  gGeoManager = fManager;
+  const double kF = (1659.81/2)*mm;
+  // const double kF = 848.61*mm; // focal length
+  const double kMirrorR = kF*2; // the radius of curvature
+  Double_t mwidth = 1.1*m;
+  Double_t mlength = (1.3)*m;
+  Double_t mwidth2 = 54.3*cm;
+  Double_t halfwidth = (mwidth/2);
+  Double_t halfwidth2 = (mwidth2/2);
+  Double_t halflength = (mlength/2);
+  Double_t marginX = 10*mm;
+  Double_t marginY = 20*mm;
+  const double kMirrorT = 0.001*mm; // mirror thickness, intentionally use a very thin thickness to avoid unnecessary reflection on the edges
+  TGeoSphere* mirSphere = new TGeoSphere("mirSphere", kMirrorR, kMirrorR + kMirrorT, 90, 180); // fixed choice in theta and phi, so the mirrors are "square"
+  TGeoBBox* trd1 = new TGeoBBox("trd1",halfwidth,halflength,2*m);
+  TGeoCompositeShape* comp
+    = new TGeoCompositeShape("comp", "mirSphere*trd1");
 
-  // AMirror* mir = new AMirror("mir", comp);
-  // fManager->GetTopVolume()->AddNode(mir, 1, 0);
-  // Added each mirror seprately
+  AMirror* mir = new AMirror("mir", comp);
+  fManager->GetTopVolume()->AddNode(mir, 1, 0);
+  Added each mirror seprately
+  */
 
-
-  //Edits start
-  Int_t count = 1;
-  Double_t rmin = 0*m;
+  // placeholder values (not used for dimensions)
+  Double_t rmin = 0*m; 
   Double_t rmax = 0.84861*m;
   Double_t margin = 5*mm;
   Double_t phimin = 0;
   Double_t phimax = 22.5;
-  
+  // placeholder values end
+
+  // Calls TetragonSegmentedMirror in GSegmentedMirror.cpp
   TetragonSegmentedMirror mirror(rmin + margin, rmax, phimin, phimax);
   mirror.SetMargin(margin);
   mirror.SetPositionErrors(0*mm, 0*mm, 0*mm);
   mirror.SetRotationErrors(0, 0, 0);
   Double_t roughness = (*(vSegP2.at(1))).roughness; 
   mirror.SetRougness(roughness);
-  addPrimaryMirror(Form("primary%d", 1), &mirror);
+  addPrimaryMirror(Form("primary%d", 1), &mirror); // Adds primary mirrors indiviudally
 
   TetragonSegmentedMirror mirror2(rmin + margin, rmax, phimin, phimax);
   mirror2.SetMargin(margin);
@@ -355,88 +358,7 @@ void GSegSCTelescope::addPrimaryF() {
   mirror4.SetRotationErrors(0, 0, 0);
   mirror4.SetRougness(roughness);
   addPrimaryMirror(Form("primary%d", 4), &mirror4);
-  // Edits end
-
-  // segment not created if reflect = 0
-  // P1 mirrors
-  // for (Int_t i = 0; i < iNumP1Mirrors; i++) {
-  //   if ( ( (*(vSegP1.at(i))).reflect) > 0) {
-  //     Double_t rmin = (*(vSegP1.at(i))).rmin;
-  //     Double_t rmax = (*(vSegP1.at(i))).rmax;
-  //     Double_t margin = ( (*(vSegP1.at(i))).margin )*mm;
-  //     rmin = rmin*m - margin/TMath::Cos(11.25/2.*TMath::DegToRad());
-  //     rmax = rmax*m;
-      
-  //     Double_t phimin = ( (*(vSegP1.at(i))).delPhi)*i;
-  //     Double_t phimax = ( (*(vSegP1.at(i))).delPhi)*(i+1);
-  //     if (debug) {
-  //       *oLog << "    P1 pentagon segmented mirror number " << i << endl;
-  //       *oLog << "        rmin/rmax " << rmin << " " << rmax << endl;
-  //       *oLog << "        margin    " << margin << endl;
-  //       *oLog << "        phimin/max " << phimin << "  " << phimax << endl;
-  //     }
-  //   TetragonSegmentedMirror mirror(rmin + margin, rmax, phimin, phimax);
-  //   Double_t posErrorX = (*(vSegP1.at(i))).posErrorX;
-  //   Double_t posErrorY = (*(vSegP1.at(i))).posErrorY;
-  //   Double_t posErrorZ = (*(vSegP1.at(i))).posErrorZ;
-  //   mirror.SetPositionErrors(posErrorX*mm, posErrorY*mm, posErrorZ*mm);
- 
-  //   Double_t rotErrorPhi = (*(vSegP1.at(i))).rotErrorPhi;
-  //   Double_t rotErrorTheta = (*(vSegP1.at(i))).rotErrorTheta;
-  //   Double_t rotErrorPsi = (*(vSegP1.at(i))).rotErrorPsi;
-  //   mirror.SetRotationErrors(rotErrorPhi, rotErrorTheta,
-  //                            rotErrorPsi);
- 
-  //   Double_t roughness = (*(vSegP1.at(i))).roughness; 
-  //   mirror.SetRougness(roughness);
-
-  //   mirror.SetMargin(margin);
-  //   iReflect = (*(vSegP1.at(i))).reflect;
-  //  // add mirror segment
-  //   addPrimaryMirror(Form("primary%d", count), &mirror);
-  //   count++;
-  //   } 
-  // }
-
-  // // P2 mirrors
-  // for (Int_t i = 0; i < iNumP2Mirrors; i++) {
-  //   if ( ( (*(vSegP2.at(i))).reflect) > 0) {
-  //     Double_t rmin = (*(vSegP2.at(i))).rmin;
-  //     Double_t rmax = (*(vSegP2.at(i))).rmax;
-  //     Double_t margin = ( (*(vSegP2.at(i))).margin )*mm;
-  //     rmin = rmin*m - margin/TMath::Cos(11.25/2.*TMath::DegToRad());
-  //     rmax = rmax*m;
-      
-  //     Double_t phimin = ( (*(vSegP2.at(i))).delPhi)*i;
-  //     Double_t phimax = ( (*(vSegP2.at(i))).delPhi)*(i+1);
-  //     if (0) {
-  //       *oLog << "    P1 pentagon segmented P2 mirror number " << i << endl;
-  //       *oLog << "        rmin/rmax " << rmin << " " << rmax << endl;
-  //       *oLog << "        margin    " << margin << endl;
-  //       *oLog << "        phimin/max " << phimin << "  " << phimax << endl;
-  //     }
-  //   TetragonSegmentedMirror mirror(rmin + margin, rmax, phimin, phimax);
-  //   Double_t posErrorX = (*(vSegP2.at(i))).posErrorX;
-  //   Double_t posErrorY = (*(vSegP2.at(i))).posErrorY;
-  //   Double_t posErrorZ = (*(vSegP2.at(i))).posErrorZ;
-  //   mirror.SetPositionErrors(posErrorX*mm, posErrorY*mm, posErrorZ*mm);
- 
-  //   Double_t rotErrorPhi = (*(vSegP2.at(i))).rotErrorPhi;
-  //   Double_t rotErrorTheta = (*(vSegP2.at(i))).rotErrorTheta;
-  //   Double_t rotErrorPsi = (*(vSegP2.at(i))).rotErrorPsi;
-  //   mirror.SetRotationErrors(rotErrorPhi, rotErrorTheta,
-  //                            rotErrorPsi);
- 
-  //   Double_t roughness = (*(vSegP2.at(i))).roughness; 
-  //   mirror.SetRougness(roughness);
-
-  //   mirror.SetMargin(margin);
-  //   iReflect = (*(vSegP2.at(i))).reflect;
-  //   // add mirror segment
-  //   addPrimaryMirror(Form("primary%d", count), &mirror);
-  //   count++;
-  //   } 
-  // }
+  
 };
 /*******************************************************************/
 void GSegSCTelescope::addPrimaryMirror(const char*name,
@@ -449,23 +371,18 @@ void GSegSCTelescope::addPrimaryMirror(const char*name,
     *oLog << "  --  GSegSCTelescope::addPrimaryMirror" << endl;
   }
   
+  // Takes return from BuildMirror and applies the mirror class
+  // kTRUE if its primary mirror
   AMirror* mir = mirror->BuildMirror(name, fPrimaryV, kTRUE);
   mir->SetLineColor(iPrimaryColor);
-  // get and add TGraph for reflectivity mir->SetReflectivity(TGraph *)
 
   TGraph * graph = makeReflectivityGraph(iReflect);
   mir->SetReflectivity(graph); // graph owned by AMirror (and deleted)
+
+  // Applies the translation
   TGeoCombiTrans* combi = mirror->BuildMirrorCombiTrans(name, fPrimaryV, kTRUE);
 
-  // // Test
-  // Double_t kF = (1659.81/2)*mm;        // focal length
-  // Double_t kMirrorR = kF * 2;      // the radius of curvature
-  // TGeoTranslation* transZ = new TGeoTranslation(0, 0, kMirrorR);
-  // TGeoHMatrix* hmat = new TGeoHMatrix((*combi) * (*transZ));
-
-  //ABorderSurfaceCondition * condition
-  //  = new ABorderSurfaceCondition(fManager->GetTopVolume(), mir);
-  //condition->SetGaussianRoughness(mirror->GetRoughness()*TMath::DegToRad());
+  // Adds objects to the Model
   fManager->GetTopVolume()->AddNode(mir, 1, combi);
   
 };
@@ -663,15 +580,12 @@ void GSegSCTelescope::addPrimaryBaffle() {
   gGeoManager = fManager;
 
   //Cover for Corrector lens
-  // AGeoAsphericDisk * cover = new AGeoAsphericDisk("cover", 1*cm, 0, 0, 0, 1*m, 460.8984*mm);
   AGeoAsphericDisk * cover = new AGeoAsphericDisk("cover", 1*cm, 0, 0, 0, 1*m, 0.5*m);
-  // TGeoBBox* cover = new TGeoBBox("cover", 1*m, 1*m, 1*cm);
   AObscuration * coverobs = new AObscuration("coverobs", cover);
-  // coverobs->SetConstantAbsorptionLength(1);
   coverobs->SetLineColor(1);
   TGeoTranslation* coverTrans = new TGeoTranslation("coverTrans", 0., 0., -5.3*mm);
   fManager->GetTopVolume()->AddNode(coverobs, 1, coverTrans);
-  //End Edits
+  //End cover for corrector lens
 
 }
 /*******************************************************************/
@@ -680,26 +594,17 @@ void GSegSCTelescope::addSecondaryBaffle() {
   gGeoManager = fManager;
 
   // Camera Block
-  // const double kCameraBoxX = 0.215*m; // the camera box X
-  // const double kCameraBoxY = 0.143*m; // the camera box Y
   const double kCameraBoxX = (0.215/2)*m; // the camera box X
-  const double kCameraBoxY = (0.143/2)*m;
-  const double kCameraBoxH = 1*mm; // the camera box height (N/A in cfg)
-  const double kCameraOffset = -2.56*cm; //old
-  // const double kCameraOffset = 2*cm;
-  // const double kCamR = 460.8984*mm;
-  // const double focus = (848.61)*mm;
-  const double focus = 863.37*mm;
+  const double kCameraBoxY = (0.143/2)*m; // the camera box Y
+  const double focus = 863.37*mm; // Distance from origin to Camera box
   TGeoBBox* camBox2 = new TGeoBBox("camBox2", kCameraBoxX, 
                                          kCameraBoxY, 2*m); // very thin box
   TGeoSphere* camSphere2 = new TGeoSphere("camSphere2", (852.91*2)*mm, (852.91*2)*mm + 0.01*cm, 90, 180);
-  TGeoCompositeShape* CamBlock = new TGeoCompositeShape("CamBlock", "camBox2*camSphere2");
-  // AFocalSurface* CamBlock1 = new AFocalSurface("CamBlock1", CamBlock);
+  TGeoCompositeShape* CamBlock = new TGeoCompositeShape("CamBlock", "camBox2*camSphere2"); // Applies curvature to the camera
   AObscuration* CamBlockobs = new AObscuration("CamBlockobs", CamBlock);
   CamBlockobs->SetLineColor(1);
-  // fManager->GetTopVolume()->AddNode(CamBlockobs, 1, new TGeoTranslation(0, 0, (-1*focus+(0.1*mm))));
   fManager->GetTopVolume()->AddNode(CamBlockobs, 1, new TGeoTranslation(0, 0, ((852.91*2*mm)-focus)+(0.1*cm)));
-  // Camera Block
+  // End Camera Block
 
 }
 /*******************************************************************/
@@ -715,35 +620,30 @@ void GSegSCTelescope::addEntranceWindow() {
     *oLog << "        fEntranceWindowAbsLength "<<fEntranceWindowAbsLength<<endl;
   }
 
-  const Double_t kZf = fF * fZf;
-  // TGeoTube* ewind = new TGeoTube("ewind", 0., fRf*m, fEntranceWindowThickness/2);
-  // TGeoTube* ewind = new TGeoTube("ewind", 0., 0.5641*m, fEntranceWindowThickness/2);
-  // edits
-  // AGeoAsphericDisk * ewind = new AGeoAsphericDisk("ewind", 0, 0, 0, 0, 460.8984*mm);
   AGeoAsphericDisk * ewind = new AGeoAsphericDisk("ewind", 0, 0, 1, 0, 0.5*m);
   Double_t coefficients[3] = {-4.3304382218444141e-5 /(mm), 7.8231607966343787e-11 / (mm * mm * mm),
                                7.4697933801370512e-17 / (mm * mm * mm * mm * mm)};
-  ewind->SetPolynomials(0, 0, 3, coefficients);
-  TGeoTranslation* ewindTrans = new TGeoTranslation("ewindTrans", 0., 0., -5.3*mm);
-  //edits end
+  ewind->SetPolynomials(0, 0, 3, coefficients); // Adds the aspherical coefficients for the lens
+
+  TGeoTranslation* ewindTrans = new TGeoTranslation("ewindTrans", 0., 0., -5.3*mm); // z is distance from origin to lens
   ALens* ewindLen = new ALens("ewindLen", ewind);
-  // edits for refractive index (needs the size adjustements)
+
+  // Refractive coefficients are fitted into SellmeierFormula through ROBAST
+  // Values from that is entered here to give the corrector lens a refractive surface
   ASellmeierFormula* SPB2 = new ASellmeierFormula(0.999964, 0.200362, 2.16314, 0.00564364, 0.0230819, 63.9044);
   std::cout << "Refractive Index at 600 nm: "
             << SPB2->GetIndex(600 * nm) << std::endl;
   ewindLen->SetRefractiveIndex(SPB2);
   fManager->GetTopVolume()->AddNode(ewindLen, 1, ewindTrans);
   // edits for refractive index end
-  // ewindLen->SetConstantRefractiveIndex(fEntranceWindowN);
-  // if (bEntranceWindowAbsFlag) ewindLen->SetConstantAbsorptionLength(fEntranceWindowAbsLength);
 
-  double lowang = 15.;//deg                                                                   
-  double hiang = 65.;//deg  
-  TF1 *offset = new TF1("offset","[2]*(1-[0] * ( cos(TMath::DegToRad()*x) / ( sqrt( 1-pow([0]*sin(TMath::DegToRad()*x)/[1],2) ) ) ) / [1] )",0,90);
-  offset->SetParameter(0,1); //Vacuum is assumed as a good approximation of n_air
-  offset->SetParameter(1,fEntranceWindowN);
-  offset->SetParameter(2,fEntranceWindowThickness);
-  fFocalPlaneOffsetCorrection = offset->Integral(lowang,hiang)/(hiang-lowang);
+  // double lowang = 15.;//deg                                                                   
+  // double hiang = 65.;//deg  
+  // TF1 *offset = new TF1("offset","[2]*(1-[0] * ( cos(TMath::DegToRad()*x) / ( sqrt( 1-pow([0]*sin(TMath::DegToRad()*x)/[1],2) ) ) ) / [1] )",0,90);
+  // offset->SetParameter(0,1); //Vacuum is assumed as a good approximation of n_air
+  // offset->SetParameter(1,fEntranceWindowN);
+  // offset->SetParameter(2,fEntranceWindowThickness);
+  // fFocalPlaneOffsetCorrection = offset->Integral(lowang,hiang)/(hiang-lowang);
 
   if(debug) *oLog << "         fFocalPlaneOffsetCorrection " <<  fFocalPlaneOffsetCorrection << endl;
   
@@ -820,59 +720,24 @@ void GSegSCTelescope::addMAPMTFocalPlane()  {
   //Edits
   const double kCameraBoxX = (0.215/2)*m; // the camera box X
   const double kCameraBoxY = (0.143/2)*m; // the camera box Y
-  // const double kCameraBoxX = 10*mm; // the camera box X
-  // const double kCameraBoxY = 10*mm; // the camera box Y
-  const double kCameraBoxH = 0.001*m; // the camera box height (N/A in cfg)
-  const double kCameraOffset = -2.56*cm; //old
-  // const double kCameraOffset = 2*cm;
-  // const double kCamR = 460.8984*mm;
-  // const double focus = (848.61)*mm;
-  const double focus = 863.37*mm;
-
-  // Make a disk focal plane
-  // TGeoBBox* tubeCamera = new TGeoBBox("tubeCamera", kCameraBoxX-1*cm, kCameraBoxY-1*cm, 1*mm);
-  // AFocalSurface* focalPlane = new AFocalSurface("focalPlane", tubeCamera);
-  // AOpticalComponent* mapmt = new AOpticalComponent("mapmt", tubeCamera);
+  const double focus = 863.37*mm; // Distnace from origin to camera box
 
   // Add curvature to the camera
   TGeoBBox* camBox = new TGeoBBox("camBox", kCameraBoxX, 
                                          kCameraBoxY, 2*m); // very thin box
-  TGeoSphere* camSphere = new TGeoSphere("camSphere", (852.91*2)*mm, (852.91*2)*mm + 0.001*m, 90, 180); // fixed choice in theta and phi, so the mirrors are "square"
-  // TGeoTranslation* transZ1 = new TGeoTranslation("transZ1", 0, 0, focus);
-  // transZ1->RegisterYourself();
-  // TGeoTranslation* transZ2 = new TGeoTranslation("transZ2", 0, 0, focus);
-  // transZ2->RegisterYourself();
+  TGeoSphere* camSphere = new TGeoSphere("camSphere", (852.91*2)*mm, (852.91*2)*mm + 0.001*m, 90, 180);
   TGeoCompositeShape* mapmtCathodeV = new TGeoCompositeShape("mapmtCathodeV", "camBox*camSphere");
   // end curvature
 
-  // TGeoBBox* mapmtCathodeV = new TGeoBBox("mapmtCathodeV", kCameraBoxX, 
-  //                                      kCameraBoxY, kCameraBoxH/2); // very thin box
-
+  // FocalSurface added onto the shape
   AFocalSurface* mapmtCathode = new AFocalSurface("mapmtCathode", mapmtCathodeV);
   mapmtCathode->SetLineColor(iMAPMTCathodeColor);
   AOpticalComponent* mapmt = new AOpticalComponent("mapmt", mapmtCathodeV);
 
 
   mapmt->AddNode(mapmtCathode, 1, new TGeoTranslation(0, 0, 0));
-
-  // Make a camera box
-  // TGeoBBox* mapmtCathode = new TGeoBBox("mapmtCathode", kCameraBoxX, kCameraBoxY, kCameraBoxH/2);
-  // double t = 1*cm;
-  // TGeoSphere* tubeCameraBox2 = new TGeoSphere("tubeCameraBox2", kCamR, kCamR + 5*mm, 88, 92, 88, 92); //change angles
-  // TGeoBBox* tubeCameraBox2 = new TGeoBBox("tubeCameraBox2", kCameraBoxX - t, kCameraBoxY - t, kCameraBoxH/2 - t);
-
-  // TGeoTranslation* transZ1 = new TGeoTranslation("transZ1", 0, 0, 0 + kCameraOffset + kCameraBoxH/2);
-  // transZ1->RegisterYourself();
-  // TGeoTranslation* transZ2 = new TGeoTranslation("transZ2", 0, 0, 0 + kCameraOffset + kCameraBoxH/2 - t - 1*mm);
-  // transZ2->RegisterYourself();
-
-  // TGeoCompositeShape* boxComposite = new TGeoCompositeShape("boxComposite", "tubeCameraBox:transZ1-tubeCameraBox2:transZ2");
-
-  // AObscuration* cameraBox = new AObscuration("cameraBox", boxComposite);
-
-  // AObscuration* cameraBox = new AObscuration("cameraBox", mapmtCathode);
-  // mapmt->AddNode(cameraBox, 1, new TGeoTranslation(0, 0, focus));
   
+  //Adds the camera with translation
   fManager->GetTopVolume()->AddNode(mapmtCathode,1,new TGeoCombiTrans("cFocS",
                                                              0.0,
                                                              0.0,
@@ -881,165 +746,6 @@ void GSegSCTelescope::addMAPMTFocalPlane()  {
                                                                               0.0,
                                                                               0.0,
 									      0.0)));
-//Edits end
-
-//   Double_t fWidthBox = 50.0*cm;
-//   Double_t fHeightBox = 10.*cm;
-//   TGeoMedium* med = fManager->GetMedium("med");
-
-//  // make a new volume for the camera
-//   // size adequately covers os8 camera/focal surface 
-//   TGeoVolume *focVol = gGeoManager->MakeBox("focVol",med,fWidthBox,
-//                                             fWidthBox,fHeightBox);
-//   ////////////////////////////////////////////////////////////////////////
-//   // Make MAPMT photocathode without pixel structure 
-//   Double_t cathodeHalfThick = 100*um;
-//   //Double_t cathodeHalfThick = 2.0*mm;
-//   TGeoBBox* mapmtCathodeV = new TGeoBBox("mapmtCathodeV", fPixelSize*(4/fSubCells), 
-//                                          fPixelSize*(4/fSubCells), cathodeHalfThick); // very thin box
-//   AFocalSurface* mapmtCathode = new AFocalSurface("mapmtCathode", mapmtCathodeV);
-//   mapmtCathode->SetLineColor(iMAPMTCathodeColor);
-//   if (debug) *oLog << "cathodeHalfThick " << cathodeHalfThick << endl;
-
-//   //////////////////////////////////////////////////////////////////////
-//   // Make a single MAPMT
-//   TGeoBBox* mapmtV = new TGeoBBox("mapmtV", fMAPMTWidth/fSubCells/2., fMAPMTWidth/fSubCells/2.,
-//                                   fMAPMTLength/2.);
-//   AOpticalComponent* mapmt = new AOpticalComponent("mapmt", mapmtV);
-
-//   ///////////////////////////////////////////////////////////
-//   // make input window
-//   TGeoBBox* mapmtInputWindowV = new TGeoBBox("mapmtInputWindowV",
-//                                              fMAPMTWidth/fSubCells/2., fMAPMTWidth/fSubCells/2.,
-//                                              fInputWindowThickness/2.);
-//   if (debug) *oLog << " fInputWindowThickness/2. " << fInputWindowThickness/2. << endl;
-
-//   ALens* mapmtInputWindow = new ALens("mapmtInputWindow", mapmtInputWindowV, med);
-//   mapmtInputWindow->SetLineColor(iMAPMTWindowColor);
-//   ARefractiveIndex* bk7 = AGlassCatalog::GetRefractiveIndex("N-BK7");
-//   mapmtInputWindow->SetRefractiveIndex(bk7);
-//   mapmt->AddNodeOverlap(mapmtInputWindow, 
-//                         1, new TGeoTranslation(0, 0, - fMAPMTLength/2. + fInputWindowThickness/2.)); //Glass looking circle
-
-//   if (debug) *oLog << "fMAPMTLength/2. - fInputWindowThickness/2. " 
-//                    << fMAPMTLength/2. - fInputWindowThickness/2. << endl;
-
-//   Double_t fWindowBottomRelToMapmtCenter = 
-//     (fMAPMTLength/2. - fInputWindowThickness/2.) - fInputWindowThickness/2.; // rel. to mapmt center
-
-//   Double_t cathodePosition = fMAPMTLength/2. - fInputWindowThickness - fMAPMTGap - cathodeHalfThick;
-//   mapmt->AddNode(mapmtCathode, 1, new TGeoTranslation(0, 0, cathodePosition)); //Black circle
-//   if (debug) *oLog << "cathodePosition " << cathodePosition << endl;
-
-//   Double_t fCathodeTopRelToMapmtCenter = cathodePosition + cathodeHalfThick;
-  
-//   Double_t backObsThickness = 1*mm;
-//   TGeoBBox* mapmtBackObsV = new TGeoBBox("mapmtBackObsV",
-//                                          fMAPMTWidth/fSubCells/2., fMAPMTWidth/fSubCells/2.,
-//                                          backObsThickness);
-//   // TGeoBBox* mapmtBackObsV = new TGeoBBox("mapmtBackObsV",
-//   //                                        0.215*m, 0.143*m,
-//   //                                        0.13*m);
-  
-//   AObscuration* mapmtBackObs = new AObscuration("mapmtBackObs", mapmtBackObsV);
-//   mapmtBackObs->SetLineColor(iMAPMTObscurationColor);
-//   Double_t backObsPosition = -fMAPMTLength/2. + backObsThickness;
-//   mapmt->AddNode(mapmtBackObs, 1, new TGeoTranslation(0, 0,backObsPosition+1*m)); //Both the red and the glass circle?
-//   // mapmt->AddNode(mapmtBackObs, 1, new TGeoTranslation(0, 0,(-0.84861)*m));
-//   Double_t backObsTopPositionRelToMapmtCenter = backObsPosition + backObsThickness;
-  
-//   if(debug) {
-//     *oLog << " fWindowBottomRelToMapmtCenter  " << fWindowBottomRelToMapmtCenter << endl;
-//     *oLog << " fCathodeTopRelToMapmtCenter  " << fCathodeTopRelToMapmtCenter << endl;
-//     *oLog << " backObsTopPositionRelToMapmtCenter  " << backObsTopPositionRelToMapmtCenter << endl;
-//   }
-  
-//   fCathodeTopRelToFocalSurface =  fCathodeTopRelToMapmtCenter + fMAPMTOffset -
-//     fCathodeTopRelToMapmtCenter;
-//   fWindowBottomRelToFocalSurface = fWindowBottomRelToMapmtCenter + fMAPMTOffset -
-//     fCathodeTopRelToMapmtCenter;
-//   fMAPOscurationTopRelToFocalSurface = backObsTopPositionRelToMapmtCenter + fMAPMTOffset -
-//     fCathodeTopRelToMapmtCenter;
-  
-//   // sanity check
-//   Double_t fCathodeBottomRelToFocalSurface = fCathodeTopRelToFocalSurface - cathodeHalfThick*2.0; 
-//   fCathodeBottomRelToOscurationTop = fCathodeBottomRelToFocalSurface - fMAPOscurationTopRelToFocalSurface;
-
-//   if (fCathodeBottomRelToOscurationTop < 0.0) {
-//     *oLog << " fCathodeBottomRelToOscurationTop, " << fCathodeBottomRelToOscurationTop 
-//           << ",  is less than zero. Cathode is below the obscuration. Need to increase MAPMT length"
-//           << "    stopping code " << endl;
-//     exit(0);
-//   }
-  
-//   const Double_t kZf = fF * fZf;
-//   //*oLog << "  =================== kZf " << kZf << endl;
-//   // Make the focal plane
-//   Double_t mapmtPositionReltoFocalSurface = - fMAPMTLength/2. + fInputWindowThickness + fMAPMTGap;
-//   //*oLog << " xxxxxxxxxxx  mapmtPositionReltoFocalSurface " << mapmtPositionReltoFocalSurface << endl;
-//   Int_t n = 1;
-//   // loop from -iNum to +iNum
-//   Int_t iNum = 7; // set to 1, make gl plot and use CheckPoint to see location of center module
-//   if (bSingleMAPMTmodule == false) {
-//     for(Int_t i = -iNum; i <= iNum; i++){
-//       Double_t dx = i*fMAPMTWidth;
-//       for(Int_t j = -iNum; j <= iNum; j++){
-//         if((TMath::Abs(i) + TMath::Abs(j) >= 11) || (TMath::Abs(i)*TMath::Abs(j) == 21)){
-//           continue;
-//         } // if
-// 	if (fSubCells == 1){
-// 	  Double_t dy = j*fMAPMTWidth;
-// 	  Double_t r2 = (i*i + j*j)*fMAPMTWidth*fMAPMTWidth;
-// 	  Double_t dz = fKappa1*TMath::Power(fF, -1)*r2 + fKappa2*TMath::Power(fF, -3)*r2*r2;
-// 	  focVol->AddNode(mapmt, n, new TGeoTranslation(dx, dy, 
-// 							mapmtPositionReltoFocalSurface +
-// 							+ fMAPMTOffset + dz));
-// 	  n++;
-// 	}
-// 	else{
-// 	  for (Int_t k = -fSubCells/2; k<fSubCells/2; k++){
-// 	    for (Int_t l = -fSubCells/2; l<fSubCells/2; l++){
-// 	      Double_t subdx = dx+(k+1/2)*(fMAPMTWidth/fSubCells);
-// 	      Double_t dy = j*fMAPMTWidth+(l+1/2)*(fMAPMTWidth/fSubCells);
-// 	      Double_t r2 = subdx*subdx+dy*dy;
-// 	      Double_t dz = fKappa1*TMath::Power(fF, -1)*r2 + fKappa2*TMath::Power(fF, -3)*r2*r2;
-// 	      focVol->AddNode(mapmt, n, new TGeoTranslation(subdx, dy, 
-// 							    mapmtPositionReltoFocalSurface +
-// 							    + fMAPMTOffset + dz));
-// 	      n++;
-// 	    }
-// 	  }
-// 	}
-//       } // y
-//     } // x
-//   }
-//   else {
-//     Double_t dx = 0.0;
-//     Double_t dy = 0.0;
-//     Double_t dz = 0.0;
-//     focVol->AddNode(mapmt, 1, new TGeoTranslation(dx, dy, 
-//                                                   mapmtPositionReltoFocalSurface +
-//                                                   + fMAPMTOffset + dz));
-
-//   }
-//   fManager->GetTopVolume()->AddNode(focVol,1,new TGeoCombiTrans("cFocS",
-//                                                              0.0,
-//                                                              0.0,
-//                                                              kZf-fFocalPlaneOffsetCorrection,
-//                                                              new TGeoRotation("rFocS",
-//                                                                               0.0,
-//                                                                               0.0,
-// 									      0.0)));
-//   /* 
-//  fManager->GetTopVolume()->AddNode(focVol,1,new TGeoCombiTrans("cFocS",
-//                                                                0.0,
-//                                                                0.0,
-//                                                                kZf,
-//                                                                new TGeoRotation("rFocS",
-//                                                                                 0.0,
-//                                                                                 0.0,
-//                                                                                 0.0)));
-// 										*/
 };
 /*************************************************************************************/
 
@@ -1169,8 +875,8 @@ void GSegSCTelescope::injectPhoton(const ROOT::Math::XYZVector &photonLocT,
   double dz = fphotonInjectDir[2];
 
   SafeDelete(ray);
-  ray = new ARay(0, fphotWaveLgt, (x/12)*m, (y/12)*m, (z)*m, t, (dx), (dy), dz);
-  // ray = new ARay(0, fphotWaveLgt, (x)*m, (y)*m, (z)*m, t, (dx), (dy), dz);
+  // ray = new ARay(0, fphotWaveLgt, (x/12)*m, (y/12)*m, (z)*m, t, (dx), (dy), dz);
+  ray = new ARay(0, fphotWaveLgt, (x)*m, (y)*m, (z)*m, t, (dx), (dy), dz);
   
   gGeoManager = fManager;
 
