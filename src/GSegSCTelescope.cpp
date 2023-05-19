@@ -13,8 +13,14 @@ VERSION4.0
     May 2011
  */
 
-// Edits made by Parshad Patel 
-// 8May2023
+/*  GSegSCTelescope.cpp
+
+    Edits by:
+    Parshad Patel
+    Georgia Tech
+    May 2023
+    
+*/
 
 #include <iostream>
 #include <cstdlib>
