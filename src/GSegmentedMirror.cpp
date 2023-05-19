@@ -2,6 +2,19 @@
 // telescope structure.
 // Nov/21/2012 Akira Okumura <oxon@mac.com>
 
+/*  GSegmentedMirror.cpp
+
+    Edits by:
+    Parshad Patel
+    Georgia Tech
+    April 2023
+        and
+    
+    Alexander Rogers
+    Georgia Tech
+    April 2022
+*/
+
 #include "TGeoSphere.h"
 #include "TH2D.h"
 #include "TCanvas.h"
@@ -58,31 +71,15 @@ SegmentedMirror::SegmentedMirror(Double_t rmin, Double_t rmax,
 TGeoCombiTrans* SegmentedMirror::BuildMirrorCombiTrans(const char* name,AGeoAsphericDisk* disk, Bool_t isPrimary)
 {
 
-  // Double_t cphi = (fPhimax + fPhimin)/2.;
-  // Double_t cr = (fRmax + fRmin)/2.;
-  // Double_t cz = isPrimary ? disk->CalcF2(cr) : disk->CalcF1(cr);
-
-  // // TGeoRotation rot1("", -90. + cphi + fRotationErrorXY, fRotationErrorSagittal, 0);
-  // // TGeoRotation rot2("", -cphi, 0., 0.);
-  // // TGeoRotation rot3("", 0., fRotationErrorTangential, 0.);
-  // // TGeoRotation rot4("", cphi, 0., 0.);
-
-  // // TGeoTranslation tr4(cr*TMath::Cos(cphi*TMath::DegToRad()) + fPositionErrorX, cr*TMath::Sin(cphi*TMath::DegToRad()) + fPositionErrorY, cz + fPositionErrorZ);
- 
-  // TGeoRotation rot1("", 0, 0, 0);
-
-  // TGeoTranslation tr4(0, 0, 0);
-  // TGeoCombiTrans* combi = new TGeoCombiTrans(tr4, rot1);
-
-  // return combi;
     Double_t kF = 148.5 * cm;        // focal length
     Double_t kMirrorR = kF * 2;      // the radius of curvature
     Double_t kMirrorD = 15 * cm;     // facet diameter, circular mirror
     Double_t kMirrorT = 1.2954 * cm; // mirror thickness
     Double_t theta; //= TMath::ASin(kMirrorD / 2. / kMirrorR) * TMath::RadToDeg();
 
-    const int kNMirror = 84;
+    const int kNMirror = 84; // Number of Mirrors
     
+    // Coordinates of the Mirror segments
     Double_t xy[kNMirror][3] = {{30.2514, -8.001, 3.3274}, {30.2514, 8.001, 3.3274},
         {44.1198, -16.002, 7.62}, {44.1198, 0, 6.7056}, {44.1198, 16.002, 7.62},
         {57.9628, -24.003, 13.8938}, {57.9628, -8.001, 12.0142}, {57.9628, 8.001, 12.0142}, {57.9628, 24.003, 13.8938},
@@ -95,6 +92,7 @@ TGeoCombiTrans* SegmentedMirror::BuildMirrorCombiTrans(const char* name,AGeoAsph
     };
     // clang-format on
 
+    // Loop over all mirrors and assign the first rotation and translation
     for (int i = 0; i < kNMirror; i++) {
       char* mirname = Form("%d",i);
       if(strcmp(name,mirname)==0){
@@ -112,17 +110,15 @@ TGeoCombiTrans* SegmentedMirror::BuildMirrorCombiTrans(const char* name,AGeoAsph
 
         // and is rotated to compose a DC optics
         Double_t phi = (TMath::ATan2(y, x)) * r2d;
+    // End loop
+  //
 	theta = (TMath::ATan2(TMath::Sqrt(r2), 2*kF-z))* r2d;
 	TGeoRotation* rot = new TGeoRotation("", phi - 90., theta, 0);
 
         // make a matrix from translation and rotation matrices
-        //TGeoTranslation* transZ = new TGeoTranslation(0, 0, kMirrorR);
         TGeoCombiTrans* combi = new TGeoCombiTrans(*trans, *rot);
         combi->RegisterYourself();
         return combi;
-        //TGeoHMatrix* hmat = new TGeoHMatrix((*combi) * (*transZ));
-	//hmat->RegisterYourself();
-	//return hmat;
       }
     }
 }
@@ -169,6 +165,8 @@ AMirror* SectorSegmentedMirror::BuildMirror(const char* name,
                                             AGeoAsphericDisk* disk,
                                             Bool_t isPrimary)
 {
+
+  
   Double_t zmin = disk->GetOrigin()[2] - disk->GetDZ();
   Double_t zmax = disk->GetOrigin()[2] + disk->GetDZ();
   Double_t dphi = (fPhimax - fPhimin)/2.;
@@ -222,13 +220,14 @@ AMirror* TetragonSegmentedMirror::BuildMirror(const char* name,
                                               AGeoAsphericDisk* disk,
                                               Bool_t isPrimary)
 {
+
+  //Not Used in model
   Double_t zmin = disk->GetOrigin()[2] - disk->GetDZ();
   Double_t zmax = disk->GetOrigin()[2] + disk->GetDZ();
   Double_t dphi = (fPhimax - fPhimin)/2.;
-
-  // (R, Z) = (cr, cz) is used as the origin of the rotation error matrix
   Double_t cr = (fRmax + fRmin)/2.;
   Double_t cz = isPrimary ? disk->CalcF2(cr) : disk->CalcF1(cr);
+  // End Not used in model
   
   Double_t kF = 148.5 * cm;        // focal length
   Double_t kMirrorR = kF * 2 ;      // the radius of curvature
@@ -236,13 +235,10 @@ AMirror* TetragonSegmentedMirror::BuildMirror(const char* name,
   Double_t kMirrorT = 1.2954 * cm; // mirror thickness
   Double_t theta = TMath::ASin(kMirrorD / 2. / kMirrorR) * TMath::RadToDeg();
 
-  // clang-format on
+  // Create the mirror segments
   TGeoSphere* mirSphere = new TGeoSphere("mirSphere", kMirrorR, kMirrorR + kMirrorT, 180. - theta, 180.);
-  //AGeoAsphericDisk * mirSphere = new AGeoAsphericDisk("mirSphere", 0, 0, 0, 0, (7.5 * cm));
     AMirror* mirror = new AMirror("mirror", mirSphere);
     return mirror;
-  //TGeoSphere* mirSphere = new TGeoSphere("mirSphere", kMirrorR, kMirrorR + kMirrorT, 180. - theta, 180.);
-  
 }
 //______________________________________________________________________________
 PentagonSegmentedMirror::PentagonSegmentedMirror(Double_t rmin, Double_t rmax, Double_t phimin, Double_t phimax) :
