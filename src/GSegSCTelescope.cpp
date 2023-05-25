@@ -327,22 +327,6 @@ void GSegSCTelescope::addPrimaryF() {
     
   }
 
-  // Camera Block
-  const double kCameraBoxX = (0.25/2)*m; // the camera box X
-  const double kCameraBoxY = (0.25/2)*m; // Camera box y
-  const double kCameraBoxH = 0.001*m; // the camera box height (N/A in cfg)
-  const double kCameraOffset = -2.56*cm; //old (not used)
-  const double focus = (148.5)*cm; //focus of the telescope
-
-  // Create the camera block to block photons from +z hitting the camera
-  TGeoBBox* CamBlock = new TGeoBBox("CamBlock", kCameraBoxX, 
-                                         kCameraBoxY, kCameraBoxH); // very thin box
-
-  // Create an obscuration class for the Camera                                       
-  AObscuration* CamBlockobs = new AObscuration("CamBlockobs", CamBlock);
-  CamBlockobs->SetLineColor(1);
-  fManager->GetTopVolume()->AddNode(CamBlockobs, 1, new TGeoTranslation(0, 0, (focus+1*mm)));
-  // Camera Block
 };
 /*******************************************************************/
 void GSegSCTelescope::addPrimaryMirror(const char*name,
@@ -564,25 +548,22 @@ void GSegSCTelescope::addPrimaryBaffle() {
 
   // gGeoManager = fManager;
 
-  // const Double_t kZp = (fF)*fZp;
+  // Camera Block
+  const double kCameraBoxX = (0.25/2)*m; // the camera box X
+  const double kCameraBoxY = (0.25/2)*m; // Camera box y
+  const double kCameraBoxH = 0.001*m; // the camera box height (N/A in cfg)
+  const double kCameraOffset = -2.56*cm; //old (not used)
+  const double focus = (148.5)*cm; //focus of the telescope
 
-  // bool debug = false;
-  // if (debug) {
-  //   *oLog << "  --  GSegSCTelescope::addPrimaryBaffle" << endl;
-  //   *oLog << "       fRpMax "<<fRpMax<<" kZp "<<kZp<<" fP[0] "<<fP[0] << endl;
-  //   *oLog << "       fpBRadOffset "<<fpBRadOffset<<" fpBZOffset "<<fpBZOffset<<" fpBLen "<<fpBLen<<" fpBTilt "<<fpBTilt << endl;
-  // }
+  // Create the camera block to block photons from +z hitting the camera
+  TGeoBBox* CamBlock = new TGeoBBox("CamBlock", kCameraBoxX, 
+                                         kCameraBoxY, kCameraBoxH); // very thin box
 
-  // TGeoCone* pBaffle = new TGeoCone("pBaffle", fpBLen*TMath::Cos(TMath::DegToRad()*fpBTilt)/2,
-	// 			   fRpMax+fpBRadOffset, 
-	// 			   fRpMax+fpBRadOffset+1*cm, 
-	// 			   fRpMax+fpBRadOffset+fpBLen*TMath::Tan(TMath::DegToRad()*fpBTilt), 
-	// 			   fRpMax+fpBRadOffset+fpBLen*TMath::Tan(TMath::DegToRad()*fpBTilt)+1*cm);
-  // TGeoTranslation* pBaffleTrans = new TGeoTranslation("pBaffleTrans", 0., 0., kZp+fP[0]+fpBZOffset+fpBLen*TMath::Cos(TMath::DegToRad()*fpBTilt)/2);
-  
-  // AObscuration* pBaffleObs = new AObscuration("pBaffleObs", pBaffle);  
-
-  // fManager->GetTopVolume()->AddNode(pBaffleObs, 1, pBaffleTrans);
+  // Create an obscuration class for the Camera                                       
+  AObscuration* CamBlockobs = new AObscuration("CamBlockobs", CamBlock);
+  CamBlockobs->SetLineColor(1);
+  fManager->GetTopVolume()->AddNode(CamBlockobs, 1, new TGeoTranslation(0, 0, (focus+1*mm)));
+  // Camera Block
 
 }
 /*******************************************************************/
